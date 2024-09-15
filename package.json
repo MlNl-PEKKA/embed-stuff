@@ -7,9 +7,12 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "db:types:dev": "npx supabase gen types --lang=typescript --project-id poykvdnpsqfqnqazfiio --schema public > src/server/db/schema/db.types.ts",
+    "db:types:local": "npx supabase gen types --lang=typescript --local --schema public > src/server/db/schema/db.types.ts"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.5.1",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-query": "^5.50.0",
     "@trpc/client": "^11.0.0-rc.446",
@@ -35,6 +38,7 @@
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
+    "supabase": "^1.8.1",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.5.3"
   },

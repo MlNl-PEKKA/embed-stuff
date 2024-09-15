@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
  * 1. You want to modify request context (see Part 1).
@@ -6,9 +7,14 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { initTRPC } from "@trpc/server";
+import { initTRPC, TRPCError } from "@trpc/server";
+import type { cookies } from "next/headers";
 import superjson from "superjson";
-import { ZodError } from "zod";
+import { type ZodObject, ZodError, type TypeOf } from "zod";
+import { createAdminClient, createClient } from "../db";
+import { ERRORS } from "../enums";
+import { authorize } from "../utils";
+import type { ProcedureBuilder } from "@trpc/server/unstable-core-do-not-import";
 
 /**
  * 1. CONTEXT
@@ -22,9 +28,14 @@ import { ZodError } from "zod";
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers }) => {
+export const createTRPCContext = async (opts: {
+  headers: Headers;
+  cookies: ReturnType<typeof cookies>;
+}) => {
+  const adminDb = createAdminClient();
   return {
     ...opts,
+    adminDb,
   };
 };
 
@@ -93,6 +104,19 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
   return result;
 });
 
+const authMiddleware = t.middleware(async ({ next, ctx, path }) => {
+  const db = createClient(ctx.cookies);
+  const user = (await db.auth.getUser()).data.user;
+  if (!user) throw new TRPCError(ERRORS.UNAUTHORIZED);
+  if (!authorize(path, [])) throw new TRPCError(ERRORS.FORBIDDEN);
+  return await next({
+    ctx: {
+      ...ctx,
+      db,
+    },
+  });
+});
+
 /**
  * Public (unauthenticated) procedure
  *
@@ -101,3 +125,48 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  * are logged in.
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
+
+export type PublicProcedure<T extends ZodObject<any, any, any, any, any>> =
+  typeof publicProcedure extends ProcedureBuilder<
+    infer TContext,
+    any,
+    infer TContextOverrides,
+    any,
+    any,
+    any,
+    any,
+    boolean
+  >
+    ? {
+        ctx: TContext & TContextOverrides;
+        input: TypeOf<T>;
+      }
+    : never;
+
+/**
+ * Private (authenticated) procedure
+ *
+ * This procedure is intended for queries and mutations that require the user to be authenticated.
+ * It ensures that the user is logged in and authorized before accessing the API. User session data + permissions
+ * are always accessible through the middleware chain, and you can safely assume the presence of an authenticated user.
+ */
+export const privateProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(authMiddleware);
+
+export type PrivateProcedure<T extends ZodObject<any, any, any, any, any>> =
+  typeof privateProcedure extends ProcedureBuilder<
+    infer TContext,
+    any,
+    infer TContextOverrides,
+    any,
+    any,
+    any,
+    any,
+    boolean
+  >
+    ? {
+        ctx: TContext & TContextOverrides;
+        input: TypeOf<T>;
+      }
+    : never;
