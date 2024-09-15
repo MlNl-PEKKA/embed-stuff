@@ -1,19 +1,21 @@
 import { env } from "~/env";
 import type { DB } from "./schema";
-import { createServerClient, createBrowserClient } from "@supabase/ssr";
-import type { cookies } from "next/headers";
+import { createClient as _createClient } from "@supabase/supabase-js";
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
 
-type Cookies = ReturnType<typeof cookies>;
-
-export const createClient = (cookies: Cookies) =>
-  createServerClient<DB>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
+export const createClient = () => {
+  const cookieStore = cookies();
+  return createServerClient<DB>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
     cookies: {
       getAll() {
-        return cookies.getAll();
+        return cookieStore.getAll();
       },
       setAll(cookiesToSet) {
         try {
-          cookiesToSet.forEach(({ name, value }) => cookies.set(name, value));
+          cookiesToSet.forEach(({ name, value, options }) =>
+            cookieStore.set(name, value, { ...options }),
+          );
         } catch {
           // The `setAll` method was called from a Server Component.
           // This can be ignored if you have middleware refreshing
@@ -22,6 +24,7 @@ export const createClient = (cookies: Cookies) =>
       },
     },
   });
+};
 
 export const createAdminClient = () =>
-  createBrowserClient<DB>(env.SUPABASE_URL, env.SUPABASE_SERVICE_KEY);
+  _createClient<DB>(env.SUPABASE_URL, env.SUPABASE_SERVICE_KEY);

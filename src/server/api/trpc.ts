@@ -8,7 +8,6 @@
  * need to use are documented accordingly near the end.
  */
 import { initTRPC, TRPCError } from "@trpc/server";
-import type { cookies } from "next/headers";
 import superjson from "superjson";
 import { type ZodObject, ZodError, type TypeOf } from "zod";
 import { createAdminClient, createClient } from "../db";
@@ -28,10 +27,7 @@ import type { ProcedureBuilder } from "@trpc/server/unstable-core-do-not-import"
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: {
-  headers: Headers;
-  cookies: ReturnType<typeof cookies>;
-}) => {
+export const createTRPCContext = async (opts: { headers: Headers }) => {
   const adminDb = createAdminClient();
   return {
     ...opts,
@@ -105,7 +101,7 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
 });
 
 const authMiddleware = t.middleware(async ({ next, ctx, path }) => {
-  const db = createClient(ctx.cookies);
+  const db = createClient();
   const user = (await db.auth.getUser()).data.user;
   if (!user) throw new TRPCError(ERRORS.UNAUTHORIZED);
   if (!authorize(path, [])) throw new TRPCError(ERRORS.FORBIDDEN);
