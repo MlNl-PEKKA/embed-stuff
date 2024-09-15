@@ -4,6 +4,7 @@ import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
 import { CheckCircle, Code, BarChart2, Smile } from "lucide-react";
 import Link from "next/link";
+import { ModeToggle } from "./mode-toggle";
 
 export function LandingPage() {
   return (
@@ -13,7 +14,7 @@ export function LandingPage() {
           <Smile className="mr-2 h-6 w-6" />
           <span className="font-bold">The Emote Kit</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
+        <nav className="ml-auto flex items-center gap-4 sm:gap-6">
           <Link
             className="text-sm font-medium underline-offset-4 hover:underline"
             href="#features"
@@ -32,6 +33,7 @@ export function LandingPage() {
           >
             Pricing
           </Link>
+          <ModeToggle />
         </nav>
       </header>
       <main className="flex-1">
@@ -150,7 +152,7 @@ export function LandingPage() {
                   key={index}
                   className="flex flex-col items-center space-y-2 text-center"
                 >
-                  <div className="bg-primary flex h-12 w-12 items-center justify-center rounded-full text-white">
+                  <div className="bg-primary flex h-12 w-12 items-center justify-center rounded-full text-white dark:text-black">
                     {index + 1}
                   </div>
                   <h3 className="text-xl font-bold">{step.title}</h3>
