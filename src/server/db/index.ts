@@ -3,6 +3,7 @@ import type { DB } from "./schema";
 import { createClient as _createClient } from "@supabase/supabase-js";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export const createClient = () => {
   const cookieStore = cookies();
@@ -14,7 +15,7 @@ export const createClient = () => {
       setAll(cookiesToSet) {
         try {
           cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, { ...options }),
+            cookieStore.set(name, value, { ...(options as ResponseCookie) }),
           );
         } catch {
           // The `setAll` method was called from a Server Component.
