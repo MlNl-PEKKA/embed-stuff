@@ -26,7 +26,15 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/components/*": ["./src/components/*"],
+      "~/lib/*": ["./src/lib/*"],
+      "~/server/*": ["./src/server/*"],
+      "~/styles/*": ["./src/styles/*"],
+      "~/trpc/*": ["./src/trpc/*"],
+      "~/env": ["./src/env.js"],
+      "~/api/*": ["./src/app/api/*"],
+      "~/error/*": ["./src/app/error/*"],
+      "~/login/*": ["./src/app/login/_common/*"]
     }
   },
   "include": [
