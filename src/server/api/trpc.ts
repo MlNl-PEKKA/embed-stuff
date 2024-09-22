@@ -104,7 +104,7 @@ const authMiddleware = t.middleware(async ({ next, ctx, path }) => {
   const db = createClient();
   const user = (await db.auth.getUser()).data.user;
   if (!user) throw new TRPCError(ERRORS.UNAUTHORIZED);
-  if (authorize(path, [])) throw new TRPCError(ERRORS.FORBIDDEN);
+  if (!authorize(path, [])) throw new TRPCError(ERRORS.FORBIDDEN);
   return await next({
     ctx: {
       ...ctx,

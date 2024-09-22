@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
+import { HydrateClient } from "~/trpc/server";
 
 export const metadata: Metadata = {
   title: "The Emote Kit",
@@ -12,9 +13,7 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <html
       lang="en"
@@ -29,10 +28,16 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <HydrateClient>
+              <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-900">
+                {children}
+              </div>
+            </HydrateClient>
           </ThemeProvider>
         </TRPCReactProvider>
       </body>
     </html>
   );
-}
+};
+
+export default Layout;

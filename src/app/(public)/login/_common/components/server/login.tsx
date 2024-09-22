@@ -1,5 +1,5 @@
 import { LoginPage } from "~/components/login-page";
-import { github, google } from "src/app/login/_common/actions";
+import { github, google } from "~/login/actions";
 
 export const Login = async () => {
   return <LoginPage actions={actions} />;

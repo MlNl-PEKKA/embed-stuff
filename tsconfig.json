@@ -33,8 +33,8 @@
       "~/trpc/*": ["./src/trpc/*"],
       "~/env": ["./src/env.js"],
       "~/api/*": ["./src/app/api/*"],
-      "~/error/*": ["./src/app/error/*"],
-      "~/login/*": ["src/app/login/_common/*"]
+      "~/error/*": ["./src/app/(public)/error/*"],
+      "~/login/*": ["./src/app/(public)/login/_common/*"]
     }
   },
   "include": [
