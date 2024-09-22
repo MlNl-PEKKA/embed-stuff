@@ -1,6 +1,6 @@
 import { LoginPage } from "~/components/login-page";
 import { github, google } from "~/login/actions";
-import { validate } from "~/login/utils/server/validate";
+import { validate } from "~/login/utils/server";
 
 export const Login = async () => {
   await validate();
