@@ -1,6 +1,6 @@
 import { LandingPage } from "~/components/landing-page";
 
-export const Page = () => {
+const Page = () => {
   return <LandingPage />;
 };
 
