@@ -6,7 +6,7 @@ const corsOptions = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 // 1. Specify protected and public routes
-const publicRoutes = ["/", "/login"] as const;
+const publicRoutes = ["/", "/login", "/api/auth/callback"] as const;
 
 export async function middleware(req: NextRequest) {
   // Check the origin from the request
@@ -60,6 +60,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|.*.svg$|sitemap.xml|robots.txt).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*.svg$|sitemap.xml|robots.txt).*)",
   ],
 };
