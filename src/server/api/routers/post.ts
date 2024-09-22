@@ -2,18 +2,18 @@ import { z } from "zod";
 
 import {
   createTRPCRouter,
-  type PublicProcedure,
-  publicProcedure,
+  privateProcedure,
+  type PrivateProcedure,
 } from "~/server/api/trpc";
 
 const schema = z.object({ text: z.string() });
 
-const query = ({ input }: PublicProcedure<typeof schema>) => {
+const query = ({ input }: PrivateProcedure<typeof schema>) => {
   return {
     greeting: `Hello ${input.text}`,
   };
 };
 
 export const post = createTRPCRouter({
-  hello: publicProcedure.input(schema).query(query),
+  hello: privateProcedure.input(schema).query(query),
 });

@@ -1,13 +1,18 @@
+"use client";
+
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
 import { CheckCircle, Code, BarChart2, Smile } from "lucide-react";
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
+import { api } from "~/trpc/react";
 
 export function LandingPage() {
+  const a = api.post.hello.useQuery({ text: "ABC" });
   return (
     <div className="flex min-h-screen flex-col">
       <header className="flex h-14 items-center px-4 lg:px-6">
+        {a.data?.greeting}
         <Link className="flex items-center justify-center" href="#">
           <Smile className="mr-2 h-6 w-6" />
           <span className="font-bold">The Emote Kit</span>
@@ -42,7 +47,7 @@ export function LandingPage() {
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
                   Bring Your Website to Life with The Emote Kit
                 </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
+                <p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl">
                   Add interactive, verified emoji reactions with ease and engage
                   your audience like never before.
                 </p>
@@ -56,7 +61,7 @@ export function LandingPage() {
         </section>
         <section
           id="features"
-          className="flex w-full justify-center bg-gray-100 py-12 md:py-24 lg:py-32 dark:bg-gray-800"
+          className="flex w-full justify-center bg-gray-100 py-12 dark:bg-gray-800 md:py-24 lg:py-32"
         >
           <div className="container px-4 md:px-6">
             <h2 className="mb-12 text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
@@ -65,7 +70,7 @@ export function LandingPage() {
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
               <Card>
                 <CardContent className="flex flex-col items-center space-y-4 p-6">
-                  <Code className="text-primary h-12 w-12" />
+                  <Code className="h-12 w-12 text-primary" />
                   <h3 className="text-center text-2xl font-bold">
                     Easy Integration
                   </h3>
@@ -77,7 +82,7 @@ export function LandingPage() {
               </Card>
               <Card>
                 <CardContent className="flex flex-col items-center space-y-4 p-6">
-                  <CheckCircle className="text-primary h-12 w-12" />
+                  <CheckCircle className="h-12 w-12 text-primary" />
                   <h3 className="text-center text-2xl font-bold">
                     Verified Reactions
                   </h3>
@@ -89,7 +94,7 @@ export function LandingPage() {
               </Card>
               <Card>
                 <CardContent className="flex flex-col items-center space-y-4 p-6">
-                  <Smile className="text-primary h-12 w-12" />
+                  <Smile className="h-12 w-12 text-primary" />
                   <h3 className="text-center text-2xl font-bold">
                     Customizable Emojis
                   </h3>
@@ -102,7 +107,7 @@ export function LandingPage() {
               </Card>
               <Card>
                 <CardContent className="flex flex-col items-center space-y-4 p-6">
-                  <BarChart2 className="text-primary h-12 w-12" />
+                  <BarChart2 className="h-12 w-12 text-primary" />
                   <h3 className="text-center text-2xl font-bold">
                     Real-Time Analytics
                   </h3>
@@ -150,7 +155,7 @@ export function LandingPage() {
                   key={index}
                   className="flex flex-col items-center space-y-2 text-center"
                 >
-                  <div className="bg-primary flex h-12 w-12 items-center justify-center rounded-full text-white dark:text-black">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white dark:text-black">
                     {index + 1}
                   </div>
                   <h3 className="text-xl font-bold">{step.title}</h3>
@@ -162,7 +167,7 @@ export function LandingPage() {
             </div>
           </div>
         </section>
-        <section className="flex w-full justify-center bg-gray-100 py-12 md:py-24 lg:py-32 dark:bg-gray-800">
+        <section className="flex w-full justify-center bg-gray-100 py-12 dark:bg-gray-800 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <h2 className="mb-12 text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               What Our Users Are Saying
