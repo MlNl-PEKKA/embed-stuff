@@ -1,3 +1,7 @@
+"use server";
+
 import { authenticate } from "./authenticate";
 
-export const github = async () => await authenticate("github");
+export async function github() {
+  await authenticate("github");
+}
