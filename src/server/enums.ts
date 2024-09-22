@@ -1,6 +1,6 @@
 import type { TRPC_ERROR_CODE_KEY } from "@trpc/server/unstable-core-do-not-import";
 
-export const ERRORS = Object.freeze({
+export const ERRORS = {
   /**
    *  @see https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses
    */
@@ -12,10 +12,10 @@ export const ERRORS = Object.freeze({
     code: "UNAUTHORIZED",
     message: "User unauthenticated",
   },
-} satisfies {
+} as const satisfies {
   [id in TRPC_ERROR_CODE_KEY]?: {
     message?: string;
     code: id;
     cause?: unknown;
   };
-});
+};
