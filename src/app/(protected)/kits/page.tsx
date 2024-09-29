@@ -1,5 +1,5 @@
 const Page = () => {
-  return <>KKK</>;
+  return <>Kits</>;
 };
 
 export default Page;
