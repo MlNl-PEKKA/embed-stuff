@@ -6,6 +6,7 @@ import { type Metadata } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
 import { HydrateClient } from "~/trpc/server";
+import { TooltipProvider } from "~/components/ui/tooltip";
 
 export const metadata: Metadata = {
   title: "The Emote Kit",
@@ -21,20 +22,22 @@ const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       suppressHydrationWarning
     >
       <body>
-        <TRPCReactProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <HydrateClient>
-              <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-900">
-                {children}
-              </div>
-            </HydrateClient>
-          </ThemeProvider>
-        </TRPCReactProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TooltipProvider>
+            <TRPCReactProvider>
+              <HydrateClient>
+                <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-black">
+                  {children}
+                </div>
+              </HydrateClient>
+            </TRPCReactProvider>
+          </TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
