@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { Layout as ProtectedLayout } from "~/protected/components/Layout";
 import { PathProvider } from "./_common/contexts";
 

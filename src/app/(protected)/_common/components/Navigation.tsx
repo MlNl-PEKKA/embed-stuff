@@ -1,4 +1,4 @@
-import { Box, Boxes, CircleUserRound, List, LogOut } from "lucide-react";
+import { Box, Boxes, CircleUserRound, List } from "lucide-react";
 import { Path } from "./Path";
 import { Logout } from "./Logout";
 import { ModeToggle } from "~/components/mode-toggle";

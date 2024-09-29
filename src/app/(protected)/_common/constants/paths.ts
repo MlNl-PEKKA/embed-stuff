@@ -1,10 +1,23 @@
-type PathsType<T extends string = string> = {
-  [id in `/${T}`]: string;
+import type { Route } from "next";
+
+type Path<T extends Route = Route> = T extends `/api/${string}`
+  ? never
+  : T extends `${infer R}/${string}`
+    ? R extends ""
+      ? T
+      : never
+    : never;
+
+type Paths<T extends Path = Path> = {
+  [id in `${T}`]: string;
 };
 
-export const PATHS: PathsType = {
-  "/emotes": "Emotes",
+export const PATHS: Paths = {
+  "/": "Landing",
   "/kits": "Kits",
   "/projects": "Projects",
   "/profile": "Profile",
+  "/emotes": "Emotes",
+  "/error": "Error",
+  "/login": "Login",
 } as const;

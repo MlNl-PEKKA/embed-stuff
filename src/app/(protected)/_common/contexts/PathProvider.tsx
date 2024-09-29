@@ -5,8 +5,8 @@ import { PATHS } from "../constants";
 
 const usePathContext = () => {
   const path = usePathname();
-  const currentModule = `/${path.split("/")[1]}` as const;
-  const name = PATHS[currentModule]!;
+  const currentModule = `/${path.split("/")[1]}` as keyof typeof PATHS;
+  const name = PATHS[currentModule];
   return {
     module: currentModule,
     path,

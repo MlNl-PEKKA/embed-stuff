@@ -1,7 +1,7 @@
 "use client";
 import { cva } from "class-variance-authority";
 import Link from "next/link";
-import { Button, type ButtonProps } from "~/components/ui/button";
+import { Button } from "~/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -25,9 +25,9 @@ const pathVariants = cva(
   },
 );
 
-type PathsType = keyof typeof PATHS;
+type Paths = keyof typeof PATHS;
 
-type LinkType<T extends PathsType = PathsType> = {
+type Links<T extends Paths = Paths> = {
   link: true;
   path: T;
 };
@@ -43,15 +43,14 @@ type CommonProps = {
   className?: string;
 };
 
-type ModuleLinkProps<T extends PathsType = PathsType> = CommonProps &
-  LinkType<T>;
+type ModuleLinkProps<T extends Paths = Paths> = CommonProps & Links<T>;
 
 type ModuleButtonProps = CommonProps & ButtonType;
 
-type Props<T extends PathsType = PathsType> = CommonProps &
+type Props<T extends Paths = Paths> = CommonProps &
   (ModuleLinkProps<T> | ButtonType);
 
-export const Path = <T extends PathsType>(props: Props<T>) => {
+export const Path = <T extends Paths>(props: Props<T>) => {
   return (
     <Tooltip>
       {props.link ? <ModuleLink {...props} /> : <ModuleButton {...props} />}
@@ -59,7 +58,7 @@ export const Path = <T extends PathsType>(props: Props<T>) => {
   );
 };
 
-const ModuleLink = <T extends PathsType>({
+const ModuleLink = <T extends Paths>({
   logo,
   className,
   path,
