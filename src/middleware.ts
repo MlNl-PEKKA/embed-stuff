@@ -33,7 +33,7 @@ export async function middleware(req: NextRequest) {
   if (error) NextResponse.redirect(new URL("/error", req.nextUrl));
   if (isPublicRoute) {
     if (data.session && path === publicRoutes[1])
-      return NextResponse.redirect(new URL("/home", req.nextUrl));
+      return NextResponse.redirect(new URL("/projects", req.nextUrl));
   } else {
     if (!data.session)
       return NextResponse.redirect(new URL("/login", req.nextUrl));

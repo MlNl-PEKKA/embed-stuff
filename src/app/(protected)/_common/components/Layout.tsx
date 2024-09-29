@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
-import { Logo } from "./logo";
-import { Navigation } from "./navigation";
-import { Title } from "./title";
+import { Logo } from "./Logo";
+import { Title } from "./Title";
+import { Navigation } from "./Navigation";
 
 export function Layout(props: PropsWithChildren) {
   return (
