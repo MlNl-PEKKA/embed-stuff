@@ -11,16 +11,19 @@ import { cn } from "~/lib/utils";
 import type { PATHS } from "../constants";
 import { usePath } from "../hooks";
 
-const pathVariants = cva("rounded-lg", {
-  variants: {
-    active: {
-      true: "bg-muted",
+const pathVariants = cva(
+  "flex items-center justify-center rounded-lg size-10",
+  {
+    variants: {
+      active: {
+        true: "bg-muted",
+      },
+    },
+    defaultVariants: {
+      active: false,
     },
   },
-  defaultVariants: {
-    active: false,
-  },
-});
+);
 
 type PathsType = keyof typeof PATHS;
 
@@ -37,7 +40,8 @@ type ButtonType = {
 
 type CommonProps = {
   logo: JSX.Element;
-} & Pick<ButtonProps, "className">;
+  className?: string;
+};
 
 type ModuleLinkProps<T extends PathsType = PathsType> = CommonProps &
   LinkType<T>;
@@ -65,15 +69,12 @@ const ModuleLink = <T extends PathsType>({
   return (
     <>
       <TooltipTrigger asChild>
-        <Link href={path}>
-          <Button
-            variant="ghost"
-            size="icon"
-            className={cn(pathVariants({ active, className }))}
-            aria-label={name}
-          >
-            {logo}
-          </Button>
+        <Link
+          href={path}
+          aria-label={name}
+          className={cn(pathVariants({ active, className }))}
+        >
+          {logo}
         </Link>
       </TooltipTrigger>
       <TooltipContent side="right" sideOffset={5}>
