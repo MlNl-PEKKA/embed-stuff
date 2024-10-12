@@ -49,5 +49,5 @@ const onError = (
   router?: AppRouterInstance,
 ) => {
   if (!router) return;
-  if (error.data.code === ERRORS.UNAUTHORIZED.code) router.push("/login");
+  if (error?.data?.code === ERRORS.UNAUTHORIZED.code) router.push("/login");
 };
