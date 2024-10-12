@@ -14,7 +14,6 @@ type Paths<T extends Path = Path> = {
 
 export const PATHS: Paths = {
   "/": "Landing",
-  "/kits": "Kits",
   "/projects": "Projects",
   "/profile": "Profile",
   "/emotes": "Emotes",
