@@ -12,108 +12,34 @@ export type Database = {
       emote: {
         Row: {
           created_at: string
-          created_by: string | null
           emoji: string
           id: string
           name: string
-          type: string
-          url: string | null
+          user_id: string | null
           visibility: string
         }
         Insert: {
           created_at?: string
-          created_by?: string | null
-          emoji?: string
+          emoji: string
           id?: string
-          name?: string
-          type?: string
-          url?: string | null
+          name: string
+          user_id?: string | null
           visibility?: string
         }
         Update: {
           created_at?: string
-          created_by?: string | null
           emoji?: string
           id?: string
           name?: string
-          type?: string
-          url?: string | null
+          user_id?: string | null
           visibility?: string
         }
         Relationships: [
           {
             foreignKeyName: "emote_created_by_fkey"
-            columns: ["created_by"]
+            columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "user"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      kit: {
-        Row: {
-          created_at: string
-          created_by: string | null
-          id: string
-          name: string
-          visibility: string
-        }
-        Insert: {
-          created_at?: string
-          created_by?: string | null
-          id?: string
-          name?: string
-          visibility?: string
-        }
-        Update: {
-          created_at?: string
-          created_by?: string | null
-          id?: string
-          name?: string
-          visibility?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "kit_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "user"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      kit_emote: {
-        Row: {
-          created_at: string
-          emote_id: string
-          id: string
-          kit_id: string | null
-        }
-        Insert: {
-          created_at?: string
-          emote_id: string
-          id?: string
-          kit_id?: string | null
-        }
-        Update: {
-          created_at?: string
-          emote_id?: string
-          id?: string
-          kit_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "kit_emote_emote_id_fkey"
-            columns: ["emote_id"]
-            isOneToOne: false
-            referencedRelation: "emote"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "kit_emote_kit_id_fkey"
-            columns: ["kit_id"]
-            isOneToOne: false
-            referencedRelation: "kit"
             referencedColumns: ["id"]
           },
         ]
@@ -122,7 +48,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
-          name: string | null
+          name: string
           status: string
           url: string
           user_id: string
@@ -130,7 +56,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
-          name?: string | null
+          name: string
           status?: string
           url: string
           user_id: string
@@ -138,7 +64,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
-          name?: string | null
+          name?: string
           status?: string
           url?: string
           user_id?: string
@@ -153,35 +79,35 @@ export type Database = {
           },
         ]
       }
-      project_kit: {
+      project_emote: {
         Row: {
           created_at: string
+          emote_id: string
           id: string
-          kit_id: string
           project_id: string
         }
         Insert: {
           created_at?: string
+          emote_id: string
           id?: string
-          kit_id: string
           project_id: string
         }
         Update: {
           created_at?: string
+          emote_id?: string
           id?: string
-          kit_id?: string
           project_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "project_kit_kit_id_fkey"
-            columns: ["kit_id"]
+            foreignKeyName: "project_emote_emote_id_fkey"
+            columns: ["emote_id"]
             isOneToOne: false
-            referencedRelation: "kit"
+            referencedRelation: "emote"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "project_kit_project_id_fkey"
+            foreignKeyName: "project_emote_project_id_fkey"
             columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "project"
@@ -193,27 +119,27 @@ export type Database = {
         Row: {
           created_at: string
           id: string
-          kit_emote_id: string
+          project_emote_id: string
           user_id: string | null
         }
         Insert: {
           created_at?: string
           id?: string
-          kit_emote_id: string
+          project_emote_id: string
           user_id?: string | null
         }
         Update: {
           created_at?: string
           id?: string
-          kit_emote_id?: string
+          project_emote_id?: string
           user_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "reaction_kit_emote_id_fkey"
-            columns: ["kit_emote_id"]
+            foreignKeyName: "reaction_project_emote_id_fkey"
+            columns: ["project_emote_id"]
             isOneToOne: false
-            referencedRelation: "kit_emote"
+            referencedRelation: "project_emote"
             referencedColumns: ["id"]
           },
           {
@@ -228,24 +154,27 @@ export type Database = {
       user: {
         Row: {
           created_at: string
-          first_name: string
+          email: string
           id: string
-          last_name: string | null
+          image: string | null
           membership: string
+          name: string
         }
         Insert: {
           created_at?: string
-          first_name: string
+          email: string
           id: string
-          last_name?: string | null
+          image?: string | null
           membership?: string
+          name: string
         }
         Update: {
           created_at?: string
-          first_name?: string
+          email?: string
           id?: string
-          last_name?: string | null
+          image?: string | null
           membership?: string
+          name?: string
         }
         Relationships: [
           {
@@ -354,4 +283,3 @@ export type Enums<
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
     : never
-

@@ -8,12 +8,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "db": "pnpm dlx supabase db",
-    "db:start": "pnpm dlx supabase start",
-    "db:stop": "pnpm dlx supabase stop",
-    "db:migration": "pnpm dlx supabase migration",
-    "db:types:dev": "pnpm dlx supabase gen types --lang=typescript --project-id poykvdnpsqfqnqazfiio --schema public > src/server/db/schema/db.ts",
-    "db:types:local": "pnpm dlx supabase gen types --lang=typescript --local --schema public > src/server/db/schema/db.ts",
+    "types": "pnpm dlx supabase gen types --lang=typescript --project-id poykvdnpsqfqnqazfiio --schema public > src/server/db/schema/db.ts",
     "shad": "pnpm dlx shadcn@latest add"
   },
   "dependencies": {

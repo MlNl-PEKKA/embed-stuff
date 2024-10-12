@@ -1,7 +1,6 @@
 import type { Custom, CustomizableTypes } from "~/lib/types";
 import type { Database } from "../db";
 import type { Emote } from "./emote";
-import type { Kit } from "./kit";
 import type { User } from "./user";
 import { Project } from "./project";
 
@@ -37,7 +36,6 @@ export type Tables = Custom<
   DatabaseTables,
   {
     emote: Emote;
-    kit: Kit;
     project: Project;
     user: User;
   }
