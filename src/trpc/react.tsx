@@ -12,6 +12,7 @@ import { createQueryClient } from "./query-client";
 import { getBaseUrl } from "~/lib/getBaseUrl";
 import { useRouter } from "next/navigation";
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
 const getQueryClient = (router?: AppRouterInstance) => {
@@ -66,6 +67,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <api.Provider client={trpcClient} queryClient={queryClient}>
+        <ReactQueryDevtools />
         {props.children}
       </api.Provider>
     </QueryClientProvider>

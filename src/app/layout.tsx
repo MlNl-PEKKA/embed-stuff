@@ -5,7 +5,6 @@ import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
-import { HydrateClient } from "~/trpc/server";
 import { TooltipProvider } from "~/components/ui/tooltip";
 
 export const metadata: Metadata = {
@@ -30,11 +29,9 @@ const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         >
           <TooltipProvider>
             <TRPCReactProvider>
-              <HydrateClient>
-                <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-black">
-                  {children}
-                </div>
-              </HydrateClient>
+              <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-black">
+                {children}
+              </div>
             </TRPCReactProvider>
           </TooltipProvider>
         </ThemeProvider>

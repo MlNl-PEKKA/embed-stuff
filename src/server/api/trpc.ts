@@ -14,6 +14,8 @@ import { ZodError, type TypeOf, type ZodSchema } from "zod";
 import { createPrivateClient } from "../db";
 import { ERRORS } from "../enums";
 import { authorize } from "../utils";
+import type { User } from "@supabase/supabase-js";
+import { env } from "~/env";
 
 /**
  * 1. CONTEXT
@@ -96,9 +98,26 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
 
 const authMiddleware = t.middleware(async ({ next, ctx, path }) => {
   const db = createPrivateClient();
-  const user = (await db.auth.getUser()).data.user;
-  if (!user) throw new TRPCError(ERRORS.UNAUTHORIZED);
-  if (!authorize(path, [])) throw new TRPCError(ERRORS.FORBIDDEN);
+
+  let sessionUser: User | null;
+  if (env.NODE_ENV === "development")
+    sessionUser = (await db.auth.getSession()).data.session?.user ?? null;
+  else sessionUser = (await db.auth.getUser()).data?.user ?? null;
+  if (!sessionUser) throw new TRPCError(ERRORS.UNAUTHORIZED);
+
+  const user = (
+    await db
+      .from("user")
+      .select()
+      .eq("id", sessionUser.id)
+      .single()
+      .throwOnError()
+  ).data;
+  if (!user)
+    throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+
+  if (!authorize(path, user.membership)) throw new TRPCError(ERRORS.FORBIDDEN);
+
   return await next({
     ctx: {
       ...ctx,

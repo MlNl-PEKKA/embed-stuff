@@ -1,12 +1,18 @@
+import { unstable_noStore as noStore } from "next/cache";
 import type { PropsWithChildren } from "react";
 import { Layout as ProtectedLayout } from "~/protected/components/Layout";
 import { PathProvider } from "~/protected/contexts/PathProvider";
+import { api, HydrateClient } from "~/trpc/server";
 
-const Layout = (props: PropsWithChildren) => {
+const Layout = async (props: PropsWithChildren) => {
+  noStore();
+  void api.user.prefetch();
   return (
-    <PathProvider>
-      <ProtectedLayout>{props.children} </ProtectedLayout>
-    </PathProvider>
+    <HydrateClient>
+      <PathProvider>
+        <ProtectedLayout>{props.children} </ProtectedLayout>
+      </PathProvider>
+    </HydrateClient>
   );
 };
 

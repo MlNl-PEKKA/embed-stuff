@@ -28,8 +28,8 @@ export async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(
     path as (typeof publicRoutes)[number],
   );
-  const supabase = createPrivateClient();
-  const { data, error } = await supabase.auth.getSession();
+  const db = createPrivateClient();
+  const { data, error } = await db.auth.getSession();
   if (error) NextResponse.redirect(new URL("/error", req.nextUrl));
   if (isPublicRoute) {
     if (data.session && path === publicRoutes[1])

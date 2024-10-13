@@ -2,5 +2,6 @@ import "server-only";
 import type { Tree } from "./utils";
 
 export const PERMISSIONS: Tree = {
-  post: [],
+  user: ["free", "pro"],
+  emotes: ["free", "pro"],
 };

@@ -5,33 +5,39 @@ import type {
 } from "@trpc/server/unstable-core-do-not-import";
 import type { AppRouter } from "./api/root";
 import { PERMISSIONS } from "./permissions";
+import type { DB } from "./db/schema";
 
 type Procedures = AppRouter["_def"]["procedures"];
 
-type Permissions = string[];
+type MembershipAccess = DB["public"]["Tables"]["user"]["Row"]["membership"][];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Leaf = QueryProcedure<any> | MutationProcedure<any>;
 
 export type Tree<T = Procedures> = T extends Leaf
-  ? Permissions
-  : { [x in keyof T]: Tree<T[x]> } | Permissions;
+  ? MembershipAccess
+  : { [x in keyof T]: Tree<T[x]> } | MembershipAccess;
 
-const getPermission = (input: string[], permissions: Tree = PERMISSIONS) => {
+const getMembershipAccess = (
+  input: string[],
+  membershipAccess: Tree = PERMISSIONS,
+) => {
+  if (Array.isArray(membershipAccess)) return membershipAccess;
   if (input.length === 0) return null;
-  if (Array.isArray(permissions)) return permissions;
   const level = input[0];
-  const subPermissions = permissions[level as keyof typeof permissions];
+  const subPermissions =
+    membershipAccess[level as keyof typeof membershipAccess];
   if (!subPermissions) return null;
   input.shift();
-  return getPermission(input, subPermissions as Tree);
+  return getMembershipAccess(input, subPermissions as Tree);
 };
 
-export const authorize = (path: string, permissions: Permissions) => {
+export const authorize = (
+  path: string,
+  membership: MembershipAccess[number],
+) => {
   const input = path.split(".");
-  const validPermissions = getPermission(input);
-  if (!validPermissions) return false;
-  return validPermissions.every((permission) =>
-    permissions.includes(permission),
-  );
+  const membershipAccess = getMembershipAccess(input);
+  if (!membershipAccess) return false;
+  return membershipAccess.some((access) => membership === access);
 };
