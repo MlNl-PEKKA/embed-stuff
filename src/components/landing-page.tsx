@@ -5,14 +5,11 @@ import { Card, CardContent } from "~/components/ui/card";
 import { CheckCircle, Code, BarChart2, Smile } from "lucide-react";
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
-import { api } from "~/trpc/react";
 
 export function LandingPage() {
-  const a = api.post.hello.useQuery({ text: "ABC" });
   return (
     <div className="flex min-h-screen flex-col">
       <header className="flex h-14 items-center px-4 lg:px-6">
-        {a.data?.greeting}
         <Link className="flex items-center justify-center" href="#">
           <Smile className="mr-2 h-6 w-6" />
           <span className="font-bold">The Emote Kit</span>
