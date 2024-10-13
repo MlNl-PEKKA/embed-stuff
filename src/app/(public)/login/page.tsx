@@ -1,4 +1,4 @@
-import { Login } from "~/login/components/login.server";
+import { Login } from "~/login/components/Login";
 
 const Page = () => {
   return <Login />;
