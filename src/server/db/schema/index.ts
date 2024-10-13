@@ -8,3 +8,10 @@ export type DB = Custom<
     public: Custom<Database["public"], { Tables: Tables }>;
   }
 >;
+
+type _Tables = DB["public"]["Tables"];
+
+export type DBTable<
+  T extends keyof _Tables,
+  U extends keyof _Tables[T] = "Row",
+> = _Tables[T][U];

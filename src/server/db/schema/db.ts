@@ -14,6 +14,7 @@ export type Database = {
           created_at: string
           emoji: string
           id: string
+          is_pro: boolean
           name: string
           user_id: string | null
           visibility: string
@@ -22,6 +23,7 @@ export type Database = {
           created_at?: string
           emoji: string
           id?: string
+          is_pro?: boolean
           name: string
           user_id?: string | null
           visibility?: string
@@ -30,6 +32,7 @@ export type Database = {
           created_at?: string
           emoji?: string
           id?: string
+          is_pro?: boolean
           name?: string
           user_id?: string | null
           visibility?: string

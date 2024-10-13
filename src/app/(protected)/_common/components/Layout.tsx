@@ -1,9 +1,12 @@
+"use client";
 import type { PropsWithChildren } from "react";
 import { Logo } from "./Logo";
 import { Title } from "./Title";
 import { Navigation } from "./Navigation";
+import { useUser } from "../hooks/useUser";
 
 export function Layout(props: PropsWithChildren) {
+  const a = useUser();
   return (
     <div className="grid h-screen w-full pl-[56px]">
       <aside className="inset-y fixed left-0 z-20 flex h-full flex-col border-r">
@@ -16,9 +19,7 @@ export function Layout(props: PropsWithChildren) {
         <header className="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
           <Title />
         </header>
-        <main className="grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3">
-          {props.children}
-        </main>
+        <main className="flex flex-1 overflow-auto">{props.children}</main>
       </div>
     </div>
   );

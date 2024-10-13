@@ -6,7 +6,7 @@ import { api, HydrateClient } from "~/trpc/server";
 
 const Layout = async (props: PropsWithChildren) => {
   noStore();
-  void api.user.prefetch();
+  void (await api.user.prefetch());
   return (
     <HydrateClient>
       <PathProvider>

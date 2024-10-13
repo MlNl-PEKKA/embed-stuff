@@ -4,7 +4,7 @@ import { api, HydrateClient } from "~/trpc/server";
 
 const Layout = async (props: PropsWithChildren) => {
   noStore();
-  void api.emotes.prefetch();
+  void (await api.emotes.prefetch());
   return <HydrateClient>{props.children}</HydrateClient>;
 };
 

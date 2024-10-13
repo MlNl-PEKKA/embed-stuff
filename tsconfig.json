@@ -35,6 +35,7 @@
       "~/api/*": ["./src/app/api/*"],
       "~/error/*": ["./src/app/(public)/error/*"],
       "~/protected/*": ["./src/app/(protected)/_common/*"],
+      "~/emotes/*": ["./src/app/(protected)/emotes/_common/*"],
       "~/login/*": ["./src/app/(public)/login/_common/*"]
     }
   },
