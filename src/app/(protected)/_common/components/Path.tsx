@@ -8,8 +8,8 @@ import {
   TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
-import type { PATHS } from "../constants";
-import { usePath } from "../hooks";
+import type { PATHS } from "~/protected/constants/paths";
+import { usePath } from "~/protected/hooks/usePath";
 
 const pathVariants = cva(
   "flex items-center justify-center rounded-lg size-10",

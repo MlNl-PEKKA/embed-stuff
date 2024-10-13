@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { createContext, memo, type PropsWithChildren } from "react";
-import { PATHS } from "../constants";
+import { PATHS } from "~/protected/constants/paths";
 
 const usePathContext = () => {
   const path = usePathname();

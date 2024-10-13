@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { createClient } from "~/server/db";
+import { createPrivateClient } from "~/server/db";
 
 const corsOptions = {
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -28,7 +28,7 @@ export async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(
     path as (typeof publicRoutes)[number],
   );
-  const supabase = createClient();
+  const supabase = createPrivateClient();
   const { data, error } = await supabase.auth.getSession();
   if (error) NextResponse.redirect(new URL("/error", req.nextUrl));
   if (isPublicRoute) {

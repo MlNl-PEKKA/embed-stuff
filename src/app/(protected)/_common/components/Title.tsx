@@ -1,6 +1,6 @@
 "use client";
 
-import { usePath } from "~/protected/hooks";
+import { usePath } from "~/protected/hooks/usePath";
 
 export const Title = () => {
   const { name } = usePath();

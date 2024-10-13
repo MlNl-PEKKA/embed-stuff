@@ -5,7 +5,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-export const createClient = () => {
+export const createPrivateClient = () => {
   const cookieStore = cookies();
   return createServerClient<DB>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
     cookies: {
@@ -32,5 +32,5 @@ export const createClient = () => {
   });
 };
 
-export const createAdminClient = () =>
+export const createPublicClient = () =>
   _createClient<DB>(env.SUPABASE_URL, env.SUPABASE_SERVICE_KEY);

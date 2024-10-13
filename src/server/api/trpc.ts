@@ -8,12 +8,12 @@
  * need to use are documented accordingly near the end.
  */
 import { initTRPC, TRPCError } from "@trpc/server";
+import type { ProcedureBuilder } from "@trpc/server/unstable-core-do-not-import";
 import superjson from "superjson";
-import { type ZodObject, ZodError, type TypeOf } from "zod";
-import { createAdminClient, createClient } from "../db";
+import { ZodError, type TypeOf, type ZodSchema } from "zod";
+import { createPrivateClient } from "../db";
 import { ERRORS } from "../enums";
 import { authorize } from "../utils";
-import type { ProcedureBuilder } from "@trpc/server/unstable-core-do-not-import";
 
 /**
  * 1. CONTEXT
@@ -27,13 +27,7 @@ import type { ProcedureBuilder } from "@trpc/server/unstable-core-do-not-import"
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const adminDb = createAdminClient();
-  return {
-    ...opts,
-    adminDb,
-  };
-};
+export const createTRPCContext = async (opts: { headers: Headers }) => opts;
 
 /**
  * 2. INITIALIZATION
@@ -101,14 +95,14 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
 });
 
 const authMiddleware = t.middleware(async ({ next, ctx, path }) => {
-  const db = createClient();
+  const db = createPrivateClient();
   const user = (await db.auth.getUser()).data.user;
   if (!user) throw new TRPCError(ERRORS.UNAUTHORIZED);
   if (!authorize(path, [])) throw new TRPCError(ERRORS.FORBIDDEN);
   return await next({
     ctx: {
       ...ctx,
-      db,
+      user,
     },
   });
 });
@@ -121,23 +115,10 @@ const authMiddleware = t.middleware(async ({ next, ctx, path }) => {
  * are logged in.
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
-
-export type PublicProcedure<T extends ZodObject<any, any, any, any, any>> =
-  typeof publicProcedure extends ProcedureBuilder<
-    infer TContext,
-    any,
-    infer TContextOverrides,
-    any,
-    any,
-    any,
-    any,
-    boolean
-  >
-    ? {
-        ctx: TContext & TContextOverrides;
-        input: TypeOf<T>;
-      }
-    : never;
+export type PublicProcedure<T = undefined> = Procedure<
+  typeof publicProcedure,
+  T
+>;
 
 /**
  * Private (authenticated) procedure
@@ -149,20 +130,42 @@ export type PublicProcedure<T extends ZodObject<any, any, any, any, any>> =
 export const privateProcedure = t.procedure
   .use(timingMiddleware)
   .use(authMiddleware);
+export type PrivateProcedure<T = undefined> = Procedure<
+  typeof privateProcedure,
+  T
+>;
 
-export type PrivateProcedure<T extends ZodObject<any, any, any, any, any>> =
-  typeof privateProcedure extends ProcedureBuilder<
-    infer TContext,
-    any,
-    infer TContextOverrides,
-    any,
-    any,
-    any,
-    any,
-    boolean
-  >
+type Procedure<
+  U extends ProcedureBuilder<any, any, any, any, any, any, any, any>,
+  T = unknown,
+> = T extends ZodSchema
+  ? U extends ProcedureBuilder<
+      infer TContext,
+      any,
+      infer TContextOverrides,
+      any,
+      any,
+      any,
+      any,
+      any
+    >
     ? {
         ctx: TContext & TContextOverrides;
         input: TypeOf<T>;
+      }
+    : never
+  : U extends ProcedureBuilder<
+        infer TContext,
+        any,
+        infer TContextOverrides,
+        any,
+        any,
+        any,
+        any,
+        any
+      >
+    ? {
+        ctx: TContext & TContextOverrides;
+        input: undefined;
       }
     : never;

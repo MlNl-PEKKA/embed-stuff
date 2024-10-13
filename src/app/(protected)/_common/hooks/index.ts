@@ -1,1 +1,0 @@
-export { usePath } from "./usePath";

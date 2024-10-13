@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { Layout as ProtectedLayout } from "~/protected/components/Layout";
-import { PathProvider } from "./_common/contexts";
+import { PathProvider } from "~/protected/contexts/PathProvider";
 
 const Layout = (props: PropsWithChildren) => {
   return (
