@@ -11,17 +11,18 @@ import { type AppRouter } from "~/server/api/root";
 import { createQueryClient } from "./query-client";
 import { getBaseUrl } from "~/lib/getBaseUrl";
 import { useRouter } from "next/navigation";
-import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
-const getQueryClient = (router?: AppRouterInstance) => {
+const getQueryClient = (
+  logout?: (_queryClient?: QueryClient) => Promise<void>,
+) => {
   if (typeof window === "undefined") {
     // Server: always make a new query client
     return createQueryClient();
   }
   // Browser: use singleton pattern to keep the same query client
-  return (clientQueryClientSingleton ??= createQueryClient(router));
+  return (clientQueryClientSingleton ??= createQueryClient(logout));
 };
 
 export const api = createTRPCReact<AppRouter>();
@@ -42,7 +43,8 @@ export type RouterOutputs = inferRouterOutputs<AppRouter>;
 
 export function TRPCReactProvider(props: { children: React.ReactNode }) {
   const router = useRouter();
-  const queryClient = getQueryClient(router);
+  const logout = async () => router.push("/login");
+  const queryClient = getQueryClient(logout);
   const [trpcClient] = useState(() =>
     api.createClient({
       links: [

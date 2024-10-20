@@ -1,27 +1,54 @@
-/* eslint-disable prefer-const */
 import {
   defaultShouldDehydrateQuery,
   MutationCache,
+  type Query,
   QueryCache,
   QueryClient,
 } from "@tanstack/react-query";
-import type { TRPCError } from "@trpc/server";
-import { type TRPCErrorShape } from "@trpc/server/unstable-core-do-not-import";
-import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import SuperJSON from "superjson";
-import { ERRORS } from "~/server/enums";
+import {
+  type TRPCError,
+  type TRPCErrorShape,
+} from "@trpc/server/unstable-core-do-not-import";
+import superjson from "superjson";
 
-export const createQueryClient = (router?: AppRouterInstance) => {
+export const createQueryClient = (
+  logout?: (_queryClient: QueryClient) => Promise<void>,
+) => {
   let queryClient: QueryClient;
+  // eslint-disable-next-line prefer-const
   queryClient = new QueryClient({
     queryCache: new QueryCache({
       onError: (error) =>
-        onError(error as unknown as TRPCErrorShape<TRPCError>, router),
+        onError(
+          error as unknown as TRPCErrorShape<TRPCError>,
+          queryClient,
+          logout,
+        ),
     }),
     mutationCache: new MutationCache({
       onError: (error) =>
-        onError(error as unknown as TRPCErrorShape<TRPCError>, router),
-      onSuccess: () => queryClient.invalidateQueries(),
+        onError(
+          error as unknown as TRPCErrorShape<TRPCError>,
+          queryClient,
+          logout,
+        ),
+      onSuccess: () => {
+        const nonStaticQueries = (query: Query) => {
+          const defaultStaleTime =
+            queryClient.getQueryDefaults(query.queryKey).staleTime ?? 0;
+          const staleTimes = query.observers
+            .map((observer) => observer.options.staleTime)
+            .filter((staleTime) => staleTime !== undefined) as number[];
+          const staleTime =
+            query.getObserversCount() > 0
+              ? Math.min(...staleTimes)
+              : defaultStaleTime;
+          return staleTime !== Infinity;
+        };
+        void queryClient.invalidateQueries({
+          predicate: nonStaticQueries,
+        });
+      },
     }),
     defaultOptions: {
       queries: {
@@ -31,23 +58,27 @@ export const createQueryClient = (router?: AppRouterInstance) => {
         retry: 2,
       },
       dehydrate: {
-        serializeData: SuperJSON.serialize,
+        serializeData: superjson.serialize,
         shouldDehydrateQuery: (query) =>
           defaultShouldDehydrateQuery(query) ||
           query.state.status === "pending",
       },
       hydrate: {
-        deserializeData: SuperJSON.deserialize,
+        deserializeData: superjson.deserialize,
       },
     },
   });
   return queryClient;
 };
 
+/**
+ *  @see https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses
+ */
 const onError = (
   error: TRPCErrorShape<TRPCError>,
-  router?: AppRouterInstance,
+  queryClient?: QueryClient,
+  logout?: (_queryClient: QueryClient) => Promise<void>,
 ) => {
-  if (!router) return;
-  if (error?.data?.code === ERRORS.UNAUTHORIZED.code) router.push("/login");
+  if (!logout || !queryClient) return;
+  if ((error?.data?.code ?? null) === "UNAUTHORIZED") void logout(queryClient);
 };
