@@ -4,7 +4,7 @@ import { Layout } from "./Layout";
 
 type Props = Pick<Parameters<typeof Layout>[0], "asChild">;
 
-export const Login = async (props: Props) => {
+export const Login = (props: Props) => {
   return (
     <Layout
       title="Login"
