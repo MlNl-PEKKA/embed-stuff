@@ -1,5 +1,5 @@
-import { type PrivateProcedure, privateProcedure } from "~/server/api/trpc";
+import { type ProtectedProcedure, protectedProcedure } from "~/server/trpc";
 
-const query = async ({ ctx }: PrivateProcedure) => ctx.user;
+const query = async ({ ctx }: ProtectedProcedure) => ctx.user;
 
-export const user = privateProcedure.query(query);
+export const user = protectedProcedure.query(query);

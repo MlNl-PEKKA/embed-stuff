@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createPrivateClient } from "~/server/db";
+import { createProtectedClient } from "~/server/db";
 // The client you created from the Server-Side Auth instructions
 
 export async function GET(request: Request) {
@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const next = searchParams.get("next") ?? "/";
 
   if (code) {
-    const supabase = createPrivateClient();
+    const supabase = createProtectedClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer

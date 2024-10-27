@@ -1,10 +1,10 @@
 import type { Provider } from "@supabase/supabase-js";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { createPrivateClient } from "~/server/db";
+import { createProtectedClient } from "~/server/db";
 
 export const authenticate = async (provider: Provider) => {
-  const supabase = createPrivateClient();
+  const supabase = createProtectedClient();
   const origin = headers().get("origin")!;
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,

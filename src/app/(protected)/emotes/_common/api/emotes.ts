@@ -1,9 +1,9 @@
 import { TRPCError } from "@trpc/server";
-import { type PrivateProcedure, privateProcedure } from "~/server/api/trpc";
-import { createPrivateClient } from "~/server/db";
+import { type ProtectedProcedure, protectedProcedure } from "~/server/trpc";
+import { createProtectedClient } from "~/server/db";
 
-const query = async ({ ctx }: PrivateProcedure) => {
-  const db = createPrivateClient();
+const query = async ({ ctx }: ProtectedProcedure) => {
+  const db = createProtectedClient();
   const emotes = (
     await db
       .from("emote")
@@ -16,4 +16,4 @@ const query = async ({ ctx }: PrivateProcedure) => {
   return emotes;
 };
 
-export const emotes = privateProcedure.query(query);
+export const emotes = protectedProcedure.query(query);

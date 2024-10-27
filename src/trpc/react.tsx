@@ -7,7 +7,7 @@ import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
 import SuperJSON from "superjson";
 
-import { type AppRouter } from "~/server/api/root";
+import { type AppRouter } from "~/server/trpc/root";
 import { createQueryClient } from "./query-client";
 import { getBaseUrl } from "~/lib/getBaseUrl";
 import { useRouter } from "next/navigation";

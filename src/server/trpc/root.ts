@@ -1,6 +1,6 @@
 import { emotes } from "src/app/(protected)/emotes/_common/api/emotes";
 import { user } from "~/protected/api/user";
-import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
+import { createCallerFactory, createTRPCRouter } from "~/server/trpc";
 
 /**
  * This is the primary router for your server.
