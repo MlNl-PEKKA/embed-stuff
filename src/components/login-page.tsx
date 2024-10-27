@@ -1,4 +1,5 @@
-import { Button } from "~/components/ui/button";
+import Link from "next/link";
+import type { PropsWithChildren } from "react";
 import {
   Card,
   CardContent,
@@ -7,35 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import Link from "next/link";
-import Image from "next/image";
-import type { ButtonHTMLAttributes } from "react";
 
-type Actions = (Pick<ButtonHTMLAttributes<HTMLButtonElement>, "formAction"> &
-  Pick<Parameters<typeof Image>[0], "src" | "alt"> & { title: string })[];
-
-type Props = {
-  actions: Actions;
-};
-
-export function LoginPage(props: Props) {
-  const buttons = props.actions.map((action, i) => (
-    <Button
-      key={i}
-      variant="outline"
-      className="w-full"
-      formAction={action.formAction}
-    >
-      <Image
-        src={action.src}
-        className="mr-2"
-        alt={action.alt}
-        width={16}
-        height={16}
-      />
-      {action.title}
-    </Button>
-  ));
+export function LoginPage(props: PropsWithChildren) {
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="space-y-1">
@@ -47,7 +21,7 @@ export function LoginPage(props: Props) {
         </CardDescription>
       </CardHeader>
       <form>
-        <CardContent className="grid gap-4">{buttons}</CardContent>
+        <CardContent className="grid gap-4">{props.children}</CardContent>
       </form>
       <CardFooter className="flex flex-wrap items-center justify-between gap-2">
         <div className="text-sm text-muted-foreground">

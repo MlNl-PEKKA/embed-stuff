@@ -1,4 +1,5 @@
 import { emotes } from "src/app/(protected)/emotes/_common/api/emotes";
+import { auth } from "~/app/api/auth";
 import { user } from "~/protected/api/user";
 import { createCallerFactory, createTRPCRouter } from "~/server/trpc";
 
@@ -8,6 +9,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/trpc";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
+  auth,
   user,
   emotes,
 });

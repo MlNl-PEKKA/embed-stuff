@@ -1,21 +1,34 @@
 import { LoginPage } from "~/components/login-page";
 import { github, google } from "~/login/actions";
+import { Provider } from "./Provider";
 
 export const Login = async () => {
-  return <LoginPage actions={actions} />;
+  return (
+    <LoginPage>
+      <Google />
+      <Github />
+    </LoginPage>
+  );
 };
 
-const actions: Parameters<typeof LoginPage>[0]["actions"] = [
-  {
-    src: "google.svg",
-    alt: "Google",
-    title: "Log in with Google",
-    formAction: google,
-  },
-  {
-    src: "github.svg",
-    alt: "Github",
-    title: "Log in with Github",
-    formAction: github,
-  },
-];
+const Google = () => {
+  return (
+    <Provider
+      src={"google.svg"}
+      alt={"Google"}
+      title={"Log in with Google"}
+      formAction={google}
+    />
+  );
+};
+
+const Github = () => {
+  return (
+    <Provider
+      src={"github.svg"}
+      alt={"Github"}
+      title={"Log in with Github"}
+      formAction={github}
+    />
+  );
+};

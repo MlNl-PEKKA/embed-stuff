@@ -29,9 +29,7 @@ const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         >
           <TooltipProvider>
             <TRPCReactProvider>
-              <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-black">
-                {children}
-              </div>
+              <div className="bg-gray-100 dark:bg-black">{children}</div>
             </TRPCReactProvider>
           </TooltipProvider>
         </ThemeProvider>

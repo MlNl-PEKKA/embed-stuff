@@ -34,6 +34,7 @@
       "~/env": ["./src/env.js"],
       "~/api/*": ["./src/app/api/*"],
       "~/error/*": ["./src/app/(public)/error/*"],
+      "~/app/*": ["./src/app/_common/*"],
       "~/protected/*": ["./src/app/(protected)/_common/*"],
       "~/emotes/*": ["./src/app/(protected)/emotes/_common/*"],
       "~/login/*": ["./src/app/(public)/login/_common/*"]

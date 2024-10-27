@@ -18,7 +18,7 @@ const PROTECTED_ROUTES = new RegExp(
   ["^/emotes(/.*)?$", "^/projects(/.*)?$", "^/profile$"].join("|"),
 );
 
-const PROTECTED_DEFAULT = "/emotes";
+const PROTECTED_DEFAULT = "/projects";
 
 const SIGN_IN = "/login";
 

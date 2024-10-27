@@ -5,6 +5,7 @@ import { type TypeOf, type ZodSchema } from "zod";
 import { t } from "./init";
 import { timing } from "./middleware/timing";
 import { auth } from "./middleware/auth";
+import { type UseTRPCQueryResult } from "@trpc/react-query/shared";
 
 export const createTRPCContext = async (opts: { headers: Headers }) => opts;
 
@@ -26,6 +27,16 @@ export type ProtectedProcedure<T = undefined> = Procedure<
 
 export const proProcedure = t.procedure.use(timing).use(auth);
 export type ProProcedure<T = undefined> = Procedure<typeof proProcedure, T>;
+
+type Definition = { _def: { $types: any } };
+
+export type ProcedureDefinition<T extends Definition> = Pick<
+  T["_def"]["$types"],
+  "input" | "output"
+>;
+
+export type ProcedureQuery<T extends ProcedureDefinition<Definition>> =
+  UseTRPCQueryResult<T["output"], any>;
 
 type Procedure<
   U extends ProcedureBuilder<any, any, any, any, any, any, any, any>,
