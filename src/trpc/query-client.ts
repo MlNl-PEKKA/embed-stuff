@@ -9,11 +9,11 @@ import {
   type TRPCError,
   type TRPCErrorShape,
 } from "@trpc/server/unstable-core-do-not-import";
+import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import superjson from "superjson";
+import { logout } from "~/app/utils/logout";
 
-export const createQueryClient = (
-  logout?: (_queryClient: QueryClient) => Promise<void>,
-) => {
+export const createQueryClient = (router?: AppRouterInstance) => {
   let queryClient: QueryClient;
   // eslint-disable-next-line prefer-const
   queryClient = new QueryClient({
@@ -22,7 +22,7 @@ export const createQueryClient = (
         onError(
           error as unknown as TRPCErrorShape<TRPCError>,
           queryClient,
-          logout,
+          router,
         ),
     }),
     mutationCache: new MutationCache({
@@ -30,7 +30,7 @@ export const createQueryClient = (
         onError(
           error as unknown as TRPCErrorShape<TRPCError>,
           queryClient,
-          logout,
+          router,
         ),
       onSuccess: () => {
         const nonStaticQueries = (query: Query) => {
@@ -74,11 +74,12 @@ export const createQueryClient = (
 /**
  *  @see https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses
  */
-const onError = (
+const onError = async (
   error: TRPCErrorShape<TRPCError>,
   queryClient?: QueryClient,
-  logout?: (_queryClient: QueryClient) => Promise<void>,
+  router?: AppRouterInstance,
 ) => {
-  if (!logout || !queryClient) return;
-  if ((error?.data?.code ?? null) === "UNAUTHORIZED") void logout(queryClient);
+  if (!router || !queryClient) return;
+  if ((error?.data?.code ?? null) === "UNAUTHORIZED")
+    await logout(queryClient, router);
 };

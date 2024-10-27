@@ -1,6 +1,8 @@
 import type { Route } from "next";
 
-type Path<T extends Route = Route> = T extends `/api/${string}`
+type Path<T extends Route = Route> = T extends
+  | `/api/${string}`
+  | `/(${string})${string}`
   ? never
   : T extends `${infer R}/${string}`
     ? R extends ""
@@ -17,6 +19,5 @@ export const PATHS = {
   "/projects": "Projects",
   "/profile": "Profile",
   "/emotes": "Emotes",
-  "/error": "Error",
   "/login": "Login",
 } as const satisfies Paths;

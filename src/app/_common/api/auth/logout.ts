@@ -1,9 +1,9 @@
 import { createProtectedClient } from "~/server/db";
 import { protectedProcedure } from "~/server/trpc";
 
-const query = async () => {
+const mutation = async () => {
   const db = createProtectedClient();
-  return await db.auth.signOut();
+  return await db.auth.signOut({ scope: "global" });
 };
 
-export const logout = protectedProcedure.query(query);
+export const logout = protectedProcedure.mutation(mutation);

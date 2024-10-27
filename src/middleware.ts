@@ -8,9 +8,7 @@ export const config = {
   ],
 };
 
-const PUBLIC_API = ["trpc", "auth/callback"].map(
-  (api) => `^/api/${api}(/.*)?$`,
-);
+const PUBLIC_API = ["trpc", "auth"].map((api) => `^/api/${api}(/.*)?$`);
 
 const PUBLIC_ROUTES = new RegExp(["^/$", ...PUBLIC_API].join("|"));
 
@@ -27,7 +25,7 @@ export const middleware = async (request: NextRequest) => {
     (await preflightCheck(request)) ??
     (await publicPageCheck(request)) ??
     (await sessionCheck(request)) ??
-    NextResponse.redirect(new URL(SIGN_IN, request.nextUrl))
+    NextResponse.redirect(new URL("/", request.nextUrl))
   );
 };
 

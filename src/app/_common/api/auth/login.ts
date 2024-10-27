@@ -11,7 +11,7 @@ const schema = z.object({
   provider: z.enum(["google", "github"]),
 });
 
-const query = async ({
+const mutation = async ({
   ctx: { headers },
   input: { provider },
 }: PublicProcedure<typeof schema>) => {
@@ -36,6 +36,6 @@ const query = async ({
   return data;
 };
 
-export const login = publicProcedure.input(schema).query(query);
+export const login = publicProcedure.input(schema).mutation(mutation);
 
 export type Login = ProcedureDefinition<typeof login>;
