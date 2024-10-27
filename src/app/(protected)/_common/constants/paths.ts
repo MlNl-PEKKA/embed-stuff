@@ -12,11 +12,11 @@ type Paths<T extends Path = Path> = {
   [id in `${T}`]: string;
 };
 
-export const PATHS: Paths = {
+export const PATHS = {
   "/": "Landing",
   "/projects": "Projects",
   "/profile": "Profile",
   "/emotes": "Emotes",
   "/error": "Error",
   "/login": "Login",
-} as const;
+} as const satisfies Paths;
