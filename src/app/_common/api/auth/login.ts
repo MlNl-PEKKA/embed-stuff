@@ -16,12 +16,7 @@ const mutation = async ({
   input: { provider },
 }: PublicProcedure<typeof schema>) => {
   const db = createProtectedClient();
-  const origin = headers.get("origin");
-  if (!origin)
-    throw new TRPCError({
-      code: "INTERNAL_SERVER_ERROR",
-      message: "Missing headers",
-    });
+  const origin = headers.get("origin")!;
   const { data, error } = await db.auth.signInWithOAuth({
     provider,
     options: {

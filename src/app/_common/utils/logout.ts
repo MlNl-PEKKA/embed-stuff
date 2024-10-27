@@ -5,7 +5,12 @@ export const logout = async (
   queryClient: QueryClient,
   router: AppRouterInstance,
 ) => {
-  await fetch("/api/auth/logout");
-  queryClient.clear();
-  router.refresh();
+  return await fetch("/api/auth/logout")
+    .then(() => {
+      queryClient.clear();
+      router.refresh();
+    })
+    .catch(() => {
+      //
+    });
 };

@@ -1,3 +1,3 @@
 import { login } from "../utils";
 
-export const POST = async () => await login({ provider: "github" });
+export const GET = async () => await login({ provider: "github" });
