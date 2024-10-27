@@ -16,4 +16,4 @@ const query = async ({ ctx }: ProtectedProcedure) => {
   return emotes;
 };
 
-export const emotes = protectedProcedure.query(query);
+export const read = protectedProcedure.query(query);

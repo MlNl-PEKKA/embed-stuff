@@ -6,6 +6,8 @@ import { t } from "./init";
 import { timing } from "./middleware/timing";
 import { auth } from "./middleware/auth";
 import { type UseTRPCQueryResult } from "@trpc/react-query/shared";
+import { session } from "./middleware/session";
+import { pro } from "./middleware/pro";
 
 export const createTRPCContext = async (opts: { headers: Headers }) => opts;
 
@@ -13,7 +15,7 @@ export const createCallerFactory = t.createCallerFactory;
 
 export const createTRPCRouter = t.router;
 
-export const publicProcedure = t.procedure.use(timing);
+export const publicProcedure = t.procedure.use(timing).use(session);
 export type PublicProcedure<T = undefined> = Procedure<
   typeof publicProcedure,
   T
@@ -25,7 +27,7 @@ export type ProtectedProcedure<T = undefined> = Procedure<
   T
 >;
 
-export const proProcedure = t.procedure.use(timing).use(auth);
+export const proProcedure = t.procedure.use(timing).use(pro);
 export type ProProcedure<T = undefined> = Procedure<typeof proProcedure, T>;
 
 type Definition = { _def: { $types: any } };

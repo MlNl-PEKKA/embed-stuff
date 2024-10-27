@@ -35,9 +35,11 @@
       "~/api/*": ["./src/app/api/*"],
       "~/error/*": ["./src/app/(public)/error/*"],
       "~/app/*": ["./src/app/_common/*"],
+      "~/public/*": ["./src/app/(public)/_common/*"],
+      "~/landing/*": ["./src/app/(public)/(landing)/_common/*"],
+      "~/login/*": ["./src/app/(public)/login/_common/*"],
       "~/protected/*": ["./src/app/(protected)/_common/*"],
-      "~/emotes/*": ["./src/app/(protected)/emotes/_common/*"],
-      "~/login/*": ["./src/app/(public)/login/_common/*"]
+      "~/emotes/*": ["./src/app/(protected)/emotes/_common/*"]
     }
   },
   "include": [

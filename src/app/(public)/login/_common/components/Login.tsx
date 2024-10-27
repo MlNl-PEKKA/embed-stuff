@@ -1,13 +1,19 @@
-import { LoginPage } from "~/components/login-page";
 import { github, google } from "~/login/actions";
 import { Provider } from "./Provider";
+import { Layout } from "./Layout";
 
-export const Login = async () => {
+type Props = Pick<Parameters<typeof Layout>[0], "asChild">;
+
+export const Login = async (props: Props) => {
   return (
-    <LoginPage>
+    <Layout
+      title="Login"
+      description="Choose your preferred login method"
+      {...props}
+    >
       <Google />
       <Github />
-    </LoginPage>
+    </Layout>
   );
 };
 

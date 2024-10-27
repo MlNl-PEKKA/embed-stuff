@@ -8,7 +8,7 @@ import { PathProvider } from "~/protected/contexts/PathProvider";
 
 export function Layout(props: PropsWithChildren<PageProps>) {
   noStore();
-  void api.user.prefetch();
+  void api.protected.user.prefetch();
   return (
     <HydrateClient>
       <PathProvider>

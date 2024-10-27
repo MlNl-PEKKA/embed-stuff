@@ -2,14 +2,13 @@ import type { User } from "@supabase/supabase-js";
 import { TRPCError } from "@trpc/server";
 import { env } from "~/env";
 import { createProtectedClient } from "~/server/db";
-import { t } from "~/server/trpc/init";
+import { session } from "./session";
 
-export const auth = t.middleware(async ({ next, ctx }) => {
+export const auth = session.unstable_pipe(async ({ next, ctx }) => {
   const db = createProtectedClient();
 
   let authUser: User | null;
-  if (env.NODE_ENV === "development")
-    authUser = (await db.auth.getSession()).data.session?.user ?? null;
+  if (env.NODE_ENV === "development") authUser = ctx.session?.user ?? null;
   else authUser = (await db.auth.getUser()).data?.user ?? null;
   if (!authUser)
     throw new TRPCError({ code: "FORBIDDEN", message: "User unauthenticated" });

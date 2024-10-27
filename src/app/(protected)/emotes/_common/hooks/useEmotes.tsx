@@ -1,3 +1,3 @@
 import { api } from "~/trpc/react";
 
-export const useEmotes = () => api.emotes.useSuspenseQuery()[0];
+export const useEmotes = () => api.protected.emotes.read.useSuspenseQuery()[0];
