@@ -1,10 +1,10 @@
 import type { PropsWithChildren } from "react";
 import { Logo } from "./Logo";
 import { Navigation } from "./Navigation";
-import type { PageProps } from "~/protected/types";
+import type { PageProps } from "@/protected/types";
 import { unstable_noStore as noStore } from "next/cache";
-import { api, HydrateClient } from "~/trpc/server";
-import { PathProvider } from "~/protected/contexts/PathProvider";
+import { api, HydrateClient } from "@/trpc/server";
+import { PathProvider } from "@/protected/contexts/PathProvider";
 
 export function Layout(props: PropsWithChildren<PageProps>) {
   noStore();

@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { createProtectedClient } from "~/server/db";
+import { createProtectedClient } from "@/db/client";
 
 export const config = {
   matcher: [

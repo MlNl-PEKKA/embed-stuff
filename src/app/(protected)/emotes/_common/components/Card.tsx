@@ -1,7 +1,7 @@
-import { Badge } from "~/components/ui/badge";
-import { Card as CardDev, CardContent, CardHeader } from "~/components/ui/card";
-import { cn } from "~/lib/utils";
-import type { DBTable } from "~/server/db/schema";
+import { Badge } from "@/components/ui/badge";
+import { Card as CardDev, CardContent, CardHeader } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import type { DBTable } from "@/server/db/schema";
 
 type Props = DBTable<"emote">;
 

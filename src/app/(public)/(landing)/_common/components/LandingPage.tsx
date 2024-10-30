@@ -1,9 +1,9 @@
 import { BarChart2, CheckCircle, Code, Smile } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
-import { ModeToggle } from "~/components/mode-toggle";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent } from "~/components/ui/card";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Loading } from "./Primary/Loading";
 import { Primary } from "./Primary";
 

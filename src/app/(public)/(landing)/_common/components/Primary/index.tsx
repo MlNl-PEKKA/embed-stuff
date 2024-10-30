@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useSession } from "~/app/hooks/useSession";
-import { Button } from "~/components/ui/button";
+import { useSession } from "@/app/hooks/useSession";
+import { Button } from "@/components/ui/button";
 
 export const Primary = () => {
   const session = useSession();

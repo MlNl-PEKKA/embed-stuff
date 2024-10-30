@@ -1,6 +1,6 @@
 import { TRPCError } from "@trpc/server";
-import { type ProtectedProcedure, protectedProcedure } from "~/server/trpc";
-import { createProtectedClient } from "~/server/db";
+import { type ProtectedProcedure, protectedProcedure } from "@/server/trpc";
+import { createProtectedClient } from "@/db/client";
 
 const query = async ({ ctx }: ProtectedProcedure) => {
   const db = createProtectedClient();

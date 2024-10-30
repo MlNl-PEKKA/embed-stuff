@@ -17,7 +17,7 @@ export type Database = {
           is_pro: boolean
           name: string
           user_id: string | null
-          visibility: string
+          visibility: Database["public"]["Enums"]["emote_visibility"]
         }
         Insert: {
           created_at?: string
@@ -26,7 +26,7 @@ export type Database = {
           is_pro?: boolean
           name: string
           user_id?: string | null
-          visibility?: string
+          visibility?: Database["public"]["Enums"]["emote_visibility"]
         }
         Update: {
           created_at?: string
@@ -35,7 +35,7 @@ export type Database = {
           is_pro?: boolean
           name?: string
           user_id?: string | null
-          visibility?: string
+          visibility?: Database["public"]["Enums"]["emote_visibility"]
         }
         Relationships: [
           {
@@ -52,7 +52,7 @@ export type Database = {
           created_at: string
           id: string
           name: string
-          status: string
+          status: Database["public"]["Enums"]["project_status"]
           url: string
           user_id: string
         }
@@ -60,7 +60,7 @@ export type Database = {
           created_at?: string
           id?: string
           name: string
-          status?: string
+          status?: Database["public"]["Enums"]["project_status"]
           url: string
           user_id: string
         }
@@ -68,7 +68,7 @@ export type Database = {
           created_at?: string
           id?: string
           name?: string
-          status?: string
+          status?: Database["public"]["Enums"]["project_status"]
           url?: string
           user_id?: string
         }
@@ -160,7 +160,7 @@ export type Database = {
           email: string
           id: string
           image: string | null
-          membership: string
+          membership: Database["public"]["Enums"]["user_membership"]
           name: string
         }
         Insert: {
@@ -168,7 +168,7 @@ export type Database = {
           email: string
           id: string
           image?: string | null
-          membership?: string
+          membership?: Database["public"]["Enums"]["user_membership"]
           name: string
         }
         Update: {
@@ -176,18 +176,10 @@ export type Database = {
           email?: string
           id?: string
           image?: string | null
-          membership?: string
+          membership?: Database["public"]["Enums"]["user_membership"]
           name?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "user_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
     }
     Views: {
@@ -197,7 +189,9 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      emote_visibility: "public" | "private"
+      project_status: "active" | "inactive"
+      user_membership: "free" | "pro"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -285,4 +279,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+    ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never

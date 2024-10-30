@@ -1,4 +1,4 @@
-import { github, google } from "~/login/actions";
+import { github, google } from "@/login/actions";
 import { Provider } from "./Provider";
 import { Layout } from "./Layout";
 

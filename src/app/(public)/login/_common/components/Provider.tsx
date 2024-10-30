@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { ButtonHTMLAttributes } from "react";
-import { Button } from "~/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 type Props = Pick<ButtonHTMLAttributes<HTMLButtonElement>, "formAction"> &
   Pick<Parameters<typeof Image>[0], "src" | "alt"> & { title: string };

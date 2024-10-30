@@ -1,6 +1,6 @@
-import { createTRPCRouter } from "~/server/trpc";
+import { createTRPCRouter } from "@/server/trpc";
 import { user } from "./user";
-import { emotes } from "~/emotes/api";
+import { emotes } from "@/emotes/api";
 
 export const protectedAPI = createTRPCRouter({
   user,

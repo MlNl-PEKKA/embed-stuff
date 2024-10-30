@@ -1,7 +1,7 @@
 import type { User } from "@supabase/supabase-js";
 import { TRPCError } from "@trpc/server";
-import { env } from "~/env";
-import { createProtectedClient } from "~/server/db";
+import { env } from "@/env";
+import { createProtectedClient } from "@/db/client";
 import { session } from "./session";
 
 export const auth = session.unstable_pipe(async ({ next, ctx }) => {

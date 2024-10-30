@@ -1,5 +1,5 @@
 import { Boxes, CircleUserRound, List } from "lucide-react";
-import { ModeToggle } from "~/components/mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
 import { Logout } from "./Logout";
 import { Path } from "./Path";
 

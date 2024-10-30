@@ -1,5 +1,5 @@
-import { createProtectedClient } from "~/server/db";
-import { t } from "~/server/trpc/init";
+import { createProtectedClient } from "@/db/client";
+import { t } from "@/server/trpc/init";
 
 export const session = t.middleware(async ({ next, ctx }) => {
   const db = createProtectedClient();

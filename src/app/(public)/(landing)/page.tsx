@@ -1,3 +1,3 @@
-import { LandingPage } from "~/landing/components/LandingPage";
+import { LandingPage } from "@/landing/components/LandingPage";
 
 export default LandingPage;

@@ -1,4 +1,4 @@
-import { type PublicProcedure, publicProcedure } from "~/server/trpc";
+import { type PublicProcedure, publicProcedure } from "@/server/trpc";
 
 const query = ({ ctx }: PublicProcedure) => ctx.session;
 

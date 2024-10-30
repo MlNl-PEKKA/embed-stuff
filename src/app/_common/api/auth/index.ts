@@ -1,4 +1,4 @@
-import { createTRPCRouter } from "~/server/trpc";
+import { createTRPCRouter } from "@/server/trpc";
 import { callback } from "./callback";
 import { login } from "./login";
 import { logout } from "./logout";

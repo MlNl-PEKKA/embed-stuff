@@ -1,7 +1,7 @@
 "use client";
 
 import { Triangle } from "lucide-react";
-import { Button } from "~/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 export const Logo = () => {
   return (

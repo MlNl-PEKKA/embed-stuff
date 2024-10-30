@@ -1,5 +1,5 @@
 "use client";
 
-import { Page } from "~/emotes/components/Page";
+import { Page } from "@/emotes/components/Page";
 
 export default Page;

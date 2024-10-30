@@ -2,15 +2,15 @@
 
 import { cva } from "class-variance-authority";
 import Link from "next/link";
-import { Button } from "~/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "~/components/ui/tooltip";
-import { cn } from "~/lib/utils";
-import type { PATHS } from "~/protected/constants/paths";
-import { usePath } from "~/protected/hooks/usePath";
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import type { PATHS } from "@/protected/constants/paths";
+import { usePath } from "@/protected/hooks/usePath";
 
 const pathVariants = cva(
   "flex items-center justify-center rounded-lg size-10",

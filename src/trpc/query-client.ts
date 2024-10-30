@@ -11,7 +11,7 @@ import {
 } from "@trpc/server/unstable-core-do-not-import";
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import superjson from "superjson";
-import { logout } from "~/app/utils/logout";
+import { logout } from "@/app/utils/logout";
 
 export const createQueryClient = (router?: AppRouterInstance) => {
   let queryClient: QueryClient;

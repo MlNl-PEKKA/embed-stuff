@@ -1,5 +1,5 @@
-import { createProtectedClient } from "~/server/db";
-import { protectedProcedure } from "~/server/trpc";
+import { createProtectedClient } from "@/db/client";
+import { protectedProcedure } from "@/server/trpc";
 
 const mutation = async () => {
   const db = createProtectedClient();

@@ -3,7 +3,7 @@
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import type { PropsWithChildren } from "react";
-import { DialogContent, Dialog as DialogUI } from "~/components/ui/dialog";
+import { DialogContent, Dialog as DialogUI } from "@/components/ui/dialog";
 
 export const Dialog = (props: PropsWithChildren) => {
   const router = useRouter();

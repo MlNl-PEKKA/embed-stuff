@@ -8,8 +8,14 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "types": "pnpm dlx supabase gen types --lang=typescript --project-id poykvdnpsqfqnqazfiio --schema public > src/server/db/schema/db.ts",
-    "shad": "pnpm dlx shadcn@latest add"
+    "shad": "pnpx shadcn@latest add",
+    "zod": "pnpm exec supabase-to-zod --input src/server/db/schema/default.ts --output src/server/db/zod.ts",
+    "types:local": "pnpm exec supabase gen types --lang=typescript --local --schema public> src/server/db/schema/default.ts && pnpm run zod",
+    "types:remote": "pnpm exec supabase gen types --lang=typescript --linked --schema public> src/server/db/schema/default.ts && pnpm run zod",
+    "seed:local": "pnpm exec supabase db dump -f supabase/seed.sql --local --data-only --exclude auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens",
+    "seed:remote": "pnpm exec supabase db dump -f supabase/seed.sql --linked --data-only --exclude auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens",
+    "db": "pnpm exec supabase db",
+    "migration": "pnpm exec supabase migration"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.1",
@@ -55,6 +61,7 @@
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "supabase": "^1.8.1",
+    "supabase-to-zod": "^1.0.7",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.5.3"
   },

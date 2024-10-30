@@ -1,4 +1,4 @@
-import { t } from "~/server/trpc/init";
+import { t } from "@/server/trpc/init";
 
 export const timing = t.middleware(async ({ next, path }) => {
   const start = Date.now();

@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { api } from "~/trpc/server";
+import { api } from "@/trpc/server";
 
 export const dynamic = "force-dynamic";
 

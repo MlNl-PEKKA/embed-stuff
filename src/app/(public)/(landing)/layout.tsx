@@ -1,7 +1,7 @@
 import { unstable_noStore as noStore } from "next/cache";
 import type { PropsWithChildren } from "react";
-import type { PageProps } from "~/landing/types";
-import { api } from "~/trpc/server";
+import type { PageProps } from "@/landing/types";
+import { api } from "@/trpc/server";
 
 const Layout = (props: PropsWithChildren<PageProps>) => {
   noStore();

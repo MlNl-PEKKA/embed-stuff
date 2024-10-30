@@ -1,6 +1,6 @@
 "use client";
 
-import { usePath } from "~/protected/hooks/usePath";
+import { usePath } from "@/protected/hooks/usePath";
 
 const Default = () => {
   const { name } = usePath();

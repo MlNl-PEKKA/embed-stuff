@@ -1,11 +1,11 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { createProtectedClient } from "~/server/db";
+import { createProtectedClient } from "@/db/client";
 import {
   type ProcedureDefinition,
   type PublicProcedure,
   publicProcedure,
-} from "~/server/trpc";
+} from "@/server/trpc";
 
 const schema = z.object({
   provider: z.enum(["google", "github"]),

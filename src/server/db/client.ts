@@ -1,5 +1,5 @@
-import { env } from "~/env";
-import type { DB } from "./schema";
+import { env } from "@/env";
+import type { DB } from "@/db/types";
 import { createClient as _createClient } from "@supabase/supabase-js";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";

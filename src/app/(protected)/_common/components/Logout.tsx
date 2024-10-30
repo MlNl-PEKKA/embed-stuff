@@ -1,7 +1,7 @@
 "use client";
 
 import { LogOut } from "lucide-react";
-import { useLogout } from "~/protected/hooks/useLogout";
+import { useLogout } from "@/protected/hooks/useLogout";
 import { Path } from "./Path";
 
 export const Logout = () => {
