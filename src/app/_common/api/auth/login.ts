@@ -1,6 +1,5 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { getBaseUrl } from "~/lib/getBaseUrl";
 import { createProtectedClient } from "~/server/db";
 import {
   type ProcedureDefinition,
@@ -13,10 +12,11 @@ const schema = z.object({
 });
 
 const mutation = async ({
+  ctx: { headers },
   input: { provider },
 }: PublicProcedure<typeof schema>) => {
   const db = createProtectedClient();
-  const origin = getBaseUrl();
+  const origin = headers.get("origin")!;
   const { data, error } = await db.auth.signInWithOAuth({
     provider,
     options: {
