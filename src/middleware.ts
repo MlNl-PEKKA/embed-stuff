@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 import { createProtectedClient } from "~/server/db";
+import { getBaseUrl } from "./lib/getBaseUrl";
 
 export const config = {
   matcher: [
@@ -38,7 +39,7 @@ const preflightCheck: MiddlewareType = async (request) => {
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
     };
 
-    const origin = request.headers.get("origin") ?? "";
+    const origin = getBaseUrl();
 
     const isAllowedOrigin = origin.startsWith("http://localhost");
 

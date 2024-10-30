@@ -18,14 +18,14 @@ export type Custom<
           Partial<Pick<U, Extract<keyof PartialOnly<T>, keyof U>>>
       : never;
 
-export type RequiredOnly<T extends CustomizableTypes<"Object">> = Pick<
+type RequiredOnly<T extends CustomizableTypes<"Object">> = Pick<
   T,
   {
     [id in keyof T]-?: undefined extends T[id] ? never : id;
   }[keyof T]
 >;
 
-export type PartialOnly<T extends CustomizableTypes<"Object">> = Omit<
+type PartialOnly<T extends CustomizableTypes<"Object">> = Omit<
   T,
   keyof RequiredOnly<T>
 >;
