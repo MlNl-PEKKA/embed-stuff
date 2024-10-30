@@ -58,8 +58,9 @@ const publicPageCheck: MiddlewareType = async (request) => {
 const sessionCheck: MiddlewareType = async (request) => {
   const { pathname } = request.nextUrl;
 
-  const session = (await createProtectedClient().auth.getSession()).data
-    ?.session;
+  const db = await createProtectedClient();
+
+  const session = (await db.auth.getSession()).data?.session;
 
   if (session) {
     if (pathname === SIGN_IN || !PROTECTED_ROUTES.test(pathname))

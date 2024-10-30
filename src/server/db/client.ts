@@ -5,8 +5,8 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-export const createProtectedClient = () => {
-  const cookieStore = cookies();
+export const createProtectedClient = async () => {
+  const cookieStore = await cookies();
   return createServerClient<DB>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
     cookies: {
       getAll() {

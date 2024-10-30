@@ -11,7 +11,7 @@ import { createTRPCContext } from "@/server/trpc";
  * handling a HTTP request (e.g. when you make requests from Client Components).
  */
 const createContext = async () => {
-  const heads = headers();
+  const heads = await headers();
   return createTRPCContext({
     headers: heads,
   });

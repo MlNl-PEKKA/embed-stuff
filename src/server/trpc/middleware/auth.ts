@@ -5,7 +5,7 @@ import { createProtectedClient } from "@/db/client";
 import { session } from "./session";
 
 export const auth = session.unstable_pipe(async ({ next, ctx }) => {
-  const db = createProtectedClient();
+  const db = await createProtectedClient();
 
   let authUser: User | null;
   if (env.NODE_ENV === "development") authUser = ctx.session?.user ?? null;

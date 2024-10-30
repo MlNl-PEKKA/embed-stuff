@@ -15,7 +15,7 @@ const mutation = async ({
   ctx: { headers },
   input: { provider },
 }: PublicProcedure<typeof schema>) => {
-  const db = createProtectedClient();
+  const db = await createProtectedClient();
   const origin = headers.get("origin")!;
   const { data, error } = await db.auth.signInWithOAuth({
     provider,

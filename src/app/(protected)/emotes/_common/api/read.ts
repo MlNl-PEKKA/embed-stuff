@@ -3,7 +3,7 @@ import { type ProtectedProcedure, protectedProcedure } from "@/server/trpc";
 import { createProtectedClient } from "@/db/client";
 
 const query = async ({ ctx }: ProtectedProcedure) => {
-  const db = createProtectedClient();
+  const db = await createProtectedClient();
   const emotes = (
     await db
       .from("emote")

@@ -18,7 +18,7 @@ const query = async ({
       code: "INTERNAL_SERVER_ERROR",
       message: "Missing auth code",
     });
-  const db = createProtectedClient();
+  const db = await createProtectedClient();
   const { error } = await db.auth.exchangeCodeForSession(code);
   if (error)
     throw new TRPCError({
