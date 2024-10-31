@@ -1,10 +1,9 @@
 import { BarChart2, CheckCircle, Code, Smile } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { PrimaryAction } from "@/public/landing/components/PrimaryAction";
+import { Redirect } from "@/public/landing/components/Redirect";
 
 const Page = () => {
   return (
@@ -33,9 +32,11 @@ const Page = () => {
           >
             Pricing
           </Link>
-          <Suspense fallback={<PrimaryAction.Suspense />}>
-            <PrimaryAction />
-          </Suspense>
+          <Redirect.ErrorBoundary>
+            <Redirect.Suspense>
+              <Redirect />
+            </Redirect.Suspense>
+          </Redirect.ErrorBoundary>
           <ModeToggle />
         </nav>
       </header>
