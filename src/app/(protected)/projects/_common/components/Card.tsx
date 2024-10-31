@@ -9,11 +9,11 @@ import { useState } from "react";
 
 type Props = DBTable<"project">;
 
-export default function Card({
+export const Card = ({
   status = "active",
   name = "Project 1",
   url = "",
-}: Props) {
+}: Props) => {
   const [imageError, setImageError] = useState(false);
   return (
     <CardDev className="w-full max-w-[200px] overflow-hidden">
@@ -50,4 +50,4 @@ export default function Card({
       </CardContent>
     </CardDev>
   );
-}
+};

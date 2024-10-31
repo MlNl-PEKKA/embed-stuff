@@ -13,7 +13,9 @@ const PUBLIC_API = ["trpc", "auth"].map((api) => `^/api/${api}(/.*)?$`);
 const PUBLIC_ROUTES = new RegExp(["^/$", ...PUBLIC_API].join("|"));
 
 const PROTECTED_ROUTES = new RegExp(
-  ["^/emotes(/.*)?$", "^/projects(/.*)?$", "^/profile$"].join("|"),
+  ["^/emotes(/.*)?$", "^/abc(/.*)?$", "^/projects(/.*)?$", "^/profile$"].join(
+    "|",
+  ),
 );
 
 const PROTECTED_DEFAULT = "/projects";

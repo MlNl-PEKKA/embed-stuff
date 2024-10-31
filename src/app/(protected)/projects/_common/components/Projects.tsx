@@ -2,9 +2,9 @@
 
 import { useProjects } from "@/projects/hooks/useProjects";
 import { Content } from "./Content";
-import Card from "./Card";
+import { Card } from "./Card";
 
-export const Page = () => {
+export const Projects = () => {
   const projects = useProjects();
   return (
     <Content>

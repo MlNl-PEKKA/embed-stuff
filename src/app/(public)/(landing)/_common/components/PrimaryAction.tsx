@@ -3,12 +3,18 @@
 import Link from "next/link";
 import { useSession } from "@/app/hooks/useSession";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export const Primary = () => {
+const Suspense = () => {
+  return <Skeleton className="h-10 w-[70px] border-[1px]" />;
+};
+
+export const PrimaryAction = () => {
   const session = useSession();
   if (session) return <GoToDashboard />;
   return <Login />;
 };
+PrimaryAction.Suspense = Suspense;
 
 const Login = () => {
   return (

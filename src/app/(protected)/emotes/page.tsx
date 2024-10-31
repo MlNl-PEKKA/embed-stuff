@@ -1,5 +1,7 @@
-"use client";
+import { Emotes } from "@/emotes/components/Emotes";
 
-import { Page } from "@/emotes/components/Page";
+const Page = () => {
+  return <Emotes />;
+};
 
 export default Page;

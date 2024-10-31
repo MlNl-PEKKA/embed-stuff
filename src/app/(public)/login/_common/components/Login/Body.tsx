@@ -13,15 +13,15 @@ type Props = {
   asChild?: boolean;
 };
 
-export function Layout({
+export const Body = ({
   asChild = false,
   children,
   ...props
-}: PropsWithChildren<Props>) {
+}: PropsWithChildren<Props>) => {
   const content = <Content {...props}>{children}</Content>;
   if (asChild) return <>{content}</>;
   return <Card className="w-full max-w-md">{content}</Card>;
-}
+};
 
 const Content = (
   props: PropsWithChildren<Pick<Props, "description" | "title">>,

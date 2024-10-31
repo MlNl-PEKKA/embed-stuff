@@ -5,12 +5,12 @@ import type { DBTable } from "@/server/db/types";
 
 type Props = DBTable<"emote">;
 
-export default function Card({
+export const Card = ({
   emoji = "🔥",
   name = "Fire",
   visibility = "public",
   is_pro = false,
-}: Props) {
+}: Props) => {
   return (
     <CardDev className="w-full max-w-[200px] overflow-hidden">
       <CardHeader className="relative flex h-40 items-center justify-center bg-gray-100 text-6xl dark:bg-gray-800">
@@ -42,4 +42,4 @@ export default function Card({
       </CardContent>
     </CardDev>
   );
-}
+};

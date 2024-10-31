@@ -1,19 +1,19 @@
 import { github, google } from "@/login/actions";
 import { Provider } from "./Provider";
-import { Layout } from "./Layout";
+import { Body } from "./Body";
 
-type Props = Pick<Parameters<typeof Layout>[0], "asChild">;
+type Props = Pick<Parameters<typeof Body>[0], "asChild">;
 
 export const Login = (props: Props) => {
   return (
-    <Layout
+    <Body
       title="Login"
       description="Choose your preferred login method"
       {...props}
     >
       <Google />
       <Github />
-    </Layout>
+    </Body>
   );
 };
 

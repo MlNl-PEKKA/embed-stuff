@@ -1,9 +1,8 @@
-import type { PropsWithChildren } from "react";
-import type { PageProps } from "@/landing/types";
 import { api, HydrateClient } from "@/trpc/server";
 import { connection } from "next/server";
+import type { PublicLandingLayoutProps } from "@/public/landing/types";
 
-const Layout = async (props: PropsWithChildren<PageProps>) => {
+const Layout = async (props: PublicLandingLayoutProps) => {
   await connection();
   void api.session.prefetch();
   return (

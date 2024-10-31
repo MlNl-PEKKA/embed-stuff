@@ -1,8 +1,10 @@
+"use client";
+
 import { useEmotes } from "@/emotes/hooks/useEmotes";
 import { Content } from "./Content";
-import Card from "./Card";
+import { Card } from "./Card";
 
-export const Page = () => {
+export const Emotes = () => {
   const emotes = useEmotes();
   return (
     <Content>

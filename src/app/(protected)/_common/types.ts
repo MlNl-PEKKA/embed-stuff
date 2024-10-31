@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
+import type { LayoutProps } from "@/app/types";
 
-export type PageProps = {
-  breadcrumbs: ReactNode;
-};
+export type ProtectedLayoutProps = LayoutProps<undefined, ["breadcrumbs"]>;
