@@ -1,5 +1,3 @@
-const Page = () => {
-  return <>Projects</>;
-};
+import { Page } from "@/projects/components/Page";
 
 export default Page;

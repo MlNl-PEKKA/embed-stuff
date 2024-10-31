@@ -1,4 +1,4 @@
-import { useEmotes } from "../hooks/useEmotes";
+import { useEmotes } from "@/emotes/hooks/useEmotes";
 import { Content } from "./Content";
 import Card from "./Card";
 
