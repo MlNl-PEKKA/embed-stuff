@@ -8,6 +8,7 @@ await import("./src/env.js");
 const config = {
   experimental: {
     typedRoutes: true,
+    reactCompiler: true,
   },
 };
 
