@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { ProcedureBuilder } from "@trpc/server/unstable-core-do-not-import";
+import type { UseTRPCQueryResult } from "@trpc/react-query/shared";
+import type { inferProcedureBuilderResolverOptions } from "@trpc/server";
+import type { AnyProcedureBuilder } from "@trpc/server/unstable-core-do-not-import";
 import { type TypeOf, type ZodSchema } from "zod";
 import { t } from "./init";
-import { timing } from "./middleware/timing";
 import { auth } from "./middleware/auth";
-import { type UseTRPCQueryResult } from "@trpc/react-query/shared";
-import { session } from "./middleware/session";
 import { pro } from "./middleware/pro";
+import { session } from "./middleware/session";
+import { timing } from "./middleware/timing";
 
 export const createTRPCContext = async (opts: { headers: Headers }) => opts;
 
@@ -40,37 +41,9 @@ export type ProcedureDefinition<T extends Definition> = Pick<
 export type ProcedureQuery<T extends ProcedureDefinition<Definition>> =
   UseTRPCQueryResult<T["output"], any>;
 
-type Procedure<
-  U extends ProcedureBuilder<any, any, any, any, any, any, any, any>,
-  T = unknown,
-> = T extends ZodSchema
-  ? U extends ProcedureBuilder<
-      infer TContext,
-      any,
-      infer TContextOverrides,
-      any,
-      any,
-      any,
-      any,
-      any
-    >
-    ? {
-        ctx: TContext & TContextOverrides;
-        input: TypeOf<T>;
-      }
-    : never
-  : U extends ProcedureBuilder<
-        infer TContext,
-        any,
-        infer TContextOverrides,
-        any,
-        any,
-        any,
-        any,
-        any
-      >
-    ? {
-        ctx: TContext & TContextOverrides;
-        input: undefined;
-      }
+type Procedure<T extends AnyProcedureBuilder, U = undefined> =
+  inferProcedureBuilderResolverOptions<T> extends infer R
+    ? U extends ZodSchema
+      ? R & { input: TypeOf<U> }
+      : R
     : never;
