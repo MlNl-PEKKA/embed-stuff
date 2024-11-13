@@ -4,6 +4,7 @@ type Path<T extends Route = Route> = T extends
   | `/api/${string}`
   | `${string}/(${string})${string}`
   | `/login`
+  | "/"
   ? never
   : T extends `${infer R}/${string}`
     ? R extends ""
@@ -16,7 +17,6 @@ type Paths<T extends Path = Path> = {
 };
 
 export const PATHS = {
-  "/": "Landing",
   "/projects": "Projects",
   "/profile": "Profile",
   "/emotes": "Emotes",
