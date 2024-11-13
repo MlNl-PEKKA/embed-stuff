@@ -40,7 +40,7 @@ default_pool_size = 20
 max_client_conn = 100
 
 [realtime]
-enabled = true
+enabled = false
 # Bind realtime via either IPv4 or IPv6. (default: IPv4)
 # ip_version = "IPv6"
 # The maximum length in bytes of HTTP request headers. (default: 4096)
@@ -58,7 +58,7 @@ openai_api_key = "env(OPENAI_API_KEY)"
 # Email testing server. Emails sent with the local dev setup are not actually sent - rather, they
 # are monitored, and you can view the emails that would have been sent from the web interface.
 [inbucket]
-enabled = true
+enabled = false
 # Port to use for the email testing server web interface.
 port = 54324
 # Uncomment to expose additional ports for testing user applications that send emails.
@@ -66,12 +66,12 @@ port = 54324
 # pop3_port = 54326
 
 [storage]
-enabled = true
+enabled = false
 # The maximum file size allowed (e.g. "5MB", "500KB").
-file_size_limit = "50MiB"
+# file_size_limit = "50MiB"
 
 [storage.image_transformation]
-enabled = true
+enabled = false
 
 # Uncomment to configure local storage buckets
 # [storage.buckets.images]
@@ -103,10 +103,10 @@ enable_manual_linking = false
 
 [auth.email]
 # Allow/disallow new user signups via email to your project.
-enable_signup = true
+enable_signup = false
 # If enabled, a user will be required to confirm any email change on both the old, and new email
 # addresses. If disabled, only the new email is required to confirm.
-double_confirm_changes = true
+double_confirm_changes = false
 # If enabled, users need to confirm their email address before signing in.
 enable_confirmations = false
 # If enabled, users will need to reauthenticate or have logged in recently to change their password.
@@ -130,7 +130,7 @@ max_frequency = "1s"
 
 [auth.sms]
 # Allow/disallow new user signups via SMS to your project.
-enable_signup = true
+enable_signup = false
 # If enabled, users need to confirm their phone number before signing in.
 enable_confirmations = false
 # Template for sending OTP to users
@@ -213,17 +213,17 @@ enabled = false
 # user_pool_region = "us-east-1"
 
 [edge_runtime]
-enabled = true
+enabled = false
 # Configure one of the supported request policies: `oneshot`, `per_worker`.
 # Use `oneshot` for hot reload, or `per_worker` for load testing.
-policy = "oneshot"
-inspector_port = 8083
+# policy = "oneshot"
+# inspector_port = 8083
 
 [analytics]
-enabled = true
+enabled = false
 port = 54327
 # Configure one of the supported backends: `postgres`, `bigquery`.
-backend = "postgres"
+# backend = "postgres"
 
 # Experimental features may be deprecated any time
 [experimental]
