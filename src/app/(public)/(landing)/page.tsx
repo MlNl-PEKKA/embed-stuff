@@ -4,29 +4,34 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Redirect } from "@/public/landing/components/Redirect";
+import { connection } from "next/server";
+import { api, HydrateClient } from "@/trpc/server";
 
-const Page = () => {
+const Page = async() => {
+  await connection();
+  void api.session.prefetch();
   return (
+    <HydrateClient>
     <div className="flex min-h-screen flex-col">
       <header className="flex h-14 items-center px-4 lg:px-6">
-        <Link className="flex items-center justify-center" href="#">
+        <Link prefetch={false} className="flex items-center justify-center" href="#">
           <Smile className="mr-2 h-6 w-6" />
           <span className="font-bold">The Emote Kit</span>
         </Link>
         <nav className="ml-auto flex items-center gap-4 sm:gap-6">
-          <Link
+          <Link prefetch={false}
             className="text-sm font-medium underline-offset-4 hover:underline"
             href="#features"
           >
             Features
           </Link>
-          <Link
+          <Link prefetch={false}
             className="text-sm font-medium underline-offset-4 hover:underline"
             href="#how-it-works"
           >
             How It Works
           </Link>
-          <Link
+          <Link prefetch={false}
             className="text-sm font-medium underline-offset-4 hover:underline"
             href="#pricing"
           >
@@ -262,15 +267,16 @@ const Page = () => {
           © 2024 The Emote Kit. All rights reserved.
         </p>
         <nav className="flex gap-4 sm:ml-auto sm:gap-6">
-          <Link className="text-xs underline-offset-4 hover:underline" href="#">
+          <Link prefetch={false} className="text-xs underline-offset-4 hover:underline" href="#">
             Terms of Service
           </Link>
-          <Link className="text-xs underline-offset-4 hover:underline" href="#">
+          <Link prefetch={false} className="text-xs underline-offset-4 hover:underline" href="#">
             Privacy
           </Link>
         </nav>
       </footer>
     </div>
+    </HydrateClient>
   );
 };
 

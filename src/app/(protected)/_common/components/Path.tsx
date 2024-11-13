@@ -70,6 +70,7 @@ const ModuleLink = <T extends Paths>({
     <>
       <TooltipTrigger asChild>
         <Link
+          prefetch={false}
           href={path}
           aria-label={name}
           className={cn(pathVariants({ active, className }))}

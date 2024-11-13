@@ -12,7 +12,7 @@ export const Content = () => {
 
 export const Login = () => {
   return (
-    <Link href={"/login"}>
+    <Link prefetch={false} href={"/login"}>
       <Button variant="outline" className="w-full">
         Login
       </Button>
@@ -22,7 +22,7 @@ export const Login = () => {
 
 const GoToDashboard = () => {
   return (
-    <Link href={"/projects"}>
+    <Link prefetch={false} href={"/projects"}>
       <Button variant="outline" className="w-full">
         Go To Dashboard
       </Button>

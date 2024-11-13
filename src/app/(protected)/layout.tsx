@@ -1,16 +1,11 @@
-import type { PropsWithChildren } from "react";
 import { Logo } from "@/protected/components/Logo";
 import { Navigation } from "@/protected/components/Navigation";
-import type { ProtectedLayoutProps } from "@/protected/types";
-import { api, HydrateClient } from "@/trpc/server";
 import { PathProvider } from "@/protected/contexts/PathProvider";
-import { connection } from "next/server";
+import type { ProtectedLayoutProps } from "@/protected/types";
+import type { PropsWithChildren } from "react";
 
-const Layout = async (props: PropsWithChildren<ProtectedLayoutProps>) => {
-  await connection();
-  void api.protected.user.prefetch();
+const Layout =  (props: PropsWithChildren<ProtectedLayoutProps>) => {
   return (
-    <HydrateClient>
       <PathProvider>
         <div className="flex h-screen w-full">
           <nav className="z-20 flex h-full flex-col border-r bg-background">
@@ -27,7 +22,6 @@ const Layout = async (props: PropsWithChildren<ProtectedLayoutProps>) => {
           </div>
         </div>
       </PathProvider>
-    </HydrateClient>
   );
 };
 
