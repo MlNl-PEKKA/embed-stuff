@@ -12,8 +12,8 @@
     "zod": "pnpm exec supabase-to-zod --input src/server/db/schema/default.ts --output src/server/db/zod.ts",
     "types:local": "pnpm exec supabase gen types --lang=typescript --local --schema public> src/server/db/schema/default.ts && pnpm run zod",
     "types:remote": "pnpm exec supabase gen types --lang=typescript --linked --schema public> src/server/db/schema/default.ts && pnpm run zod",
-    "seed:local": "pnpm exec supabase db dump -f supabase/seed.sql --local --data-only --exclude auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens",
-    "seed:remote": "pnpm exec supabase db dump -f supabase/seed.sql --linked --data-only --exclude auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens",
+    "seed:local": "pnpm exec supabase db dump -f supabase/seed.sql --local --data-only --exclude public.user,auth.users,auth.identities,auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens",
+    "seed:remote": "pnpm exec supabase db dump -f supabase/seed.sql --linked --data-only --exclude public.user,auth.users,auth.identities,auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens",
     "db": "pnpm exec supabase db",
     "migration": "pnpm exec supabase migration"
   },
