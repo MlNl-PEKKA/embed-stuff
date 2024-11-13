@@ -1,3 +1,3 @@
-const Page = () =>  <>Projects</>
+const Page = () => <>Projects</>;
 
 export default Page;

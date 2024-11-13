@@ -1,3 +1,3 @@
-const Page = () => <>Emotes</>
+const Page = () => <>Emotes</>;
 
 export default Page;
