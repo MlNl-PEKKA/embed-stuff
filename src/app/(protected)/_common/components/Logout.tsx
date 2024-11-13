@@ -9,7 +9,7 @@ export const Logout = () => {
   return (
     <Path
       logo={<LogOut />}
-      name="Logouts"
+      name="Logout"
       link={false}
       onClick={() => mutate()}
     />

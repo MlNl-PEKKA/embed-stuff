@@ -9,7 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import type { PATHS } from "@/protected/constants/paths";
+import { PATHS } from "@/protected/constants/paths";
 import { usePath } from "@/protected/hooks/usePath";
 
 const pathVariants = cva(
@@ -64,7 +64,8 @@ const ModuleLink = <T extends Paths>({
   className,
   path,
 }: ModuleLinkProps<T>) => {
-  const { module, name } = usePath();
+  const name = PATHS[path];
+  const { module } = usePath();
   const active = module === path;
   return (
     <>
