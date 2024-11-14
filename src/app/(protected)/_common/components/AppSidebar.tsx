@@ -37,11 +37,7 @@ export const AppSidebar = ({
   ...props
 }: React.ComponentProps<typeof Sidebar>) => {
   return (
-    <Sidebar
-      collapsible="none"
-      className="min-h-screen w-[3rem] border-r"
-      {...props}
-    >
+    <Sidebar variant="inset" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
