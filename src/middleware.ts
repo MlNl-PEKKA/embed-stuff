@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 import { createProtectedClient } from "@/db/client";
+import { cookies } from "next/headers";
 
 export const config = {
   matcher: [
@@ -59,8 +60,9 @@ const publicPageCheck: MiddlewareType = async (request) => {
 
 const sessionCheck: MiddlewareType = async (request) => {
   const { pathname } = request.nextUrl;
+  const cookieStore = await cookies();
 
-  const db = await createProtectedClient();
+  const db = createProtectedClient({ cookies: cookieStore });
 
   const session = (await db.auth.getSession()).data?.session;
 

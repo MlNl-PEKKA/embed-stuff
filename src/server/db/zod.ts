@@ -181,7 +181,15 @@ export const userUpdateSchema = z.object({
   name: z.string().optional(),
 });
 
-export const userRelationshipsSchema = z.tuple([]);
+export const userRelationshipsSchema = z.tuple([
+  z.object({
+    foreignKeyName: z.literal("user_id_fkey"),
+    columns: z.tuple([z.literal("id")]),
+    isOneToOne: z.literal(true),
+    referencedRelation: z.literal("users"),
+    referencedColumns: z.tuple([z.literal("id")]),
+  }),
+]);
 
 export const emoteRowSchema = z.object({
   created_at: z.string(),

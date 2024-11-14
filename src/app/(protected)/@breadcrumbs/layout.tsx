@@ -1,7 +1,12 @@
+import { Breadcrumb, BreadcrumbList } from "@/components/ui/breadcrumb";
 import type { PropsWithChildren } from "react";
 
 const Layout = (props: PropsWithChildren) => {
-  return <h1 className="text-xl font-semibold">{props.children}</h1>;
+  return (
+    <Breadcrumb>
+      <BreadcrumbList className="text-lg">{props.children}</BreadcrumbList>
+    </Breadcrumb>
+  );
 };
 
 export default Layout;

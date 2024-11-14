@@ -1,5 +1,5 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { type NextRequest } from "next/server";
 
 import { env } from "@/env";
@@ -12,8 +12,10 @@ import { createTRPCContext } from "@/server/trpc";
  */
 const createContext = async () => {
   const heads = await headers();
+  const cookieStore = await cookies();
   return createTRPCContext({
     headers: heads,
+    cookies: cookieStore,
   });
 };
 

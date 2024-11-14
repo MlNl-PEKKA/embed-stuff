@@ -15,8 +15,9 @@ const Layout = (props: PropsWithChildren<ProtectedLayoutProps>) => {
           <Navigation />
         </nav>
         <div className="flex w-full flex-col">
-          <header className="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
+          <header className="sticky top-0 z-10 flex h-[57px] items-center justify-between gap-1 border-b bg-background px-4">
             {props.breadcrumbs}
+            {props.actions}
           </header>
           <main className="flex flex-1 overflow-auto">{props.children}</main>
         </div>

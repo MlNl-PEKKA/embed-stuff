@@ -1,22 +1,22 @@
-import { env } from "@/env";
 import type { DB } from "@/db/types";
-import { createClient as _createClient } from "@supabase/supabase-js";
+import { env } from "@/env";
+import { TRPCContext } from "@/server/trpc";
 import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
-import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { createClient as _createClient } from "@supabase/supabase-js";
 
-export const createProtectedClient = async () => {
-  const cookieStore = await cookies();
+type Args = Pick<TRPCContext, "cookies">;
+
+export const createProtectedClient = (opts: Args) => {
   return createServerClient<DB>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
     cookies: {
       getAll() {
-        return cookieStore.getAll();
+        return opts.cookies.getAll();
       },
       setAll(cookiesToSet) {
         try {
           cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, {
-              ...(options as ResponseCookie),
+            opts.cookies.set(name, value, {
+              ...options,
               httpOnly: true,
               secure: true,
               sameSite: "lax",

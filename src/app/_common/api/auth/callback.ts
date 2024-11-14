@@ -10,7 +10,7 @@ const schema = z.object({
 });
 
 const query = async ({
-  ctx: { headers },
+  ctx: { headers, cookies },
   input: { code, next, origin },
 }: PublicProcedure<typeof schema>) => {
   if (!code)
@@ -18,7 +18,7 @@ const query = async ({
       code: "INTERNAL_SERVER_ERROR",
       message: "Missing auth code",
     });
-  const db = await createProtectedClient();
+  const db = createProtectedClient({ cookies });
   const { error } = await db.auth.exchangeCodeForSession(code);
   if (error)
     throw new TRPCError({

@@ -2,15 +2,32 @@
 
 import type { UseTRPCQueryResult } from "@trpc/react-query/shared";
 import type { inferProcedureBuilderResolverOptions } from "@trpc/server";
-import type { AnyProcedureBuilder } from "@trpc/server/unstable-core-do-not-import";
+import type {
+  AnyProcedureBuilder,
+  MiddlewareBuilder,
+  MiddlewareFunction,
+} from "@trpc/server/unstable-core-do-not-import";
 import { type TypeOf, type ZodSchema } from "zod";
 import { t } from "./init";
 import { auth } from "./middleware/auth";
 import { pro } from "./middleware/pro";
 import { session } from "./middleware/session";
 import { timing } from "./middleware/timing";
+import { createPublicClient } from "@/server/db/client";
+import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
-export const createTRPCContext = async (opts: { headers: Headers }) => opts;
+export type TRPCContext = {
+  headers: Headers;
+  cookies: ReadonlyRequestCookies;
+};
+
+export const createTRPCContext = async (opts: TRPCContext) => {
+  const adminDb = createPublicClient();
+  return {
+    ...opts,
+    adminDb,
+  };
+};
 
 export const createCallerFactory = t.createCallerFactory;
 
@@ -46,4 +63,27 @@ type Procedure<T extends AnyProcedureBuilder, U = undefined> =
     ? U extends ZodSchema
       ? R & { input: TypeOf<U> }
       : R
+    : never;
+
+export type Middleware<
+  T,
+  ContextOverridesOut = undefined,
+> = inferMiddlewareBuilderOptions<T, ContextOverridesOut>;
+
+type inferMiddlewareBuilderOptions<T, $ContextOverridesOut = undefined> =
+  T extends MiddlewareBuilder<
+    infer TContext,
+    infer TMeta,
+    infer TContextOverrides,
+    infer TInputOut
+  >
+    ? Parameters<
+        MiddlewareFunction<
+          TContext,
+          TMeta,
+          TContextOverrides,
+          $ContextOverridesOut,
+          TInputOut
+        >
+      >[0]
     : never;

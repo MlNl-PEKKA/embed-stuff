@@ -1,4 +1,5 @@
 import { t } from "@/server/trpc/init";
+import type { Middleware } from "..";
 
 export const timing = t.middleware(async ({ next, path }) => {
   const start = Date.now();
@@ -16,3 +17,5 @@ export const timing = t.middleware(async ({ next, path }) => {
 
   return result;
 });
+
+export type Timing = Middleware<typeof timing>;

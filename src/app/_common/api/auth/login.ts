@@ -12,10 +12,10 @@ const schema = z.object({
 });
 
 const mutation = async ({
-  ctx: { headers },
+  ctx: { headers, cookies },
   input: { provider },
 }: PublicProcedure<typeof schema>) => {
-  const db = await createProtectedClient();
+  const db = createProtectedClient({ cookies });
   const origin = headers.get("origin")!;
   const { data, error } = await db.auth.signInWithOAuth({
     provider,

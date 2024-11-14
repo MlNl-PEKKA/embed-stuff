@@ -31,9 +31,9 @@ export type Custom<
   T extends CustomizableTypes<"Object">
     ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-expect-error
-      CustomObject<T, U>
+      Prettify<CustomObject<T, U>>
     : T extends CustomizableTypes<"Array">
-      ? CustomObject<T[number], U>
+      ? Prettify<CustomObject<T[number], U>>
       : never;
 
 type RequiredOnly<T extends CustomizableTypes<"Object">> = Pick<
@@ -70,3 +70,7 @@ type Nullify<T extends CustomizableTypes<"Object">> = {
 type UnNullify<T extends CustomizableTypes<"Object">> = {
   [id in keyof T]: NonNullable<T[id]>;
 };
+
+type Prettify<T extends CustomizableTypes<"Object">> = {
+  [id in keyof T]: T[id];
+} & {};

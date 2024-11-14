@@ -1,11 +1,9 @@
-import { TRPCError } from "@trpc/server";
 import { type ProtectedProcedure, protectedProcedure } from "@/server/trpc";
-import { createProtectedClient } from "@/db/client";
+import { TRPCError } from "@trpc/server";
 
 const query = async ({ ctx }: ProtectedProcedure) => {
-  const db = await createProtectedClient();
   const emotes = (
-    await db
+    await ctx.db
       .from("emote")
       .select()
       .or(`visibility.eq.public, user_id.eq.${ctx.user.id}`)

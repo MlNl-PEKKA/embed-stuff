@@ -1,5 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { auth } from "./auth";
+import type { Middleware } from "..";
 
 export const pro = auth.unstable_pipe(async ({ next, ctx }) => {
   const {
@@ -18,3 +19,5 @@ export const pro = auth.unstable_pipe(async ({ next, ctx }) => {
     },
   });
 });
+
+export type Pro = Middleware<typeof pro>;

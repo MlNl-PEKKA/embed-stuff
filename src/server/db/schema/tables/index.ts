@@ -14,19 +14,17 @@ export type TableType<
   U extends DatabaseTableRow<T> extends CustomizableTypes<"Array">
     ? { [id in keyof Partial<DatabaseTableRow<T>[number]>]: any }
     : { [id in keyof Partial<DatabaseTableRow<T>>]: any },
-> = Required<
-  Custom<
-    DatabaseTables[T],
+> = Custom<
+  DatabaseTables[T],
+  //@ts-expect-error
+  {
     //@ts-expect-error
-    {
-      //@ts-expect-error
-      Row: Custom<DatabaseTableRow<T>, U>;
-      //@ts-expect-error
-      Insert: Custom<DatabaseTableInsert<T>, U>;
-      //@ts-expect-error
-      Update: Custom<DatabaseTableUpdate<T>, U>;
-    }
-  >
+    Row: Custom<DatabaseTableRow<T>, U>;
+    //@ts-expect-error
+    Insert: Custom<DatabaseTableInsert<T>, U>;
+    //@ts-expect-error
+    Update: Custom<DatabaseTableUpdate<T>, U>;
+  }
 >;
 
 export type Tables = Custom<DatabaseTables, {}>;
