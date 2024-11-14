@@ -57,14 +57,16 @@ export const createQueryClient = (router?: AppRouterInstance) => {
         staleTime: 10 * 1000,
         retry: 2,
         refetchOnMount: false,
-        refetchOnWindowFocus: false
+        refetchOnWindowFocus: false,
       },
       dehydrate: {
         serializeData: superjson.serialize,
         shouldDehydrateQuery: (query) => {
-          query.state.dataUpdatedAt = Date.now()
-          return defaultShouldDehydrateQuery(query) ||
-          query.state.status === "pending"
+          query.state.dataUpdatedAt = Date.now();
+          return (
+            defaultShouldDehydrateQuery(query) ||
+            query.state.status === "pending"
+          );
         },
       },
       hydrate: {

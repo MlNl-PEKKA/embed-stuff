@@ -1,4 +1,4 @@
-import { ProtectedProcedure, protectedProcedure } from "@/server/trpc";
+import { type ProtectedProcedure, protectedProcedure } from "@/server/trpc";
 
 const mutation = async ({ ctx }: ProtectedProcedure) =>
   await ctx.db.auth.signOut({ scope: "local" });
