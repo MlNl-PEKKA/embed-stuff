@@ -1,47 +1,26 @@
 "use client";
 
-import { cva } from "class-variance-authority";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { SidebarMenuButton } from "@/components/ui/sidebar";
 import { PATHS } from "@/protected/constants/paths";
 import { usePath } from "@/protected/hooks/usePath";
-
-const pathVariants = cva(
-  "flex items-center justify-center rounded-lg size-10",
-  {
-    variants: {
-      active: {
-        true: "bg-muted",
-      },
-    },
-    defaultVariants: {
-      active: false,
-    },
-  },
-);
+import Link from "next/link";
 
 type Paths = keyof typeof PATHS;
 
 type Links<T extends Paths = Paths> = {
-  link: true;
+  type: "link";
   path: T;
 };
 
 type ButtonType = {
-  link: false;
+  type: "button";
   onClick: () => void;
   name: string;
 };
 
 type CommonProps = {
   logo: JSX.Element;
-  className?: string;
+  tooltip?: boolean;
 };
 
 type ModuleLinkProps<T extends Paths = Paths> = CommonProps & Links<T>;
@@ -51,63 +30,52 @@ type ModuleButtonProps = CommonProps & ButtonType;
 type Props<T extends Paths = Paths> = CommonProps &
   (ModuleLinkProps<T> | ButtonType);
 
-export const Path = <T extends Paths>(props: Props<T>) => {
-  return (
-    <Tooltip>
-      {props.link ? <ModuleLink {...props} /> : <ModuleButton {...props} />}
-    </Tooltip>
-  );
+export const Path = <T extends Paths>({
+  tooltip = true,
+  ...props
+}: Props<T>) => {
+  switch (props.type) {
+    case "link":
+      return <ModuleLink {...props} tooltip={tooltip} />;
+    default:
+      return <ModuleButton {...props} tooltip={tooltip} />;
+  }
 };
 
 const ModuleLink = <T extends Paths>({
   logo,
-  className,
   path,
+  tooltip,
 }: ModuleLinkProps<T>) => {
   const name = PATHS[path];
   const { module } = usePath();
   const active = module === path;
   return (
-    <>
-      <TooltipTrigger asChild>
-        <Link
-          prefetch={false}
-          href={path}
-          aria-label={name}
-          className={cn(pathVariants({ active, className }))}
-        >
-          {logo}
-        </Link>
-      </TooltipTrigger>
-      <TooltipContent side="right" sideOffset={5}>
-        {name}
-      </TooltipContent>
-    </>
+    <SidebarMenuButton
+      isActive={active}
+      asChild
+      tooltip={{
+        children: name,
+        hidden: !tooltip,
+      }}
+    >
+      <Link prefetch={false} href={path} aria-label={name}>
+        {logo}
+      </Link>
+    </SidebarMenuButton>
   );
 };
 
-const ModuleButton = ({
-  logo,
-  className,
-  name,
-  onClick,
-}: ModuleButtonProps) => {
+const ModuleButton = ({ logo, name, tooltip, onClick }: ModuleButtonProps) => {
   return (
-    <>
-      <TooltipTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className={cn(pathVariants({ className }))}
-          aria-label={name}
-          onClick={onClick}
-        >
-          {logo}
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent side="right" sideOffset={5}>
-        {name}
-      </TooltipContent>
-    </>
+    <SidebarMenuButton
+      onClick={onClick}
+      tooltip={{
+        children: name,
+        hidden: !tooltip,
+      }}
+    >
+      {logo}
+    </SidebarMenuButton>
   );
 };

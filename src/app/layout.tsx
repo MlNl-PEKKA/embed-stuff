@@ -28,11 +28,7 @@ const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <TRPCReactProvider>
-              <div className="flex min-h-screen w-screen items-center justify-center bg-gray-100 dark:bg-black">
-                {children}
-              </div>
-            </TRPCReactProvider>
+            <TRPCReactProvider>{children}</TRPCReactProvider>
           </TooltipProvider>
         </ThemeProvider>
       </body>

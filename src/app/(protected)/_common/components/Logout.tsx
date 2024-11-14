@@ -10,7 +10,7 @@ export const Logout = () => {
     <Path
       logo={<LogOut />}
       name="Logout"
-      link={false}
+      type="button"
       onClick={() => mutate()}
     />
   );
