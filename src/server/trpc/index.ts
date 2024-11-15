@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { UseTRPCQueryResult } from "@trpc/react-query/shared";
+import type {
+  UseTRPCMutationResult,
+  UseTRPCQueryResult,
+} from "@trpc/react-query/shared";
 import type { inferProcedureBuilderResolverOptions } from "@trpc/server";
 import type {
   AnyProcedureBuilder,
@@ -57,6 +60,9 @@ export type ProcedureDefinition<T extends Definition> = Pick<
 
 export type ProcedureQuery<T extends ProcedureDefinition<Definition>> =
   UseTRPCQueryResult<T["output"], any>;
+
+export type ProcedureMutation<T extends ProcedureDefinition<Definition>> =
+  UseTRPCMutationResult<T["output"], any, any, any>;
 
 type Procedure<T extends AnyProcedureBuilder, U = undefined> =
   inferProcedureBuilderResolverOptions<T> extends infer R

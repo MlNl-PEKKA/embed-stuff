@@ -9,8 +9,8 @@ export const InterceptedDrawer = (props: PropsWithChildren) => {
   const router = useRouter();
   return (
     <Drawer open onClose={() => router.back()}>
-      <DrawerContent>
-        <DialogTitle className="sr-only">Create</DialogTitle>
+      <DrawerContent className="h-[90%]">
+        <DialogTitle className="sr-only" />
         {props.children}
       </DrawerContent>
     </Drawer>
