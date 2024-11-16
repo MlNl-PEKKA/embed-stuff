@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import { api } from "@/trpc/server";
-
-export const dynamic = "force-dynamic";
+import { connection } from "next/server";
 
 export const GET = async (request: Request) => {
+  await connection();
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/projects";
