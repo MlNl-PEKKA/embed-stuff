@@ -1,15 +1,15 @@
-import type { Route } from "next";
+// type Path<T extends Route = Route> = T extends
+//   | `/api/${string}`
+//   | `${string}/(${string})${string}`
+//   | `/login`
+//   ? never
+//   : T extends `${infer R}/${string}`
+//     ? R extends ""
+//       ? T
+//       : never
+//     : never;
 
-type Path<T extends Route = Route> = T extends
-  | `/api/${string}`
-  | `${string}/(${string})${string}`
-  | `/login`
-  ? never
-  : T extends `${infer R}/${string}`
-    ? R extends ""
-      ? T
-      : never
-    : never;
+type Path = "/" | "/profile" | "/emotes" | "/projects" | "/projects/create";
 
 type Paths<T extends Path = Path> = {
   [id in `${T}`]: string;
