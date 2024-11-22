@@ -54,10 +54,11 @@ export const createQueryClient = (router?: AppRouterInstance) => {
       queries: {
         // With SSR, we usually want to set some default staleTime
         // above 0 to avoid refetching immediately on the client
-        staleTime: 10 * 1000,
+        staleTime: 1 * 1_000,
         retry: 2,
         refetchOnMount: false,
         refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
       },
       dehydrate: {
         serializeData: superjson.serialize,

@@ -15,7 +15,6 @@ import { t } from "./init";
 import { auth } from "./middleware/auth";
 import { pro } from "./middleware/pro";
 import { session } from "./middleware/session";
-import { timing } from "./middleware/timing";
 import { createPublicClient } from "@/server/db/client";
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
@@ -36,19 +35,19 @@ export const createCallerFactory = t.createCallerFactory;
 
 export const createTRPCRouter = t.router;
 
-export const publicProcedure = t.procedure.use(timing).use(session);
+export const publicProcedure = t.procedure.use(session);
 export type PublicProcedure<T = undefined> = Procedure<
   typeof publicProcedure,
   T
 >;
 
-export const protectedProcedure = t.procedure.use(timing).use(auth);
+export const protectedProcedure = t.procedure.use(auth);
 export type ProtectedProcedure<T = undefined> = Procedure<
   typeof protectedProcedure,
   T
 >;
 
-export const proProcedure = t.procedure.use(timing).use(pro);
+export const proProcedure = t.procedure.use(pro);
 export type ProProcedure<T = undefined> = Procedure<typeof proProcedure, T>;
 
 type Definition = { _def: { $types: any } };
