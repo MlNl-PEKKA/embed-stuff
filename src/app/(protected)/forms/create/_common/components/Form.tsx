@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { TypeOf } from "zod";
-import { schema } from "@/projects/create/schema/create";
+import { schema } from "@/forms/create/schema/create";
 import { Button } from "@/components/ui/button";
 import {
   Form as FormBody,
@@ -14,13 +14,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useProjectCreate } from "@/projects/create/hooks/useProjectCreate";
+import { useFormCreate } from "@/forms/create/hooks/useFormCreate";
 
 export const Form = () => {
   const form = useForm<TypeOf<typeof schema>>({
     resolver: zodResolver(schema),
   });
-  const { mutate, isPending } = useProjectCreate();
+  const { mutate, isPending } = useFormCreate();
   return (
     <FormBody {...form}>
       <form
@@ -36,21 +36,7 @@ export const Form = () => {
               <FormControl>
                 <Input placeholder="Name" {...field} />
               </FormControl>
-              <FormDescription>This is your project name.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="url"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>URL</FormLabel>
-              <FormControl>
-                <Input placeholder="URL" {...field} />
-              </FormControl>
-              <FormDescription>This is your project URL.</FormDescription>
+              <FormDescription>This is your form name.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

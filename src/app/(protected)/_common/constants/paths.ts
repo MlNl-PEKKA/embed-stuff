@@ -1,15 +1,4 @@
-// type Path<T extends Route = Route> = T extends
-//   | `/api/${string}`
-//   | `${string}/(${string})${string}`
-//   | `/login`
-//   ? never
-//   : T extends `${infer R}/${string}`
-//     ? R extends ""
-//       ? T
-//       : never
-//     : never;
-
-type Path = "/" | "/profile" | "/emotes" | "/projects" | "/projects/create";
+type Path = "/" | "/profile" | "/emotes" | "/forms" | "/forms/create";
 
 type Paths<T extends Path = Path> = {
   [id in `${T}`]: string;
@@ -17,8 +6,8 @@ type Paths<T extends Path = Path> = {
 
 export const PATHS = {
   "/": "Landing",
-  "/projects": "Projects",
+  "/forms": "Forms",
   "/profile": "Profile",
   "/emotes": "Emotes",
-  "/projects/create": "Create Project",
+  "/forms/create": "Create Form",
 } as const satisfies Paths;

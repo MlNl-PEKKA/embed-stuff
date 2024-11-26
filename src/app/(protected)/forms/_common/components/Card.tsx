@@ -5,31 +5,12 @@ import { CardContent, Card as CardDev, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type { DBTable } from "@/server/db/types";
 
-type Props = DBTable<"project">;
+type Props = DBTable<"form">;
 
-export const Card = ({
-  status = "active",
-  name = "Project 1",
-  // url = "",
-}: Props) => {
-  // const [imageError, setImageError] = useState(false);
+export const Card = ({ status = "active", name = "Form 1" }: Props) => {
   return (
     <CardDev className="w-full max-w-[200px] overflow-hidden">
-      <CardHeader className="relative flex h-40 items-center justify-center bg-gray-100 text-6xl dark:bg-gray-800">
-        {/* {!imageError ? (
-          <Image
-            src={url}
-            alt={`Screenshot of ${name}`}
-            layout="fill"
-            objectFit="cover"
-            onError={() => setImageError(true)}
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center">
-            {name.charAt(0).toUpperCase()}
-          </div>
-        )} */}
-      </CardHeader>
+      <CardHeader className="relative flex h-40 items-center justify-center bg-gray-100 text-6xl dark:bg-gray-800" />
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <h3 className="truncate text-lg font-semibold capitalize">{name}</h3>

@@ -3,7 +3,7 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 
 const Page = () => (
-  <Link href={"/projects/create"}>
+  <Link href={"/forms/create"}>
     <Button variant="outline" className="flex h-[2rem] items-center">
       Create
       <Plus />

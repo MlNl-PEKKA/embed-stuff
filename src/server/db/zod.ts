@@ -49,32 +49,30 @@ export const emoteRelationshipsSchema = z.tuple([
   }),
 ]);
 
-export const projectStatusSchema = z.union([
+export const formStatusSchema = z.union([
   z.literal("active"),
   z.literal("inactive"),
 ]);
 
-export const projectInsertSchema = z.object({
+export const formInsertSchema = z.object({
   created_at: z.string().optional(),
   id: z.string().optional(),
   name: z.string(),
-  status: projectStatusSchema.optional(),
-  url: z.string(),
+  status: formStatusSchema.optional(),
   user_id: z.string(),
 });
 
-export const projectUpdateSchema = z.object({
+export const formUpdateSchema = z.object({
   created_at: z.string().optional(),
   id: z.string().optional(),
   name: z.string().optional(),
-  status: projectStatusSchema.optional(),
-  url: z.string().optional(),
+  status: formStatusSchema.optional(),
   user_id: z.string().optional(),
 });
 
-export const projectRelationshipsSchema = z.tuple([
+export const formRelationshipsSchema = z.tuple([
   z.object({
-    foreignKeyName: z.literal("project_user_id_fkey"),
+    foreignKeyName: z.literal("form_user_id_fkey"),
     columns: z.tuple([z.literal("user_id")]),
     isOneToOne: z.literal(false),
     referencedRelation: z.literal("user"),
@@ -82,71 +80,71 @@ export const projectRelationshipsSchema = z.tuple([
   }),
 ]);
 
-export const projectEmoteRowSchema = z.object({
+export const formEmoteRowSchema = z.object({
   created_at: z.string(),
   emote_id: z.string(),
+  form_id: z.string(),
   id: z.string(),
-  project_id: z.string(),
 });
 
-export const projectEmoteInsertSchema = z.object({
+export const formEmoteInsertSchema = z.object({
   created_at: z.string().optional(),
   emote_id: z.string(),
+  form_id: z.string(),
   id: z.string().optional(),
-  project_id: z.string(),
 });
 
-export const projectEmoteUpdateSchema = z.object({
+export const formEmoteUpdateSchema = z.object({
   created_at: z.string().optional(),
   emote_id: z.string().optional(),
+  form_id: z.string().optional(),
   id: z.string().optional(),
-  project_id: z.string().optional(),
 });
 
-export const projectEmoteRelationshipsSchema = z.tuple([
+export const formEmoteRelationshipsSchema = z.tuple([
   z.object({
-    foreignKeyName: z.literal("project_emote_emote_id_fkey"),
+    foreignKeyName: z.literal("form_emote_emote_id_fkey"),
     columns: z.tuple([z.literal("emote_id")]),
     isOneToOne: z.literal(false),
     referencedRelation: z.literal("emote"),
     referencedColumns: z.tuple([z.literal("id")]),
   }),
   z.object({
-    foreignKeyName: z.literal("project_emote_project_id_fkey"),
-    columns: z.tuple([z.literal("project_id")]),
+    foreignKeyName: z.literal("form_emote_form_id_fkey"),
+    columns: z.tuple([z.literal("form_id")]),
     isOneToOne: z.literal(false),
-    referencedRelation: z.literal("project"),
+    referencedRelation: z.literal("form"),
     referencedColumns: z.tuple([z.literal("id")]),
   }),
 ]);
 
 export const reactionRowSchema = z.object({
   created_at: z.string(),
+  form_emote_id: z.string(),
   id: z.string(),
-  project_emote_id: z.string(),
   user_id: z.string().nullable(),
 });
 
 export const reactionInsertSchema = z.object({
   created_at: z.string().optional(),
+  form_emote_id: z.string(),
   id: z.string().optional(),
-  project_emote_id: z.string(),
   user_id: z.string().optional().nullable(),
 });
 
 export const reactionUpdateSchema = z.object({
   created_at: z.string().optional(),
+  form_emote_id: z.string().optional(),
   id: z.string().optional(),
-  project_emote_id: z.string().optional(),
   user_id: z.string().optional().nullable(),
 });
 
 export const reactionRelationshipsSchema = z.tuple([
   z.object({
-    foreignKeyName: z.literal("reaction_project_emote_id_fkey"),
-    columns: z.tuple([z.literal("project_emote_id")]),
+    foreignKeyName: z.literal("reaction_form_emote_id_fkey"),
+    columns: z.tuple([z.literal("form_emote_id")]),
     isOneToOne: z.literal(false),
-    referencedRelation: z.literal("project_emote"),
+    referencedRelation: z.literal("form_emote"),
     referencedColumns: z.tuple([z.literal("id")]),
   }),
   z.object({
@@ -191,6 +189,11 @@ export const userRelationshipsSchema = z.tuple([
   }),
 ]);
 
+export const projectStatusSchema = z.union([
+  z.literal("active"),
+  z.literal("inactive"),
+]);
+
 export const emoteRowSchema = z.object({
   created_at: z.string(),
   emoji: z.string(),
@@ -201,12 +204,11 @@ export const emoteRowSchema = z.object({
   visibility: emoteVisibilitySchema,
 });
 
-export const projectRowSchema = z.object({
+export const formRowSchema = z.object({
   created_at: z.string(),
   id: z.string(),
   name: z.string(),
-  status: projectStatusSchema,
-  url: z.string(),
+  status: formStatusSchema,
   user_id: z.string(),
 });
 

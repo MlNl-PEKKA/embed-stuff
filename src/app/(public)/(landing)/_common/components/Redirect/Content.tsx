@@ -22,7 +22,7 @@ export const Login = () => {
 
 const GoToDashboard = () => {
   return (
-    <Link prefetch={false} href={"/projects"}>
+    <Link prefetch={false} href={"/forms"}>
       <Button variant="outline" className="w-full">
         Go To Dashboard
       </Button>

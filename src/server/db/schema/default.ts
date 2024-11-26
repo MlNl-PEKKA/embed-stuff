@@ -47,34 +47,31 @@ export type Database = {
           },
         ]
       }
-      project: {
+      form: {
         Row: {
           created_at: string
           id: string
           name: string
-          status: Database["public"]["Enums"]["project_status"]
-          url: string
+          status: Database["public"]["Enums"]["form_status"]
           user_id: string
         }
         Insert: {
           created_at?: string
           id?: string
           name: string
-          status?: Database["public"]["Enums"]["project_status"]
-          url: string
+          status?: Database["public"]["Enums"]["form_status"]
           user_id: string
         }
         Update: {
           created_at?: string
           id?: string
           name?: string
-          status?: Database["public"]["Enums"]["project_status"]
-          url?: string
+          status?: Database["public"]["Enums"]["form_status"]
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "project_user_id_fkey"
+            foreignKeyName: "form_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "user"
@@ -82,38 +79,38 @@ export type Database = {
           },
         ]
       }
-      project_emote: {
+      form_emote: {
         Row: {
           created_at: string
           emote_id: string
+          form_id: string
           id: string
-          project_id: string
         }
         Insert: {
           created_at?: string
           emote_id: string
+          form_id: string
           id?: string
-          project_id: string
         }
         Update: {
           created_at?: string
           emote_id?: string
+          form_id?: string
           id?: string
-          project_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "project_emote_emote_id_fkey"
+            foreignKeyName: "form_emote_emote_id_fkey"
             columns: ["emote_id"]
             isOneToOne: false
             referencedRelation: "emote"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "project_emote_project_id_fkey"
-            columns: ["project_id"]
+            foreignKeyName: "form_emote_form_id_fkey"
+            columns: ["form_id"]
             isOneToOne: false
-            referencedRelation: "project"
+            referencedRelation: "form"
             referencedColumns: ["id"]
           },
         ]
@@ -121,28 +118,28 @@ export type Database = {
       reaction: {
         Row: {
           created_at: string
+          form_emote_id: string
           id: string
-          project_emote_id: string
           user_id: string | null
         }
         Insert: {
           created_at?: string
+          form_emote_id: string
           id?: string
-          project_emote_id: string
           user_id?: string | null
         }
         Update: {
           created_at?: string
+          form_emote_id?: string
           id?: string
-          project_emote_id?: string
           user_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "reaction_project_emote_id_fkey"
-            columns: ["project_emote_id"]
+            foreignKeyName: "reaction_form_emote_id_fkey"
+            columns: ["form_emote_id"]
             isOneToOne: false
-            referencedRelation: "project_emote"
+            referencedRelation: "form_emote"
             referencedColumns: ["id"]
           },
           {
@@ -198,6 +195,7 @@ export type Database = {
     }
     Enums: {
       emote_visibility: "public" | "private"
+      form_status: "active" | "inactive"
       project_status: "active" | "inactive"
       user_membership: "free" | "pro"
     }

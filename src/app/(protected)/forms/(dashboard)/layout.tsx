@@ -1,4 +1,4 @@
-import type { ProjectsLayout } from "@/projects/types";
+import type { ProjectsLayout } from "@/forms/types";
 
 const Layout = (props: ProjectsLayout) => {
   return (

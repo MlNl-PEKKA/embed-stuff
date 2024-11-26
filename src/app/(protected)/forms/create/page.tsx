@@ -1,4 +1,4 @@
-import { Create } from "@/projects/create/components/Create";
+import { Create } from "@/forms/create/components/Create";
 
 const Page = () => {
   return <Create />;

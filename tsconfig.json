@@ -40,11 +40,11 @@
       "@/login/*": ["./src/app/(public)/login/_common/*"],
       "@/protected/*": ["./src/app/(protected)/_common/*"],
       "@/emotes/*": ["./src/app/(protected)/emotes/_common/*"],
-      "@/projects/*": ["./src/app/(protected)/projects/_common/*"],
-      "@/projects/dashboard/*": [
-        "./src/app/(protected)/projects/(dashboard)/_common/*"
+      "@/forms/*": ["./src/app/(protected)/forms/_common/*"],
+      "@/forms/dashboard/*": [
+        "./src/app/(protected)/forms/(dashboard)/_common/*"
       ],
-      "@/projects/create/*": ["./src/app/(protected)/projects/create/_common/*"]
+      "@/forms/create/*": ["./src/app/(protected)/forms/create/_common/*"]
     }
   },
   "include": [

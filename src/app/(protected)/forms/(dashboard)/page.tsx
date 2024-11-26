@@ -1,13 +1,13 @@
-import { Projects } from "@/projects/components/Projects";
+import { Forms } from "@/forms/components/Forms";
 import { api, HydrateClient } from "@/trpc/server";
 import { connection } from "next/server";
 
 const Page = async () => {
   await connection();
-  void api.protected.projects.read.prefetch();
+  void api.protected.forms.read.prefetch();
   return (
     <HydrateClient>
-      <Projects />
+      <Forms />
     </HydrateClient>
   );
 };

@@ -4,23 +4,23 @@ import {
   protectedProcedure,
 } from "@/server/trpc";
 import { TRPCError } from "@trpc/server";
-import { schema } from "@/projects/create/schema/create";
+import { schema } from "@/forms/create/schema/create";
 
 const mutation = async ({ ctx, input }: ProtectedProcedure<typeof schema>) => {
-  const project = (
+  const form = (
     await ctx.db
-      .from("project")
+      .from("form")
       .insert({ ...input, user_id: ctx.user.id })
       .select()
       .single()
       .throwOnError()
   ).data;
-  if (!project)
+  if (!form)
     throw new TRPCError({
       code: "INTERNAL_SERVER_ERROR",
-      message: "Something went wrong while creating the project",
+      message: "Something went wrong while creating the form",
     });
-  return project;
+  return form;
 };
 
 export const create = protectedProcedure.input(schema).mutation(mutation);
