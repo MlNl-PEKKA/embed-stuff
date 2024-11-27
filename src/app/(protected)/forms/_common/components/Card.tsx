@@ -4,12 +4,17 @@ import { Badge } from "@/components/ui/badge";
 import { CardContent, Card as CardDev, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type { DBTable } from "@/server/db/types";
+import { useRouter } from "next/navigation";
 
 type Props = DBTable<"form">;
 
-export const Card = ({ status = "active", name = "Form 1" }: Props) => {
+export const Card = ({ status = "active", name = "Form 1", id }: Props) => {
+  const router = useRouter();
   return (
-    <CardDev className="w-full max-w-[200px] overflow-hidden">
+    <CardDev
+      className="w-full max-w-[200px] overflow-hidden"
+      onClick={() => router.push(`/forms/${id}`)}
+    >
       <CardHeader className="relative flex h-40 items-center justify-center bg-gray-100 text-6xl dark:bg-gray-800" />
       <CardContent className="p-4">
         <div className="flex items-center justify-between">

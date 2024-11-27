@@ -1,6 +1,6 @@
-import type { ProjectsLayout } from "@/forms/types";
+import type { FormsLayout } from "@/forms/types";
 
-const Layout = (props: ProjectsLayout) => {
+const Layout = (props: FormsLayout) => {
   return (
     <>
       {props.children}

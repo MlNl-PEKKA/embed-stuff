@@ -71,6 +71,6 @@ type UnNullify<T extends CustomizableTypes<"Object">> = {
   [id in keyof T]: NonNullable<T[id]>;
 };
 
-type Prettify<T extends CustomizableTypes<"Object">> = {
+export type Prettify<T extends CustomizableTypes<"Object">> = {
   [id in keyof T]: T[id];
 } & {};

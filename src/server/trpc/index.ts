@@ -63,7 +63,7 @@ export type ProcedureQuery<T extends ProcedureDefinition<Definition>> =
 export type ProcedureMutation<T extends ProcedureDefinition<Definition>> =
   UseTRPCMutationResult<T["output"], any, any, any>;
 
-type Procedure<T extends AnyProcedureBuilder, U = undefined> =
+export type Procedure<T extends AnyProcedureBuilder, U = undefined> =
   inferProcedureBuilderResolverOptions<T> extends infer R
     ? U extends ZodSchema
       ? R & { input: TypeOf<U> }

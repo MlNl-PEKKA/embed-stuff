@@ -1,3 +1,3 @@
 import type { LayoutProps } from "@/app/types";
 
-export type ProjectsLayout = LayoutProps<undefined, ["create"]>;
+export type FormsLayout = LayoutProps<undefined, ["create"]>;

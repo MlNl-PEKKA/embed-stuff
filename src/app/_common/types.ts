@@ -1,3 +1,4 @@
+import type { Prettify } from "@/lib/types";
 import type { ReactNode } from "react";
 
 type InputParams = undefined | string | readonly string[];
@@ -27,12 +28,20 @@ export type LayoutProps<
 > = T extends undefined
   ? U extends undefined
     ? RootLayout
-    : RootLayout & OutpurParallelRoutes<U>
+    : Prettify<RootLayout & OutpurParallelRoutes<U>>
   : U extends undefined
-    ? RootLayout & {
-        params: OutputParams<T>;
-      }
-    : RootLayout &
-        OutpurParallelRoutes<U> & {
+    ? Prettify<
+        RootLayout & {
           params: OutputParams<T>;
-        };
+        }
+      >
+    : Prettify<
+        RootLayout &
+          OutpurParallelRoutes<U> & {
+            params: OutputParams<T>;
+          }
+      >;
+
+export type ParamsProps<T extends readonly string[]> = {
+  [id in T[number]]: string;
+};
