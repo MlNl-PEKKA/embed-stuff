@@ -15,7 +15,7 @@ export const Card = ({ status = "active", name = "Form 1", id }: Props) => {
       className="w-full max-w-[200px] overflow-hidden"
       onClick={() => router.push(`/forms/${id}`)}
     >
-      <CardHeader className="relative flex h-40 items-center justify-center text-6xl">
+      <CardHeader className="relative flex h-40 items-center justify-center border-b-[1px] text-6xl">
         ⚡
       </CardHeader>
       <CardContent className="p-4">
@@ -27,7 +27,7 @@ export const Card = ({ status = "active", name = "Form 1", id }: Props) => {
               "ml-2",
               status === "active"
                 ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
-                : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100",
+                : "hidden",
             )}
           >
             {status === "active" ? "Active" : "Inactive"}
