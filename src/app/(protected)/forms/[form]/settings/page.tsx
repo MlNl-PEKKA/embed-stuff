@@ -1,5 +1,7 @@
+import { Form } from "@/form/settings/components/Form";
+
 const Page = () => {
-  return <>Settings</>;
+  return <Form />;
 };
 
 export default Page;

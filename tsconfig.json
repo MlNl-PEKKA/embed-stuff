@@ -45,7 +45,11 @@
         "./src/app/(protected)/forms/(dashboard)/_common/*"
       ],
       "@/forms/create/*": ["./src/app/(protected)/forms/create/_common/*"],
-      "@/form/*": ["./src/app/(protected)/forms/[form]/_common/*"]
+      "@/form/*": ["./src/app/(protected)/forms/[form]/_common/*"],
+      "@/form/settings/*": [
+        "./src/app/(protected)/forms/[form]/settings/_common/*"
+      ],
+      "@/form/emotes/*": ["./src/app/(protected)/forms/[form]/emotes/_common/*"]
     }
   },
   "include": [

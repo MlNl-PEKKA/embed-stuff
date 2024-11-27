@@ -16,4 +16,4 @@ export const formProcedure = protectedProcedure
     });
   });
 
-export type FormProcedure = Procedure<typeof formProcedure>;
+export type FormProcedure<T = undefined> = Procedure<typeof formProcedure, T>;
