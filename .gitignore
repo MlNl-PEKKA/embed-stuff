@@ -48,3 +48,5 @@ yarn-error.log*
 /supabase/.branches
 /supabase/.temp
 /supabase/seed.sql
+
+debug.log
