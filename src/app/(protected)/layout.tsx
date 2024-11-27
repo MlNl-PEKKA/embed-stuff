@@ -9,8 +9,8 @@ const Layout = (props: PropsWithChildren<ProtectedLayoutProps>) => {
     <PathProvider>
       <SidebarProvider className="min-h-screen">
         <AppSidebar />
-        <SidebarInset className="px-2">
-          <header className="flex h-[3rem] w-full items-center justify-between border-b-[1px] px-2 py-2">
+        <SidebarInset className="px-2 pt-3">
+          <header className="flex h-[3rem] w-full items-center justify-between px-4">
             {props.breadcrumbs}
             {props.actions}
           </header>

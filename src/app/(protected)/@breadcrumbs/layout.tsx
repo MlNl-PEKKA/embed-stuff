@@ -4,7 +4,9 @@ import type { PropsWithChildren } from "react";
 const Layout = (props: PropsWithChildren) => {
   return (
     <Breadcrumb>
-      <BreadcrumbList className="text-base">{props.children}</BreadcrumbList>
+      <BreadcrumbList className="text-xl font-medium">
+        {props.children}
+      </BreadcrumbList>
     </Breadcrumb>
   );
 };

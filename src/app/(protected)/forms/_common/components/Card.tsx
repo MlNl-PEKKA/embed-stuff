@@ -15,7 +15,9 @@ export const Card = ({ status = "active", name = "Form 1", id }: Props) => {
       className="w-full max-w-[200px] overflow-hidden"
       onClick={() => router.push(`/forms/${id}`)}
     >
-      <CardHeader className="relative flex h-40 items-center justify-center bg-gray-100 text-6xl dark:bg-gray-800" />
+      <CardHeader className="relative flex h-40 items-center justify-center text-6xl">
+        ⚡
+      </CardHeader>
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <h3 className="truncate text-lg font-semibold capitalize">{name}</h3>

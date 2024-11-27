@@ -13,7 +13,7 @@ export const Card = ({
 }: Props) => {
   return (
     <CardDev className="w-full max-w-[200px] overflow-hidden">
-      <CardHeader className="relative flex h-40 items-center justify-center bg-gray-100 text-6xl dark:bg-gray-800">
+      <CardHeader className="relative flex h-40 items-center justify-center border-b-[1px] text-6xl">
         {is_pro && (
           <Badge
             variant="secondary"
@@ -31,9 +31,9 @@ export const Card = ({
             variant="outline"
             className={cn(
               "ml-2",
-              visibility === "public"
+              visibility === "private"
                 ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
-                : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100",
+                : "hidden",
             )}
           >
             {visibility === "public" ? "Public" : "Private"}
