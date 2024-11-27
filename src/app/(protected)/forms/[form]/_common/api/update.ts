@@ -1,7 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { schema } from "@/form/schema/update";
 import { formProcedure, type FormProcedure } from "@/form/utils/formProcedure";
-import { ProcedureDefinition } from "@/server/trpc";
 
 const mutation = async ({ ctx, input }: FormProcedure<typeof schema>) => {
   const form = (
@@ -23,5 +22,3 @@ const mutation = async ({ ctx, input }: FormProcedure<typeof schema>) => {
 };
 
 export const update = formProcedure.input(schema).mutation(mutation);
-
-export type Update = ProcedureDefinition<typeof update>;
