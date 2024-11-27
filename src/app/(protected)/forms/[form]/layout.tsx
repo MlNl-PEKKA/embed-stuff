@@ -11,9 +11,9 @@ const Layout = async (props: FormLayout) => {
   });
   return (
     <HydrateClient>
-      <div className="mx-4 mt-2">
+      <div className="mx-4 mt-2 flex flex-col gap-4">
         <Navigation />
-        {props.children}
+        <div>{props.children}</div>
       </div>
     </HydrateClient>
   );
