@@ -8,7 +8,7 @@ const mutation = async ({ ctx, input }: FormProcedure<typeof schema>) => {
       .from("form")
       .update({ ...input })
       .eq("user_id", ctx.user.id)
-      .eq("id", ctx.form)
+      .eq("id", input.id)
       .select()
       .single()
       .throwOnError()

@@ -28,7 +28,6 @@ export const auth = session.unstable_pipe(async ({ next, ctx }) => {
 
   return await next({
     ctx: {
-      ...ctx,
       user,
       db,
     },

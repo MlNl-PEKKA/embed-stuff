@@ -10,14 +10,14 @@ export const Navigation = () => {
   return (
     <nav className="flex gap-2">
       <Badge>Overview</Badge>
-      <Badge href={"/emotes"}>Emotes</Badge>
+      <Badge href={"/kit"}>Kit</Badge>
       <Badge href={"/settings"}>Settings</Badge>
     </nav>
   );
 };
 
 type BadgeProps = Omit<Parameters<typeof Link>[0], "href"> & {
-  href?: "" | "/settings" | "/emotes";
+  href?: "" | "/kit" | "/settings";
 };
 
 const Badge = ({ href = "", ...props }: BadgeProps) => {

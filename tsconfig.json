@@ -49,7 +49,7 @@
       "@/form/settings/*": [
         "./src/app/(protected)/forms/[form]/settings/_common/*"
       ],
-      "@/form/emotes/*": ["./src/app/(protected)/forms/[form]/emotes/_common/*"]
+      "@/form/kit/*": ["src/app/(protected)/forms/[form]/kit/_common/*"]
     }
   },
   "include": [
