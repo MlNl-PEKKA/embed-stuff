@@ -110,6 +110,13 @@ export const formEmoteRelationshipsSchema = z.tuple([
     referencedColumns: z.tuple([z.literal("id")]),
   }),
   z.object({
+    foreignKeyName: z.literal("form_emote_emote_id_fkey"),
+    columns: z.tuple([z.literal("emote_id")]),
+    isOneToOne: z.literal(false),
+    referencedRelation: z.literal("emote_option"),
+    referencedColumns: z.tuple([z.literal("id")]),
+  }),
+  z.object({
     foreignKeyName: z.literal("form_emote_form_id_fkey"),
     columns: z.tuple([z.literal("form_id")]),
     isOneToOne: z.literal(false),
@@ -179,12 +186,25 @@ export const userUpdateSchema = z.object({
   name: z.string().optional(),
 });
 
-export const userRelationshipsSchema = z.tuple([
+export const userRelationshipsSchema = z.tuple([]);
+
+export const emoteOptionRowSchema = z.object({
+  created_at: z.string().nullable(),
+  emoji: z.string().nullable(),
+  form_id: z.array(z.string()).nullable(),
+  id: z.string().nullable(),
+  is_pro: z.boolean().nullable(),
+  name: z.string().nullable(),
+  user_id: z.string().nullable(),
+  visibility: emoteVisibilitySchema.nullable(),
+});
+
+export const emoteOptionRelationshipsSchema = z.tuple([
   z.object({
-    foreignKeyName: z.literal("user_id_fkey"),
-    columns: z.tuple([z.literal("id")]),
-    isOneToOne: z.literal(true),
-    referencedRelation: z.literal("users"),
+    foreignKeyName: z.literal("emote_created_by_fkey"),
+    columns: z.tuple([z.literal("user_id")]),
+    isOneToOne: z.literal(false),
+    referencedRelation: z.literal("user"),
     referencedColumns: z.tuple([z.literal("id")]),
   }),
 ]);

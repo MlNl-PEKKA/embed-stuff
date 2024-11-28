@@ -1,4 +1,5 @@
 import { type FormProcedure, formProcedure } from "@/form/utils/formProcedure";
+import type { ProcedureDefinition } from "@/server/trpc";
 import { TRPCError } from "@trpc/server";
 
 const query = async ({ ctx, input }: FormProcedure) => {
@@ -15,7 +16,8 @@ const query = async ({ ctx, input }: FormProcedure) => {
     throw new TRPCError({ code: "NOT_FOUND", message: "Emotes not found" });
   const { form_emote } = form;
   return form_emote.map(({ emote }) => emote);
-  return [];
 };
 
-export const emotes = formProcedure.query(query);
+export const read = formProcedure.query(query);
+
+export type Read = ProcedureDefinition<typeof read>;

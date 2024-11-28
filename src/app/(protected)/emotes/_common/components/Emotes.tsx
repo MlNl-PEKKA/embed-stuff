@@ -9,7 +9,18 @@ export const Emotes = () => {
   return (
     <Content>
       {emotes.map((emote) => (
-        <Card key={emote.id} {...emote} />
+        <Card
+          key={emote.id}
+          {...emote}
+          badge={
+            <Card.Badge
+              className={"bg-yellow-500 font-bold text-black"}
+              hidden={!emote.is_pro}
+            >
+              PRO
+            </Card.Badge>
+          }
+        />
       ))}
     </Content>
   );

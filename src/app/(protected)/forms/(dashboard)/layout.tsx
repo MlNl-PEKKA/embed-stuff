@@ -1,6 +1,8 @@
 import type { FormsLayout } from "@/forms/types";
+import { connection } from "next/server";
 
-const Layout = (props: FormsLayout) => {
+const Layout = async (props: FormsLayout) => {
+  await connection();
   return (
     <>
       {props.children}

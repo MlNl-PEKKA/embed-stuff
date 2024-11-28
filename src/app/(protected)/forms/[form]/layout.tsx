@@ -1,21 +1,14 @@
-import type { FormLayout } from "@/form/types";
-import { api, HydrateClient } from "@/trpc/server";
-import { connection } from "next/server";
 import { Navigation } from "@/form/components/Navigation";
+import type { FormLayout } from "@/form/types";
+import { connection } from "next/server";
 
 const Layout = async (props: FormLayout) => {
   await connection();
-  const id = (await props.params).form;
-  void api.protected.forms.form.read.prefetch({
-    id,
-  });
   return (
-    <HydrateClient>
-      <div className="mx-4 mt-2 flex flex-col gap-4">
-        <Navigation />
-        <div>{props.children}</div>
-      </div>
-    </HydrateClient>
+    <div className="flex h-full w-full flex-col gap-4 px-4 py-2">
+      <Navigation />
+      {props.children}
+    </div>
   );
 };
 
