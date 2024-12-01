@@ -26,6 +26,10 @@ import {
 } from "@/form/kit/hooks/useKitEmotesInsert";
 import { cn } from "@/lib/utils";
 import { Check, Minus, Plus, Trash, X } from "lucide-react";
+import {
+  KitEmotesRemoveProvider,
+  useKitEmotesRemove,
+} from "@/form/kit/hooks/useKitEmotesRemove";
 
 const Content = () => {
   const mode = useKitEmotesStore((state) => state.mode);
@@ -95,8 +99,13 @@ type EmoteLoadingProps = {
   id: string;
 };
 const EmoteLoading = (props: EmoteLoadingProps) => {
-  const { isPending, variables } = useKitEmotesInsert();
-  const loading = isPending && variables.emotes.includes(props.id);
+  const { isPending: isInsertPending, variables: insertVariables } =
+    useKitEmotesInsert();
+  const { isPending: isRemovePending, variables: removeVariables } =
+    useKitEmotesRemove();
+  const loading =
+    (isInsertPending && insertVariables.emotes.includes(props.id)) ||
+    (isRemovePending && removeVariables.emotes.includes(props.id));
   return (
     <Card.Loader hidden={!loading}>
       <Badge variant="outline" className="bg-black">
@@ -167,25 +176,12 @@ const ViewActions = () => {
 
 const AddActions = () => {
   const { mutate, isPending } = useKitEmotesInsert();
-  return (
-    <SelectionActions
-      disabled={isPending}
-      confirm={() => {
-        mutate();
-      }}
-    />
-  );
+  return <SelectionActions disabled={isPending} confirm={() => mutate()} />;
 };
 
 const RemoveActions = () => {
-  return (
-    <SelectionActions
-      confirm={() => {
-        //
-      }}
-      disabled={false}
-    />
-  );
+  const { mutate, isPending } = useKitEmotesRemove();
+  return <SelectionActions disabled={isPending} confirm={() => mutate()} />;
 };
 
 type SelectionActionProps = {
@@ -233,8 +229,10 @@ export const Emotes = ({ className, ...props }: BentoCardProps) => (
   <BentoCard className={cn("gap-4", className)} {...props}>
     <KitEmotesStoreProvider>
       <KitEmotesInsertProvider>
-        <Header />
-        <Content />
+        <KitEmotesRemoveProvider>
+          <Header />
+          <Content />
+        </KitEmotesRemoveProvider>
       </KitEmotesInsertProvider>
     </KitEmotesStoreProvider>
   </BentoCard>

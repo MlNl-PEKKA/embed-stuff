@@ -7,7 +7,7 @@ export const useContextDefaults = () => {
   const { form } = useFormParams();
   const emotes = useKitEmotesStore((state) => state.emotes).map(({ id }) => id);
   const { setMode } = useKitEmotesStore((state) => state.actions);
-  const mutation = api.protected.forms.form.kit.emotes.insert.useMutation({
+  const mutation = api.protected.forms.form.kit.emotes.remove.useMutation({
     onSuccess: () => setMode("view"),
   });
   const mutate = () => mutation.mutate({ id: form, emotes });
@@ -21,21 +21,21 @@ export const useContextDefaults = () => {
   return { ...mutation, mutate, mutateAsync };
 };
 
-const KitEmotesInsert = createContext<
+const KitEmotesRemove = createContext<
   ReturnType<typeof useContextDefaults> | undefined
 >(undefined);
 
-export const KitEmotesInsertProvider = (props: PropsWithChildren) => {
+export const KitEmotesRemoveProvider = (props: PropsWithChildren) => {
   const value = useContextDefaults();
   return (
-    <KitEmotesInsert.Provider value={value}>
+    <KitEmotesRemove.Provider value={value}>
       {props.children}
-    </KitEmotesInsert.Provider>
+    </KitEmotesRemove.Provider>
   );
 };
 
-export const useKitEmotesInsert = () => {
-  const value = useContext(KitEmotesInsert);
-  if (!value) throw new Error("KitEmotesInsert not found as a provider");
+export const useKitEmotesRemove = () => {
+  const value = useContext(KitEmotesRemove);
+  if (!value) throw new Error("KitEmotesRemove not found as a provider");
   return value;
 };
