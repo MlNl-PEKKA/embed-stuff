@@ -1,0 +1,10 @@
+{
+  "name": "@repo/next-config",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "next": "15.0.3"
+  },
+  "dependencies": {}
+}

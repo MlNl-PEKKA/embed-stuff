@@ -1,5 +1,4 @@
 import type { DB } from "@/db/types";
-import { env } from "@/env";
 import { TRPCContext } from "@/server/trpc";
 import { createServerClient } from "@supabase/ssr";
 import { createClient as _createClient } from "@supabase/supabase-js";
@@ -7,7 +6,7 @@ import { createClient as _createClient } from "@supabase/supabase-js";
 type Args = Pick<TRPCContext, "cookies">;
 
 export const createProtectedClient = (opts: Args) => {
-  return createServerClient<DB>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
+  return createServerClient<DB>(process.env.SUPABASE_URL!, process.env.SUPABASE_ANON_KEY!, {
     cookies: {
       getAll() {
         return opts.cookies.getAll();
@@ -33,4 +32,4 @@ export const createProtectedClient = (opts: Args) => {
 };
 
 export const createPublicClient = () =>
-  _createClient<DB>(env.SUPABASE_URL, env.SUPABASE_SERVICE_KEY);
+  _createClient<DB>(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY!);
