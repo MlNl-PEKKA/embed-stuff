@@ -41,6 +41,7 @@ export const Card = ({
   visibility = "public",
   badge = <></>,
   loader = <></>,
+  is_pro: _is_pro,
   className,
   ...props
 }: Props) => {

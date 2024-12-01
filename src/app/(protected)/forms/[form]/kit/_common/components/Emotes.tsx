@@ -150,7 +150,7 @@ const ViewActions = () => {
         Add emotes
       </Button>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <Button
             variant="outline"
             size="icon"
@@ -200,7 +200,7 @@ const SelectionActions = (props: SelectionActionProps) => {
   return (
     <>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <Button
             variant="outline"
             size="icon"
@@ -213,7 +213,7 @@ const SelectionActions = (props: SelectionActionProps) => {
         <TooltipContent>Confirm</TooltipContent>
       </Tooltip>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <Button
             variant="outline"
             size="icon"
