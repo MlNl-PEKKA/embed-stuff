@@ -4,227 +4,227 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Json[];
 
 export type Database = {
   public: {
     Tables: {
       emote: {
         Row: {
-          created_at: string
-          emoji: string
-          id: string
-          is_pro: boolean
-          name: string
-          user_id: string | null
-          visibility: Database["public"]["Enums"]["emote_visibility"]
-        }
+          created_at: string;
+          emoji: string;
+          id: string;
+          is_pro: boolean;
+          name: string;
+          user_id: string | null;
+          visibility: Database["public"]["Enums"]["emote_visibility"];
+        };
         Insert: {
-          created_at?: string
-          emoji: string
-          id?: string
-          is_pro?: boolean
-          name: string
-          user_id?: string | null
-          visibility?: Database["public"]["Enums"]["emote_visibility"]
-        }
+          created_at?: string;
+          emoji: string;
+          id?: string;
+          is_pro?: boolean;
+          name: string;
+          user_id?: string | null;
+          visibility?: Database["public"]["Enums"]["emote_visibility"];
+        };
         Update: {
-          created_at?: string
-          emoji?: string
-          id?: string
-          is_pro?: boolean
-          name?: string
-          user_id?: string | null
-          visibility?: Database["public"]["Enums"]["emote_visibility"]
-        }
+          created_at?: string;
+          emoji?: string;
+          id?: string;
+          is_pro?: boolean;
+          name?: string;
+          user_id?: string | null;
+          visibility?: Database["public"]["Enums"]["emote_visibility"];
+        };
         Relationships: [
           {
-            foreignKeyName: "emote_created_by_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "user"
-            referencedColumns: ["id"]
+            foreignKeyName: "emote_created_by_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "user";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       form: {
         Row: {
-          created_at: string
-          id: string
-          name: string
-          status: Database["public"]["Enums"]["form_status"]
-          user_id: string
-        }
+          created_at: string;
+          id: string;
+          name: string;
+          status: Database["public"]["Enums"]["form_status"];
+          user_id: string;
+        };
         Insert: {
-          created_at?: string
-          id?: string
-          name: string
-          status?: Database["public"]["Enums"]["form_status"]
-          user_id: string
-        }
+          created_at?: string;
+          id?: string;
+          name: string;
+          status?: Database["public"]["Enums"]["form_status"];
+          user_id: string;
+        };
         Update: {
-          created_at?: string
-          id?: string
-          name?: string
-          status?: Database["public"]["Enums"]["form_status"]
-          user_id?: string
-        }
+          created_at?: string;
+          id?: string;
+          name?: string;
+          status?: Database["public"]["Enums"]["form_status"];
+          user_id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "form_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "user"
-            referencedColumns: ["id"]
+            foreignKeyName: "form_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "user";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       form_emote: {
         Row: {
-          created_at: string
-          emote_id: string
-          form_id: string
-          id: string
-        }
+          created_at: string;
+          emote_id: string;
+          form_id: string;
+          id: string;
+        };
         Insert: {
-          created_at?: string
-          emote_id: string
-          form_id: string
-          id?: string
-        }
+          created_at?: string;
+          emote_id: string;
+          form_id: string;
+          id?: string;
+        };
         Update: {
-          created_at?: string
-          emote_id?: string
-          form_id?: string
-          id?: string
-        }
+          created_at?: string;
+          emote_id?: string;
+          form_id?: string;
+          id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "form_emote_emote_id_fkey"
-            columns: ["emote_id"]
-            isOneToOne: false
-            referencedRelation: "emote"
-            referencedColumns: ["id"]
+            foreignKeyName: "form_emote_emote_id_fkey";
+            columns: ["emote_id"];
+            isOneToOne: false;
+            referencedRelation: "emote";
+            referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "form_emote_emote_id_fkey"
-            columns: ["emote_id"]
-            isOneToOne: false
-            referencedRelation: "emote_option"
-            referencedColumns: ["id"]
+            foreignKeyName: "form_emote_emote_id_fkey";
+            columns: ["emote_id"];
+            isOneToOne: false;
+            referencedRelation: "emote_option";
+            referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "form_emote_form_id_fkey"
-            columns: ["form_id"]
-            isOneToOne: false
-            referencedRelation: "form"
-            referencedColumns: ["id"]
+            foreignKeyName: "form_emote_form_id_fkey";
+            columns: ["form_id"];
+            isOneToOne: false;
+            referencedRelation: "form";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       reaction: {
         Row: {
-          created_at: string
-          form_emote_id: string
-          id: string
-          user_id: string | null
-        }
+          created_at: string;
+          form_emote_id: string;
+          id: string;
+          user_id: string | null;
+        };
         Insert: {
-          created_at?: string
-          form_emote_id: string
-          id?: string
-          user_id?: string | null
-        }
+          created_at?: string;
+          form_emote_id: string;
+          id?: string;
+          user_id?: string | null;
+        };
         Update: {
-          created_at?: string
-          form_emote_id?: string
-          id?: string
-          user_id?: string | null
-        }
+          created_at?: string;
+          form_emote_id?: string;
+          id?: string;
+          user_id?: string | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "reaction_form_emote_id_fkey"
-            columns: ["form_emote_id"]
-            isOneToOne: false
-            referencedRelation: "form_emote"
-            referencedColumns: ["id"]
+            foreignKeyName: "reaction_form_emote_id_fkey";
+            columns: ["form_emote_id"];
+            isOneToOne: false;
+            referencedRelation: "form_emote";
+            referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "reaction_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "user"
-            referencedColumns: ["id"]
+            foreignKeyName: "reaction_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "user";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       user: {
         Row: {
-          created_at: string
-          email: string
-          id: string
-          image: string | null
-          membership: Database["public"]["Enums"]["user_membership"]
-          name: string
-        }
+          created_at: string;
+          email: string;
+          id: string;
+          image: string | null;
+          membership: Database["public"]["Enums"]["user_membership"];
+          name: string;
+        };
         Insert: {
-          created_at?: string
-          email: string
-          id: string
-          image?: string | null
-          membership?: Database["public"]["Enums"]["user_membership"]
-          name: string
-        }
+          created_at?: string;
+          email: string;
+          id: string;
+          image?: string | null;
+          membership?: Database["public"]["Enums"]["user_membership"];
+          name: string;
+        };
         Update: {
-          created_at?: string
-          email?: string
-          id?: string
-          image?: string | null
-          membership?: Database["public"]["Enums"]["user_membership"]
-          name?: string
-        }
-        Relationships: []
-      }
-    }
+          created_at?: string;
+          email?: string;
+          id?: string;
+          image?: string | null;
+          membership?: Database["public"]["Enums"]["user_membership"];
+          name?: string;
+        };
+        Relationships: [];
+      };
+    };
     Views: {
       emote_option: {
         Row: {
-          created_at: string | null
-          emoji: string | null
-          form_id: string[] | null
-          id: string | null
-          is_pro: boolean | null
-          name: string | null
-          user_id: string | null
-          visibility: Database["public"]["Enums"]["emote_visibility"] | null
-        }
+          created_at: string | null;
+          emoji: string | null;
+          form_id: string[] | null;
+          id: string | null;
+          is_pro: boolean | null;
+          name: string | null;
+          user_id: string | null;
+          visibility: Database["public"]["Enums"]["emote_visibility"] | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "emote_created_by_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "user"
-            referencedColumns: ["id"]
+            foreignKeyName: "emote_created_by_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "user";
+            referencedColumns: ["id"];
           },
-        ]
-      }
-    }
+        ];
+      };
+    };
     Functions: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Enums: {
-      emote_visibility: "public" | "private"
-      form_status: "active" | "inactive"
-      project_status: "active" | "inactive"
-      user_membership: "free" | "pro"
-    }
+      emote_visibility: "public" | "private";
+      form_status: "active" | "inactive";
+      project_status: "active" | "inactive";
+      user_membership: "free" | "pro";
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
+      [_ in never]: never;
+    };
+  };
+};
 
-type PublicSchema = Database[Extract<keyof Database, "public">]
+type PublicSchema = Database[Extract<keyof Database, "public">];
 
 export type Tables<
   PublicTableNameOrOptions extends
@@ -237,7 +237,7 @@ export type Tables<
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
+      Row: infer R;
     }
     ? R
     : never
@@ -245,11 +245,11 @@ export type Tables<
         PublicSchema["Views"])
     ? (PublicSchema["Tables"] &
         PublicSchema["Views"])[PublicTableNameOrOptions] extends {
-        Row: infer R
+        Row: infer R;
       }
       ? R
       : never
-    : never
+    : never;
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
@@ -260,17 +260,17 @@ export type TablesInsert<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
+      Insert: infer I;
     }
     ? I
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Insert: infer I
+        Insert: infer I;
       }
       ? I
       : never
-    : never
+    : never;
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
@@ -281,17 +281,17 @@ export type TablesUpdate<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
+      Update: infer U;
     }
     ? U
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Update: infer U
+        Update: infer U;
       }
       ? U
       : never
-    : never
+    : never;
 
 export type Enums<
   PublicEnumNameOrOptions extends
@@ -304,14 +304,14 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
-    : never
+    : never;
 
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof PublicSchema["CompositeTypes"]
     | { schema: keyof Database },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof Database;
   }
     ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never = never,
@@ -319,5 +319,4 @@ export type CompositeTypes<
   ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
     ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never
-
+    : never;

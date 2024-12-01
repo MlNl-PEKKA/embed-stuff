@@ -1,3 +1,3 @@
 import type { NextConfig } from "next";
 
-export const config:NextConfig = {}
+export const config: NextConfig = {};

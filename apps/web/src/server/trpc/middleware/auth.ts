@@ -9,7 +9,8 @@ export const auth = session.unstable_pipe(async ({ next, ctx }) => {
 
   let authUser: User | null;
 
-  if (process.env.NODE_ENV === "development") authUser = ctx.session?.user ?? null;
+  if (process.env.NODE_ENV === "development")
+    authUser = ctx.session?.user ?? null;
   else authUser = (await db.auth.getUser()).data?.user ?? null;
 
   if (!authUser)
