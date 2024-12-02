@@ -15,7 +15,7 @@ const PUBLIC_API = ["trpc", "auth"].map((api) => `^/api/${api}(/.*)?$`);
 const PUBLIC_ROUTES = new RegExp(["^/$", ...PUBLIC_API].join("|"));
 
 const PROTECTED_ROUTES = new RegExp(
-  ["^/emotes(/.*)?$", "^/abc(/.*)?$", "^/forms(/.*)?$", "^/profile$"].join("|")
+  ["^/emotes(/.*)?$", "^/abc(/.*)?$", "^/forms(/.*)?$", "^/profile$"].join("|"),
 );
 
 const PROTECTED_DEFAULT = "/forms";
@@ -73,5 +73,5 @@ const sessionCheck: MiddlewareType = async (request) => {
 };
 
 type MiddlewareType<T extends NextRequest = NextRequest> = (
-  _req: T
+  _req: T,
 ) => Promise<NextResponse | undefined>;

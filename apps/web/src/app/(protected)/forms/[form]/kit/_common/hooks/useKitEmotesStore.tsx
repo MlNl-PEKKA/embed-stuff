@@ -37,7 +37,7 @@ const useContextDefault = () => {
             emotes: state.emotes.filter(({ id }) => id !== emote.id),
           })),
       },
-    }))
+    })),
   );
   return store;
 };

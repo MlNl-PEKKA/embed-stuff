@@ -84,7 +84,7 @@ const EmoteBadge = (props: EmoteBadgeProps) => {
           ? mode === "add"
             ? "bg-green-600"
             : "bg-red-600"
-          : "bg-black"
+          : "bg-black",
       )}
       hidden={mode === "view"}
     >

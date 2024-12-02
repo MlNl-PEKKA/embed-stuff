@@ -3,7 +3,7 @@ import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.
 
 export const logout = async (
   queryClient: QueryClient,
-  router: AppRouterInstance
+  router: AppRouterInstance,
 ) => {
   return await fetch("/api/auth/logout")
     .then(() => {
