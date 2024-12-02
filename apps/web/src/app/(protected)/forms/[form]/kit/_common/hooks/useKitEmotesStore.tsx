@@ -1,10 +1,6 @@
 import type { Read } from "@/form/kit/api/emotes/read";
-import {
-  createContext,
-  type PropsWithChildren,
-  useContext,
-  useState,
-} from "react";
+import { createContext, useContext, useState } from "react";
+import type { PropsWithChildren } from "react";
 import { createStore, useStore } from "zustand";
 
 type Emote = Read["output"][number];
@@ -41,7 +37,7 @@ const useContextDefault = () => {
             emotes: state.emotes.filter(({ id }) => id !== emote.id),
           })),
       },
-    })),
+    }))
   );
   return store;
 };

@@ -1,6 +1,7 @@
 "use client";
 
-import { type BentoCardProps, BentoCard } from "./BentoCard";
+import { BentoCard } from "./BentoCard";
+import type { BentoCardProps } from "./BentoCard";
 
 const Preview = () => {
   return <>Preview</>;

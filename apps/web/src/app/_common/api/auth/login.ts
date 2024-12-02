@@ -1,11 +1,8 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createProtectedClient } from "@/db/client";
-import {
-  type ProcedureDefinition,
-  type PublicProcedure,
-  publicProcedure,
-} from "@/server/trpc";
+import { publicProcedure } from "@/server/trpc";
+import type { ProcedureDefinition, PublicProcedure } from "@/server/trpc";
 
 const schema = z.object({
   provider: z.enum(["google", "github"]),
@@ -16,7 +13,7 @@ const mutation = async ({
   input: { provider },
 }: PublicProcedure<typeof schema>) => {
   const db = createProtectedClient({ cookies });
-  const origin = headers.get("origin")!;
+  const origin = headers.get("origin");
   const { data, error } = await db.auth.signInWithOAuth({
     provider,
     options: {

@@ -1,13 +1,13 @@
 import {
   defaultShouldDehydrateQuery,
   MutationCache,
-  type Query,
   QueryCache,
   QueryClient,
 } from "@tanstack/react-query";
-import {
-  type TRPCError,
-  type TRPCErrorShape,
+import type { Query } from "@tanstack/react-query";
+import type {
+  TRPCError,
+  TRPCErrorShape,
 } from "@trpc/server/unstable-core-do-not-import";
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import superjson from "superjson";
@@ -22,7 +22,7 @@ export const createQueryClient = (router?: AppRouterInstance) => {
         onError(
           error as unknown as TRPCErrorShape<TRPCError>,
           queryClient,
-          router,
+          router
         ),
     }),
     mutationCache: new MutationCache({
@@ -30,7 +30,7 @@ export const createQueryClient = (router?: AppRouterInstance) => {
         onError(
           error as unknown as TRPCErrorShape<TRPCError>,
           queryClient,
-          router,
+          router
         ),
       onSuccess: () => {
         const nonStaticQueries = (query: Query) => {
@@ -81,7 +81,7 @@ export const createQueryClient = (router?: AppRouterInstance) => {
 const onError = async (
   error: TRPCErrorShape<TRPCError>,
   queryClient?: QueryClient,
-  router?: AppRouterInstance,
+  router?: AppRouterInstance
 ) => {
   if (!router || !queryClient) return;
   if ((error?.data?.code ?? null) === "UNAUTHORIZED")

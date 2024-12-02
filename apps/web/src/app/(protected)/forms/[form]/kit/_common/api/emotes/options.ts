@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { type FormProcedure, formProcedure } from "@/form/utils/formProcedure";
+import { formProcedure } from "@/form/utils/formProcedure";
+import type { FormProcedure } from "@/form/utils/formProcedure";
 import { emoteRowSchema } from "@/server/db/zod";
 import type { ProcedureDefinition } from "@/server/trpc";
 import { TRPCError } from "@trpc/server";

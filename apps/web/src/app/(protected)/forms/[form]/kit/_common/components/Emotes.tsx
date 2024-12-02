@@ -10,10 +10,8 @@ import {
 } from "@/components/ui/tooltip";
 import { Card } from "@/emotes/components/Card";
 import type { Read } from "@/form/kit/api/emotes/read";
-import {
-  type BentoCardProps,
-  BentoCard,
-} from "@/form/kit/components/BentoCard";
+import { BentoCard } from "@/form/kit/components/BentoCard";
+import type { BentoCardProps } from "@/form/kit/components/BentoCard";
 import { useKitEmoteOptions } from "@/form/kit/hooks/useKitEmotesOptions";
 import { useKitEmotesRead } from "@/form/kit/hooks/useKitEmotesRead";
 import {
@@ -86,7 +84,7 @@ const EmoteBadge = (props: EmoteBadgeProps) => {
           ? mode === "add"
             ? "bg-green-600"
             : "bg-red-600"
-          : "bg-black",
+          : "bg-black"
       )}
       hidden={mode === "view"}
     >

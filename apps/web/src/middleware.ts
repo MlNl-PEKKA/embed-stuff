@@ -1,4 +1,5 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 import { createProtectedClient } from "@/db/client";
 import { cookies } from "next/headers";
@@ -14,7 +15,7 @@ const PUBLIC_API = ["trpc", "auth"].map((api) => `^/api/${api}(/.*)?$`);
 const PUBLIC_ROUTES = new RegExp(["^/$", ...PUBLIC_API].join("|"));
 
 const PROTECTED_ROUTES = new RegExp(
-  ["^/emotes(/.*)?$", "^/abc(/.*)?$", "^/forms(/.*)?$", "^/profile$"].join("|"),
+  ["^/emotes(/.*)?$", "^/abc(/.*)?$", "^/forms(/.*)?$", "^/profile$"].join("|")
 );
 
 const PROTECTED_DEFAULT = "/forms";
@@ -39,11 +40,11 @@ const preflightCheck: MiddlewareType = async (request) => {
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
     };
 
-    const origin = request.headers.get("origin")!;
+    const origin = request.headers.get("origin");
 
-    const isAllowedOrigin = origin.startsWith("http://localhost");
+    const isAllowedOrigin = (origin ?? "").startsWith("http://localhost");
 
-    if (isAllowedOrigin)
+    if (isAllowedOrigin && origin)
       preflightHeaders["Access-Control-Allow-Origin"] = origin;
 
     return NextResponse.json({}, { headers: preflightHeaders });
@@ -72,5 +73,5 @@ const sessionCheck: MiddlewareType = async (request) => {
 };
 
 type MiddlewareType<T extends NextRequest = NextRequest> = (
-  _req: T,
+  _req: T
 ) => Promise<NextResponse | undefined>;

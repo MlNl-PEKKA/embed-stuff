@@ -1,5 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { type PropsWithChildren, Suspense as ReactSuspense } from "react";
+import { Suspense as ReactSuspense } from "react";
+import type { PropsWithChildren } from "react";
 import { Content, Login } from "./Content";
 import { ErrorBoundary as ReactErrorBoundary } from "react-error-boundary";
 

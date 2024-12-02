@@ -2,6 +2,7 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,7 +20,6 @@
     "migration": "pnpm exec supabase migration"
   },
   "dependencies": {
-    "@repo/next-config": "workspace:*",
     "@repo/tailwind-config": "workspace:*",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-checkbox": "^1.1.2",

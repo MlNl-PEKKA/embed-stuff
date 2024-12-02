@@ -10,7 +10,7 @@ import type {
   MiddlewareBuilder,
   MiddlewareFunction,
 } from "@trpc/server/unstable-core-do-not-import";
-import { type TypeOf, type ZodSchema } from "zod";
+import type { TypeOf, ZodSchema } from "zod";
 import { t } from "./init";
 import { auth } from "./middleware/auth";
 import { pro } from "./middleware/pro";

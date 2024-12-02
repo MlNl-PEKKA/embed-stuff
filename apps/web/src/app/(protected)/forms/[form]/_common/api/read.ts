@@ -1,5 +1,6 @@
 import { TRPCError } from "@trpc/server";
-import { formProcedure, type FormProcedure } from "@/form/utils/formProcedure";
+import { formProcedure } from "@/form/utils/formProcedure";
+import type { FormProcedure } from "@/form/utils/formProcedure";
 
 const query = async ({ ctx, input }: FormProcedure) => {
   const projects = (

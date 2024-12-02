@@ -1,4 +1,5 @@
-import { type FormProcedure, formProcedure } from "@/form/utils/formProcedure";
+import { formProcedure } from "@/form/utils/formProcedure";
+import type { FormProcedure } from "@/form/utils/formProcedure";
 import type { ProcedureDefinition } from "@/server/trpc";
 import { TRPCError } from "@trpc/server";
 

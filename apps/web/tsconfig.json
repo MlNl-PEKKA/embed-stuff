@@ -1,26 +1,6 @@
 {
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "incremental": true,
-    "plugins": [{ "name": "next" }],
     "baseUrl": ".",
     "paths": {
       "@repo/*": ["../../packages/*"],
@@ -56,6 +36,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-],
+  ],
   "exclude": ["node_modules"]
 }

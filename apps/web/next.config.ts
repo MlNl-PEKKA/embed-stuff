@@ -1,6 +1,5 @@
 import type { NextConfig } from "next";
-import { config } from "@repo/next-config";
 
-let nextConfig: NextConfig = { ...config };
+const nextConfig: NextConfig = {};
 
 export default nextConfig;

@@ -15,7 +15,7 @@ export const Emotes = () => {
           badge={
             <Card.Badge
               className={"bg-yellow-500 font-bold text-black"}
-              hidden={!Boolean(emote.is_pro)}
+              hidden={!emote.is_pro}
             >
               PRO
             </Card.Badge>
