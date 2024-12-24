@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "imports": {
+    "#trpc": "./src/trpc.ts"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
