@@ -6,18 +6,49 @@ settings:
 
 catalogs:
   default:
+    '@tanstack/react-query':
+      specifier: ^5.62.9
+      version: 5.62.10
+    '@trpc/client':
+      specifier: ^11.0.0-rc.666
+      version: 11.0.0-rc.666
+    '@trpc/react-query':
+      specifier: ^11.0.0-rc.666
+      version: 11.0.0-rc.666
+    '@trpc/server':
+      specifier: ^11.0.0-rc.666
+      version: 11.0.0-rc.666
     eslint:
       specifier: ^9.17.0
       version: 9.17.0
     prettier:
       specifier: ^3.4.2
       version: 3.4.2
+    superjson:
+      specifier: ^2.2.2
+      version: 2.2.2
     tailwindcss:
       specifier: ^3.4.17
       version: 3.4.17
     typescript:
       specifier: ^5.7.2
       version: 5.7.2
+    zod:
+      specifier: ^3.24.1
+      version: 3.24.1
+  react18:
+    '@types/react':
+      specifier: ^18.3.11
+      version: 18.3.18
+    '@types/react-dom':
+      specifier: ^18.3.1
+      version: 18.3.5
+    react:
+      specifier: 18.3.1
+      version: 18.3.1
+    react-dom:
+      specifier: 18.3.1
+      version: 18.3.1
 
 importers:
 
@@ -35,6 +66,185 @@ importers:
       turbo:
         specifier: ^2.3.3
         version: 2.3.3
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.2
+
+  apps/web:
+    dependencies:
+      '@embed-stuff/api':
+        specifier: workspace:*
+        version: link:../../packages/api
+      '@embed-stuff/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@embed-stuff/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@embed-stuff/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      '@t3-oss/env-nextjs':
+        specifier: ^0.11.1
+        version: 0.11.1(typescript@5.7.2)(zod@3.24.1)
+      '@tanstack/react-query':
+        specifier: 'catalog:'
+        version: 5.62.10(react@18.3.1)
+      '@trpc/client':
+        specifier: 'catalog:'
+        version: 11.0.0-rc.666(@trpc/server@11.0.0-rc.666(typescript@5.7.2))(typescript@5.7.2)
+      '@trpc/react-query':
+        specifier: 'catalog:'
+        version: 11.0.0-rc.666(@tanstack/react-query@5.62.10(react@18.3.1))(@trpc/client@11.0.0-rc.666(@trpc/server@11.0.0-rc.666(typescript@5.7.2))(typescript@5.7.2))(@trpc/server@11.0.0-rc.666(typescript@5.7.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)
+      '@trpc/server':
+        specifier: 'catalog:'
+        version: 11.0.0-rc.666(typescript@5.7.2)
+      geist:
+        specifier: ^1.3.1
+        version: 1.3.1(next@14.2.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      next:
+        specifier: ^14.2.15
+        version: 14.2.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react:
+        specifier: catalog:react18
+        version: 18.3.1
+      react-dom:
+        specifier: catalog:react18
+        version: 18.3.1(react@18.3.1)
+      superjson:
+        specifier: 'catalog:'
+        version: 2.2.2
+      zod:
+        specifier: 'catalog:'
+        version: 3.24.1
+    devDependencies:
+      '@embed-stuff/eslint-config':
+        specifier: workspace:*
+        version: link:../../toolings/eslint
+      '@embed-stuff/prettier-config':
+        specifier: workspace:*
+        version: link:../../toolings/prettier
+      '@embed-stuff/tailwind-config':
+        specifier: workspace:*
+        version: link:../../toolings/tailwind
+      '@embed-stuff/tsconfig':
+        specifier: workspace:*
+        version: link:../../toolings/typescript
+      '@types/react':
+        specifier: catalog:react18
+        version: 18.3.18
+      '@types/react-dom':
+        specifier: catalog:react18
+        version: 18.3.5(@types/react@18.3.18)
+      dotenv-cli:
+        specifier: ^7.4.4
+        version: 7.4.4
+      eslint:
+        specifier: 'catalog:'
+        version: 9.17.0(jiti@1.21.7)
+      jiti:
+        specifier: ^1.21.6
+        version: 1.21.7
+      prettier:
+        specifier: 'catalog:'
+        version: 3.4.2
+      tailwindcss:
+        specifier: 'catalog:'
+        version: 3.4.17
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.2
+
+  packages/api:
+    dependencies:
+      '@trpc/server':
+        specifier: 'catalog:'
+        version: 11.0.0-rc.666(typescript@5.7.2)
+      superjson:
+        specifier: 'catalog:'
+        version: 2.2.2
+      zod:
+        specifier: 'catalog:'
+        version: 3.24.1
+    devDependencies:
+      '@embed-stuff/eslint-config':
+        specifier: workspace:*
+        version: link:../../toolings/eslint
+      '@embed-stuff/prettier-config':
+        specifier: workspace:*
+        version: link:../../toolings/prettier
+      '@embed-stuff/tsconfig':
+        specifier: workspace:*
+        version: link:../../toolings/typescript
+      eslint:
+        specifier: 'catalog:'
+        version: 9.17.0(jiti@1.21.7)
+      prettier:
+        specifier: 'catalog:'
+        version: 3.4.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.2
+
+  packages/db:
+    devDependencies:
+      '@embed-stuff/eslint-config':
+        specifier: workspace:*
+        version: link:../../toolings/eslint
+      '@embed-stuff/prettier-config':
+        specifier: workspace:*
+        version: link:../../toolings/prettier
+      '@embed-stuff/tsconfig':
+        specifier: workspace:*
+        version: link:../../toolings/typescript
+      eslint:
+        specifier: 'catalog:'
+        version: 9.17.0(jiti@1.21.7)
+      prettier:
+        specifier: 'catalog:'
+        version: 3.4.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.2
+
+  packages/ui:
+    devDependencies:
+      '@embed-stuff/eslint-config':
+        specifier: workspace:*
+        version: link:../../toolings/eslint
+      '@embed-stuff/prettier-config':
+        specifier: workspace:*
+        version: link:../../toolings/prettier
+      '@embed-stuff/tsconfig':
+        specifier: workspace:*
+        version: link:../../toolings/typescript
+      eslint:
+        specifier: 'catalog:'
+        version: 9.17.0(jiti@1.21.7)
+      prettier:
+        specifier: 'catalog:'
+        version: 3.4.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.2
+
+  packages/utils:
+    devDependencies:
+      '@embed-stuff/eslint-config':
+        specifier: workspace:*
+        version: link:../../toolings/eslint
+      '@embed-stuff/prettier-config':
+        specifier: workspace:*
+        version: link:../../toolings/prettier
+      '@embed-stuff/tsconfig':
+        specifier: workspace:*
+        version: link:../../toolings/typescript
+      eslint:
+        specifier: 'catalog:'
+        version: 9.17.0(jiti@1.21.7)
+      prettier:
+        specifier: 'catalog:'
+        version: 3.4.2
       typescript:
         specifier: 'catalog:'
         version: 5.7.2
@@ -270,8 +480,65 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@next/env@14.2.21':
+    resolution: {integrity: sha512-lXcwcJd5oR01tggjWJ6SrNNYFGuOOMB9c251wUNkjCpkoXOPkDeF/15c3mnVlBqrW4JJXb2kVxDFhC4GduJt2A==}
+
   '@next/eslint-plugin-next@14.2.21':
     resolution: {integrity: sha512-bxfiExnMkpwo4bBhCqnDhdgFyxSp6Xt6xu4Ne7En6MpgqwiER95Or+q1WDUDX4e888taeIAdPIAVaY+Wv0kiwQ==}
+
+  '@next/swc-darwin-arm64@14.2.21':
+    resolution: {integrity: sha512-HwEjcKsXtvszXz5q5Z7wCtrHeTTDSTgAbocz45PHMUjU3fBYInfvhR+ZhavDRUYLonm53aHZbB09QtJVJj8T7g==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@next/swc-darwin-x64@14.2.21':
+    resolution: {integrity: sha512-TSAA2ROgNzm4FhKbTbyJOBrsREOMVdDIltZ6aZiKvCi/v0UwFmwigBGeqXDA97TFMpR3LNNpw52CbVelkoQBxA==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@next/swc-linux-arm64-gnu@14.2.21':
+    resolution: {integrity: sha512-0Dqjn0pEUz3JG+AImpnMMW/m8hRtl1GQCNbO66V1yp6RswSTiKmnHf3pTX6xMdJYSemf3O4Q9ykiL0jymu0TuA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@next/swc-linux-arm64-musl@14.2.21':
+    resolution: {integrity: sha512-Ggfw5qnMXldscVntwnjfaQs5GbBbjioV4B4loP+bjqNEb42fzZlAaK+ldL0jm2CTJga9LynBMhekNfV8W4+HBw==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@next/swc-linux-x64-gnu@14.2.21':
+    resolution: {integrity: sha512-uokj0lubN1WoSa5KKdThVPRffGyiWlm/vCc/cMkWOQHw69Qt0X1o3b2PyLLx8ANqlefILZh1EdfLRz9gVpG6tg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@next/swc-linux-x64-musl@14.2.21':
+    resolution: {integrity: sha512-iAEBPzWNbciah4+0yI4s7Pce6BIoxTQ0AGCkxn/UBuzJFkYyJt71MadYQkjPqCQCJAFQ26sYh7MOKdU+VQFgPg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@next/swc-win32-arm64-msvc@14.2.21':
+    resolution: {integrity: sha512-plykgB3vL2hB4Z32W3ktsfqyuyGAPxqwiyrAi2Mr8LlEUhNn9VgkiAl5hODSBpzIfWweX3er1f5uNpGDygfQVQ==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@next/swc-win32-ia32-msvc@14.2.21':
+    resolution: {integrity: sha512-w5bacz4Vxqrh06BjWgua3Yf7EMDb8iMcVhNrNx8KnJXt8t+Uu0Zg4JHLDL/T7DkTCEEfKXO/Er1fcfWxn2xfPA==}
+    engines: {node: '>= 10'}
+    cpu: [ia32]
+    os: [win32]
+
+  '@next/swc-win32-x64-msvc@14.2.21':
+    resolution: {integrity: sha512-sT6+llIkzpsexGYZq8cjjthRyRGe5cJVhqh12FmlbxHqna6zsDDK8UNaV7g41T6atFHCJUPeLb3uyAwrBwy0NA==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -292,6 +559,59 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
+  '@swc/counter@0.1.3':
+    resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
+
+  '@swc/helpers@0.5.5':
+    resolution: {integrity: sha512-KGYxvIOXcceOAbEk4bi/dVLEK9z8sZ0uBB3Il5b1rhfClSpcX0yfRO0KmTkqR2cnQDymwLB+25ZyMzICg/cm/A==}
+
+  '@t3-oss/env-core@0.11.1':
+    resolution: {integrity: sha512-MaxOwEoG1ntCFoKJsS7nqwgcxLW1SJw238AJwfJeaz3P/8GtkxXZsPPolsz1AdYvUTbe3XvqZ/VCdfjt+3zmKw==}
+    peerDependencies:
+      typescript: '>=5.0.0'
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  '@t3-oss/env-nextjs@0.11.1':
+    resolution: {integrity: sha512-rx2XL9+v6wtOqLNJbD5eD8OezKlQD1BtC0WvvtHwBgK66jnF5+wGqtgkKK4Ygie1LVmoDClths2T4tdFmRvGrQ==}
+    peerDependencies:
+      typescript: '>=5.0.0'
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  '@tanstack/query-core@5.62.9':
+    resolution: {integrity: sha512-lwePd8hNYhyQ4nM/iRQ+Wz2cDtspGeZZHFZmCzHJ7mfKXt+9S301fULiY2IR2byJYY6Z03T427E5PoVfMexHjw==}
+
+  '@tanstack/react-query@5.62.10':
+    resolution: {integrity: sha512-1e1WpHM5oGf27nWM/NWLY62/X9pbMBWa6ErWYmeuK0OqB9/g9UzA59ogiWbxCmS2wtAFQRhOdHhfSofrkhPl2g==}
+    peerDependencies:
+      react: ^18 || ^19
+
+  '@trpc/client@11.0.0-rc.666':
+    resolution: {integrity: sha512-BP3H0bktY03m7haVT5QoPR4sn30DNJcvFHsA3Msj3uPRY8JLVE03MR4rVG6T7VbcglORKpyMlRxjpUgdRmJErA==}
+    peerDependencies:
+      '@trpc/server': 11.0.0-rc.666+99556c074
+      typescript: '>=5.6.2'
+
+  '@trpc/react-query@11.0.0-rc.666':
+    resolution: {integrity: sha512-BH0vU7g5w4IrN7xmWSKvLucZ9ZnpRwsDWCSJ0R09xdYwR7geHkna3PBbd8vQVFBSw7MpWEy6LGXVSCHSbUicLg==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.62.8
+      '@trpc/client': 11.0.0-rc.666+99556c074
+      '@trpc/server': 11.0.0-rc.666+99556c074
+      react: '>=18.2.0'
+      react-dom: '>=18.2.0'
+      typescript: '>=5.6.2'
+
+  '@trpc/server@11.0.0-rc.666':
+    resolution: {integrity: sha512-k+jKrdH/owDRRXPR7oPKCQRTu0dOEnqdGh56863ym95sFY8qXE7BhOR8S4WqyZw1CiPZGjRkdFN0q/GsJhKsIA==}
+    peerDependencies:
+      typescript: '>=5.6.2'
+
   '@types/eslint@9.6.1':
     resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
 
@@ -309,6 +629,17 @@ packages:
 
   '@types/node@22.10.2':
     resolution: {integrity: sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==}
+
+  '@types/prop-types@15.7.14':
+    resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
+
+  '@types/react-dom@18.3.5':
+    resolution: {integrity: sha512-P4t6saawp+b/dFrUr2cvkVsfvPguwsxtH6dNIYRllMsefqFzkZk5UIjzyDOv5g1dXIPdG4Sp1yCR4Z6RCUsG/Q==}
+    peerDependencies:
+      '@types/react': ^18.0.0
+
+  '@types/react@18.3.18':
+    resolution: {integrity: sha512-t4yC+vtgnkYjNSKlFx1jkAhH8LgTo2N/7Qvi83kdEaUtMDiwpbLAktKDaAMlRcJ5eSxZkH74eEGt1ky31d7kfQ==}
 
   '@typescript-eslint/eslint-plugin@8.18.2':
     resolution: {integrity: sha512-adig4SzPLjeQ0Tm+jvsozSGiCliI2ajeURDGHjZ2llnA+A67HihCQ+a3amtPhUakd1GlwHxSRvzOZktbEvhPPg==}
@@ -467,6 +798,10 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
+  busboy@1.6.0:
+    resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
+    engines: {node: '>=10.16.0'}
+
   call-bind-apply-helpers@1.0.1:
     resolution: {integrity: sha512-BhYE+WDaywFg2TBWYNXAE+8B1ATnThNBqXHP5nQu0jWJdVvY2hvkpyB3qOmtmDePiS5/BDQ8wASEWGMWRG148g==}
     engines: {node: '>= 0.4'}
@@ -487,6 +822,9 @@ packages:
     resolution: {integrity: sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==}
     engines: {node: '>= 6'}
 
+  caniuse-lite@1.0.30001690:
+    resolution: {integrity: sha512-5ExiE3qQN6oF8Clf8ifIDcMRCRE/dMGcETG/XGMD8/XiXm6HXQgQTh1yZYLXXpSOsEUlJm1Xr7kGULZTuGtP/w==}
+
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
@@ -494,6 +832,9 @@ packages:
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
+
+  client-only@0.0.1:
+    resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -509,6 +850,10 @@ packages:
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
+  copy-anything@3.0.5:
+    resolution: {integrity: sha512-yCEafptTtb4bk7GLEQoM8KVJpxAfdBJYaXyzQEgQQQgYrZiDp8SJmGKlYza6CYjEDNstAdNdKA3UuoULlEbS6w==}
+    engines: {node: '>=12.13'}
+
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
@@ -517,6 +862,9 @@ packages:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
     hasBin: true
+
+  csstype@3.1.3:
+    resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
   damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
@@ -571,8 +919,20 @@ packages:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
     engines: {node: '>=0.10.0'}
 
+  dotenv-cli@7.4.4:
+    resolution: {integrity: sha512-XkBYCG0tPIes+YZr4SpfFv76SQrV/LeCE8CI7JSEMi3VR9MvTihCGTOtbIexD6i2mXF+6px7trb1imVCXSNMDw==}
+    hasBin: true
+
+  dotenv-expand@10.0.0:
+    resolution: {integrity: sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A==}
+    engines: {node: '>=12'}
+
   dotenv@16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+
+  dotenv@16.4.7:
+    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
     engines: {node: '>=12'}
 
   dunder-proto@1.0.1:
@@ -779,6 +1139,11 @@ packages:
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
 
+  geist@1.3.1:
+    resolution: {integrity: sha512-Q4gC1pBVPN+D579pBaz0TRRnGA4p9UK6elDY/xizXdFk/g4EKR5g0I+4p/Kj6gM0SajDBZ/0FvDV9ey9ud7BWw==}
+    peerDependencies:
+      next: '>=13.2.0'
+
   get-intrinsic@1.2.6:
     resolution: {integrity: sha512-qxsEs+9A+u85HhllWJJFicJfPDhRmjzoYdl64aMWW9yRIJmSyxdn8IEkuIM530/7T+lv0TIHd8L6Q/ra0tEoeA==}
     engines: {node: '>= 0.4'}
@@ -815,6 +1180,9 @@ packages:
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
     engines: {node: '>= 0.4'}
+
+  graceful-fs@4.2.11:
+    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
@@ -966,6 +1334,10 @@ packages:
     resolution: {integrity: sha512-mfcwb6IzQyOKTs84CQMrOwW4gQcaTOAWJ0zzJCl2WSPDrWk/OzDaImWFH3djXhb24g4eudZfLRozAvPGw4d9hQ==}
     engines: {node: '>= 0.4'}
 
+  is-what@4.1.16:
+    resolution: {integrity: sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A==}
+    engines: {node: '>=12.13'}
+
   isarray@2.0.5:
     resolution: {integrity: sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==}
 
@@ -1087,6 +1459,24 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+
+  next@14.2.21:
+    resolution: {integrity: sha512-rZmLwucLHr3/zfDMYbJXbw0ZeoBpirxkXuvsJbk7UPorvPYZhP7vq7aHbKnU7dQNCYIimRrbB2pp3xmf+wsYUg==}
+    engines: {node: '>=18.17.0'}
+    hasBin: true
+    peerDependencies:
+      '@opentelemetry/api': ^1.1.0
+      '@playwright/test': ^1.41.2
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+      '@playwright/test':
+        optional: true
+      sass:
+        optional: true
 
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
@@ -1215,6 +1605,10 @@ packages:
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
 
+  postcss@8.4.31:
+    resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
+    engines: {node: ^10 || ^12 || >=14}
+
   postcss@8.4.49:
     resolution: {integrity: sha512-OCVPnIObs4N29kxTjzLfUryOkvZEq+pf8jTF0lg8E7uETuWHA+v7j3c/xJmiqpX450191LlmZfUKkXxkTry7nA==}
     engines: {node: ^10 || ^12 || >=14}
@@ -1293,8 +1687,17 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
+  react-dom@18.3.1:
+    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
+    peerDependencies:
+      react: ^18.3.1
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react@18.3.1:
+    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
+    engines: {node: '>=0.10.0'}
 
   read-cache@1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
@@ -1338,6 +1741,9 @@ packages:
   safe-regex-test@1.1.0:
     resolution: {integrity: sha512-x/+Cz4YrimQxQccJf5mKEbIa1NzeCRNI5Ecl/ekmlYaampdNLPalVyIcCZNNH3MvmqBugV5TMYZXv0ljslUlaw==}
     engines: {node: '>= 0.4'}
+
+  scheduler@0.23.2:
+    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -1388,6 +1794,10 @@ packages:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
 
+  streamsearch@1.1.0:
+    resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
+    engines: {node: '>=10.0.0'}
+
   string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
     engines: {node: '>=8'}
@@ -1435,10 +1845,27 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
+  styled-jsx@5.1.1:
+    resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
+    engines: {node: '>= 12.0.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      babel-plugin-macros: '*'
+      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      babel-plugin-macros:
+        optional: true
+
   sucrase@3.35.0:
     resolution: {integrity: sha512-8EbVDiu9iN/nESwxeSxDKe0dunta1GOlHufmSSXxMD2z2/tMZpDMpvXQGsc+ajGo8y2uYUmixaSRUc/QPoQ0GA==}
     engines: {node: '>=16 || 14 >=14.17'}
     hasBin: true
+
+  superjson@2.2.2:
+    resolution: {integrity: sha512-5JRxVqC8I8NuOUjzBbvVJAKNM8qoVuH0O77h4WInc/qC2q5IreqKxYwgkga3PfA22OayK2ikceb/B26dztPl+Q==}
+    engines: {node: '>=16'}
 
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -1480,6 +1907,9 @@ packages:
 
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
+
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
   turbo-darwin-64@2.3.3:
     resolution: {integrity: sha512-bxX82xe6du/3rPmm4aCC5RdEilIN99VUld4HkFQuw+mvFg6darNBuQxyWSHZTtc25XgYjQrjsV05888w1grpaA==}
@@ -1601,6 +2031,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod@3.24.1:
+    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
 
 snapshots:
 
@@ -1746,9 +2179,38 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@next/env@14.2.21': {}
+
   '@next/eslint-plugin-next@14.2.21':
     dependencies:
       glob: 10.3.10
+
+  '@next/swc-darwin-arm64@14.2.21':
+    optional: true
+
+  '@next/swc-darwin-x64@14.2.21':
+    optional: true
+
+  '@next/swc-linux-arm64-gnu@14.2.21':
+    optional: true
+
+  '@next/swc-linux-arm64-musl@14.2.21':
+    optional: true
+
+  '@next/swc-linux-x64-gnu@14.2.21':
+    optional: true
+
+  '@next/swc-linux-x64-musl@14.2.21':
+    optional: true
+
+  '@next/swc-win32-arm64-msvc@14.2.21':
+    optional: true
+
+  '@next/swc-win32-ia32-msvc@14.2.21':
+    optional: true
+
+  '@next/swc-win32-x64-msvc@14.2.21':
+    optional: true
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -1766,6 +2228,51 @@ snapshots:
     optional: true
 
   '@rtsao/scc@1.1.0': {}
+
+  '@swc/counter@0.1.3': {}
+
+  '@swc/helpers@0.5.5':
+    dependencies:
+      '@swc/counter': 0.1.3
+      tslib: 2.8.1
+
+  '@t3-oss/env-core@0.11.1(typescript@5.7.2)(zod@3.24.1)':
+    dependencies:
+      zod: 3.24.1
+    optionalDependencies:
+      typescript: 5.7.2
+
+  '@t3-oss/env-nextjs@0.11.1(typescript@5.7.2)(zod@3.24.1)':
+    dependencies:
+      '@t3-oss/env-core': 0.11.1(typescript@5.7.2)(zod@3.24.1)
+      zod: 3.24.1
+    optionalDependencies:
+      typescript: 5.7.2
+
+  '@tanstack/query-core@5.62.9': {}
+
+  '@tanstack/react-query@5.62.10(react@18.3.1)':
+    dependencies:
+      '@tanstack/query-core': 5.62.9
+      react: 18.3.1
+
+  '@trpc/client@11.0.0-rc.666(@trpc/server@11.0.0-rc.666(typescript@5.7.2))(typescript@5.7.2)':
+    dependencies:
+      '@trpc/server': 11.0.0-rc.666(typescript@5.7.2)
+      typescript: 5.7.2
+
+  '@trpc/react-query@11.0.0-rc.666(@tanstack/react-query@5.62.10(react@18.3.1))(@trpc/client@11.0.0-rc.666(@trpc/server@11.0.0-rc.666(typescript@5.7.2))(typescript@5.7.2))(@trpc/server@11.0.0-rc.666(typescript@5.7.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)':
+    dependencies:
+      '@tanstack/react-query': 5.62.10(react@18.3.1)
+      '@trpc/client': 11.0.0-rc.666(@trpc/server@11.0.0-rc.666(typescript@5.7.2))(typescript@5.7.2)
+      '@trpc/server': 11.0.0-rc.666(typescript@5.7.2)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      typescript: 5.7.2
+
+  '@trpc/server@11.0.0-rc.666(typescript@5.7.2)':
+    dependencies:
+      typescript: 5.7.2
 
   '@types/eslint@9.6.1':
     dependencies:
@@ -1785,6 +2292,17 @@ snapshots:
   '@types/node@22.10.2':
     dependencies:
       undici-types: 6.20.0
+
+  '@types/prop-types@15.7.14': {}
+
+  '@types/react-dom@18.3.5(@types/react@18.3.18)':
+    dependencies:
+      '@types/react': 18.3.18
+
+  '@types/react@18.3.18':
+    dependencies:
+      '@types/prop-types': 15.7.14
+      csstype: 3.1.3
 
   '@typescript-eslint/eslint-plugin@8.18.2(@typescript-eslint/parser@8.18.2(eslint@9.17.0(jiti@1.21.7))(typescript@5.7.2))(eslint@9.17.0(jiti@1.21.7))(typescript@5.7.2)':
     dependencies:
@@ -1990,6 +2508,10 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
+  busboy@1.6.0:
+    dependencies:
+      streamsearch: 1.1.0
+
   call-bind-apply-helpers@1.0.1:
     dependencies:
       es-errors: 1.3.0
@@ -2011,6 +2533,8 @@ snapshots:
 
   camelcase-css@2.0.1: {}
 
+  caniuse-lite@1.0.30001690: {}
+
   chalk@4.1.2:
     dependencies:
       ansi-styles: 4.3.0
@@ -2028,6 +2552,8 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
+  client-only@0.0.1: {}
+
   color-convert@2.0.1:
     dependencies:
       color-name: 1.1.4
@@ -2038,6 +2564,10 @@ snapshots:
 
   concat-map@0.0.1: {}
 
+  copy-anything@3.0.5:
+    dependencies:
+      is-what: 4.1.16
+
   cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
@@ -2045,6 +2575,8 @@ snapshots:
       which: 2.0.2
 
   cssesc@3.0.0: {}
+
+  csstype@3.1.3: {}
 
   damerau-levenshtein@1.0.8: {}
 
@@ -2096,7 +2628,18 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
+  dotenv-cli@7.4.4:
+    dependencies:
+      cross-spawn: 7.0.6
+      dotenv: 16.4.7
+      dotenv-expand: 10.0.0
+      minimist: 1.2.8
+
+  dotenv-expand@10.0.0: {}
+
   dotenv@16.0.3: {}
+
+  dotenv@16.4.7: {}
 
   dunder-proto@1.0.1:
     dependencies:
@@ -2433,6 +2976,10 @@ snapshots:
 
   functions-have-names@1.2.3: {}
 
+  geist@1.3.1(next@14.2.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
+    dependencies:
+      next: 14.2.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
   get-intrinsic@1.2.6:
     dependencies:
       call-bind-apply-helpers: 1.0.1
@@ -2478,6 +3025,8 @@ snapshots:
       gopd: 1.2.0
 
   gopd@1.2.0: {}
+
+  graceful-fs@4.2.11: {}
 
   graphemer@1.4.0: {}
 
@@ -2622,6 +3171,8 @@ snapshots:
       call-bound: 1.0.3
       get-intrinsic: 1.2.6
 
+  is-what@4.1.16: {}
+
   isarray@2.0.5: {}
 
   isexe@2.0.0: {}
@@ -2731,6 +3282,31 @@ snapshots:
   nanoid@3.3.8: {}
 
   natural-compare@1.4.0: {}
+
+  next@14.2.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@next/env': 14.2.21
+      '@swc/helpers': 0.5.5
+      busboy: 1.6.0
+      caniuse-lite: 1.0.30001690
+      graceful-fs: 4.2.11
+      postcss: 8.4.31
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      styled-jsx: 5.1.1(react@18.3.1)
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 14.2.21
+      '@next/swc-darwin-x64': 14.2.21
+      '@next/swc-linux-arm64-gnu': 14.2.21
+      '@next/swc-linux-arm64-musl': 14.2.21
+      '@next/swc-linux-x64-gnu': 14.2.21
+      '@next/swc-linux-x64-musl': 14.2.21
+      '@next/swc-win32-arm64-msvc': 14.2.21
+      '@next/swc-win32-ia32-msvc': 14.2.21
+      '@next/swc-win32-x64-msvc': 14.2.21
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
 
   normalize-path@3.0.0: {}
 
@@ -2850,6 +3426,12 @@ snapshots:
 
   postcss-value-parser@4.2.0: {}
 
+  postcss@8.4.31:
+    dependencies:
+      nanoid: 3.3.8
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+
   postcss@8.4.49:
     dependencies:
       nanoid: 3.3.8
@@ -2876,7 +3458,17 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
+  react-dom@18.3.1(react@18.3.1):
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.3.1
+      scheduler: 0.23.2
+
   react-is@16.13.1: {}
+
+  react@18.3.1:
+    dependencies:
+      loose-envify: 1.4.0
 
   read-cache@1.0.0:
     dependencies:
@@ -2938,6 +3530,10 @@ snapshots:
       es-errors: 1.3.0
       is-regex: 1.2.1
 
+  scheduler@0.23.2:
+    dependencies:
+      loose-envify: 1.4.0
+
   semver@6.3.1: {}
 
   semver@7.6.3: {}
@@ -2995,6 +3591,8 @@ snapshots:
   signal-exit@4.1.0: {}
 
   source-map-js@1.2.1: {}
+
+  streamsearch@1.1.0: {}
 
   string-width@4.2.3:
     dependencies:
@@ -3070,6 +3668,11 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
+  styled-jsx@5.1.1(react@18.3.1):
+    dependencies:
+      client-only: 0.0.1
+      react: 18.3.1
+
   sucrase@3.35.0:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
@@ -3079,6 +3682,10 @@ snapshots:
       mz: 2.7.0
       pirates: 4.0.6
       ts-interface-checker: 0.1.13
+
+  superjson@2.2.2:
+    dependencies:
+      copy-anything: 3.0.5
 
   supports-color@7.2.0:
     dependencies:
@@ -3141,6 +3748,8 @@ snapshots:
       json5: 1.0.2
       minimist: 1.2.8
       strip-bom: 3.0.0
+
+  tslib@2.8.1: {}
 
   turbo-darwin-64@2.3.3:
     optional: true
@@ -3294,3 +3903,5 @@ snapshots:
   yaml@2.6.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@3.24.1: {}

@@ -1,22 +1,23 @@
 {
-  "name": "@embed-stuff/tailwind-config",
+  "name": "@embed-stuff/db",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
-    "./web": "./web.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
+    }
   },
   "license": "MIT",
   "scripts": {
-    "clean": "git clean -xdf .cache .turbo node_modules",
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "postcss": "^8.4.49",
-    "tailwindcss": "catalog:",
-    "tailwindcss-animate": "^1.0.7"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "with-env": "dotenv -e ../../.env --"
   },
   "devDependencies": {
     "@embed-stuff/eslint-config": "workspace:*",
