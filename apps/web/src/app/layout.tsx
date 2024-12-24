@@ -1,7 +1,11 @@
 import type { Metadata, Viewport } from "next";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 
-// import { GeistMono } from "geist/font/mono";
-// import { GeistSans } from "geist/font/sans";
+import { ThemeProvider } from "@embed-stuff/ui/components/theme-provider";
+import { ThemeToggle } from "@embed-stuff/ui/components/theme-toggle";
+import { cn } from "@embed-stuff/ui/lib/utils";
+import { Toaster } from "@embed-stuff/ui/ui/toaster";
 
 import { TRPCReactProvider } from "~/trpc/react";
 
@@ -41,19 +45,19 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-      // className={cn(
-      //   "min-h-screen bg-background font-sans text-foreground antialiased",
-      //   GeistSans.variable,
-      //   GeistMono.variable,
-      // )}
+        className={cn(
+          "min-h-screen bg-background font-sans text-foreground antialiased",
+          GeistSans.variable,
+          GeistMono.variable,
+        )}
       >
-        {/* {<ThemeProvider attribute="class" defaultTheme="system" enableSystem>} */}
-        <TRPCReactProvider>{props.children}</TRPCReactProvider>
-        <div className="absolute bottom-4 right-4">
-          {/* { <ThemeToggle />} */}
-        </div>
-        {/* { <Toaster />} */}
-        {/* </ThemeProvider> */}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <TRPCReactProvider>{props.children}</TRPCReactProvider>
+          <div className="absolute bottom-4 right-4">
+            <ThemeToggle />
+          </div>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
