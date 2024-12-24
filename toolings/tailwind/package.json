@@ -1,0 +1,27 @@
+{
+  "name": "@embed-stuff/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./web": "./web.ts"
+  },
+  "license": "MIT",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "postcss": "^8.4.49",
+    "tailwindcss": "catalog:",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@embed-stuff/eslint-config": "workspace:*",
+    "@embed-stuff/prettier-config": "workspace:*",
+    "@embed-stuff/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  },
+  "prettier": "@embed-stuff/prettier-config"
+}

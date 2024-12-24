@@ -1,0 +1,22 @@
+{
+  "name": "embed-stuff",
+  "private": true,
+  "engines": {
+    "node": ">=22.11.0",
+    "pnpm": "^9.15.1"
+  },
+  "packageManager": "pnpm@9.15.1",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "@embed-stuff/prettier-config": "workspace:*",
+    "@types/node": "^22.10.2",
+    "prettier": "catalog:",
+    "turbo": "^2.3.3",
+    "typescript": "catalog:"
+  },
+  "prettier": "@embed-stuff/prettier-config"
+}
