@@ -4,9 +4,40 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
+    "./components/*": {
+      "types": "./dist/src/components/*.d.ts",
+      "default": [
+        "./src/components/*.ts",
+        "./src/components/*.tsx"
+      ]
+    },
+    "./hooks/*": {
+      "types": "./dist/src/hooks/*.d.ts",
+      "default": [
+        "./src/hooks/*.ts",
+        "./src/hooks/*.tsx"
+      ]
+    },
+    "./lib/*": {
+      "types": "./dist/src/lib/*.d.ts",
+      "default": [
+        "./src/lib/*.ts",
+        "./src/lib/*.tsx"
+      ]
+    },
+    "./ui/*": {
+      "types": "./dist/src/ui/*.d.ts",
+      "default": [
+        "./src/ui/*.ts",
+        "./src/ui/*.tsx"
+      ]
+    },
+    "./utils/*": {
+      "types": "./dist/src/utils/*.d.ts",
+      "default": [
+        "./src/utils/*.ts",
+        "./src/utils/*.tsx"
+      ]
     }
   },
   "license": "MIT",
@@ -18,6 +49,13 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "ui-add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
+  },
+  "dependencies": {
+    "@radix-ui/react-icons": "^1.3.2",
+    "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-toast": "^1.2.4",
+    "class-variance-authority": "^0.7.0",
+    "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
     "@embed-stuff/eslint-config": "workspace:*",
