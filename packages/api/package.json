@@ -1,5 +1,5 @@
 {
-  "name": "@embed-stuff/api",
+  "name": "@acme/api",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -28,16 +28,16 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@embed-stuff/db": "workspace:*",
-    "@embed-stuff/utils": "workspace:*",
+    "@acme/db": "workspace:*",
+    "@acme/utils": "workspace:*",
     "@trpc/server": "catalog:",
     "superjson": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@embed-stuff/eslint-config": "workspace:*",
-    "@embed-stuff/prettier-config": "workspace:*",
-    "@embed-stuff/tsconfig": "workspace:*",
+    "@acme/eslint-config": "workspace:*",
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
     "@supabase/supabase-js": "catalog:supabase",
     "@trpc/react-query": "catalog:",
     "eslint": "catalog:",
@@ -45,5 +45,5 @@
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@embed-stuff/prettier-config"
+  "prettier": "@acme/prettier-config"
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@embed-stuff/db",
+  "name": "@acme/db",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -35,20 +35,20 @@
     "zod": "pnpm dlx supabase-to-zod --input src/schema/default.ts --output src/zod.ts && pnpm format:lint"
   },
   "dependencies": {
-    "@embed-stuff/utils": "workspace:*",
+    "@acme/utils": "workspace:*",
     "@supabase/ssr": "catalog:supabase",
     "@supabase/supabase-js": "catalog:supabase",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@embed-stuff/eslint-config": "workspace:*",
-    "@embed-stuff/prettier-config": "workspace:*",
-    "@embed-stuff/tsconfig": "workspace:*",
+    "@acme/eslint-config": "workspace:*",
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "supabase": "catalog:supabase",
     "supabase-to-zod": "catalog:supabase",
     "typescript": "catalog:"
   },
-  "prettier": "@embed-stuff/prettier-config"
+  "prettier": "@acme/prettier-config"
 }

@@ -1,7 +1,6 @@
 import type { User } from "@supabase/supabase-js";
+import { createAuthClient } from "@acme/db/client";
 import { TRPCError } from "@trpc/server";
-
-import { createAuthClient } from "@embed-stuff/db/client";
 
 import type { PublicProcedureMiddleware } from "#procedures/publicProcedure";
 

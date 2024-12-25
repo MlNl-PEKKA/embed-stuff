@@ -1,5 +1,5 @@
-import type { TRPCContext } from "@embed-stuff/utils/types";
-import { createPublicClient } from "@embed-stuff/db/client";
+import type { TRPCContext } from "@acme/utils/types";
+import { createPublicClient } from "@acme/db/client";
 
 import { t } from "#init";
 

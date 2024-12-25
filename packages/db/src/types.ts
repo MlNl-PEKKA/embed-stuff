@@ -1,4 +1,4 @@
-import type { Custom } from "@embed-stuff/utils/types";
+import type { Custom } from "@acme/utils/types";
 
 import type { Database, Tables } from "./schema";
 

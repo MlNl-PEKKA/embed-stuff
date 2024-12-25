@@ -1,5 +1,5 @@
 {
-  "name": "@embed-stuff/eslint-config",
+  "name": "@acme/eslint-config",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -24,12 +24,12 @@
     "typescript-eslint": "^8.15.0"
   },
   "devDependencies": {
-    "@embed-stuff/prettier-config": "workspace:*",
-    "@embed-stuff/tsconfig": "workspace:*",
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
     "@types/eslint__js": "8.42.3",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@embed-stuff/prettier-config"
+  "prettier": "@acme/prettier-config"
 }
