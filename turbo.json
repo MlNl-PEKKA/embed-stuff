@@ -32,17 +32,29 @@
     "//#clean": {
       "cache": false
     },
-    "push": {
-      "cache": false,
-      "interactive": true
-    },
-    "studio": {
-      "cache": false,
-      "persistent": true
-    },
     "ui-add": {
       "cache": false,
       "interactive": true
+    },
+    "types:local": {
+      "cache": false,
+      "dependsOn": ["^types:local"]
+    },
+    "types:remote": {
+      "cache": false,
+      "dependsOn": ["^types:remote"]
+    },
+    "seed:local": {
+      "cache": false,
+      "dependsOn": ["^seed:local"]
+    },
+    "seed:remote": {
+      "cache": false,
+      "dependsOn": ["^seed:remote"]
+    },
+    "zod": {
+      "cache": false,
+      "dependsOn": ["^zod"]
     }
   },
   "globalEnv": [

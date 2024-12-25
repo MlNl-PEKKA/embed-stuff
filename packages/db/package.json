@@ -22,13 +22,13 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "with-env": "dotenv -e ../../.env --",
-    "format:lint": "eslint src --fix && prettier src --write",
-    "supabase": "pnpm with-env pnpm dlx supabase",
-    "types:local": "pnpm supabase gen types --lang=typescript --local --schema public> src/schema/default.ts && pnpm run zod && pnpm format:lint",
-    "types:remote": "pnpm supabase gen types --lang=typescript --linked --schema public> src/schema/default.ts && pnpm run zod && pnpm format:lint",
-    "seed:local": "pnpm supabase db dump -f supabase/seed.sql --local --data-only --exclude public.user,auth.users,auth.identities,auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens && pnpm format:lint",
-    "seed:remote": "pnpm supabase db dump -f supabase/seed.sql --linked --data-only --exclude public.user,auth.users,auth.identities,auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens && pnpm format:lint",
-    "zod": "pnpm dlx supabase-to-zod --input src/schema/default.ts --output ../utils/src/dbValidators.ts && eslint ../utils/src/dbValidators.ts --fix && prettier ../utils/src/dbValidators.ts --write"
+    "fomat:lint": "eslint src --fix && prettier src --write",
+    "supabase": "pnpm --silent with-env pnpm --silent dlx supabase",
+    "types:local": "pnpm --silent supabase gen types --lang=typescript --local --schema public> src/schema/default.ts && pnpm --silent run zod && pnpm --silent fomat:lint",
+    "types:remote": "pnpm --silent supabase gen types --lang=typescript --linked --schema public> src/schema/default.ts && pnpm --silent run zod && pnpm --silent fomat:lint",
+    "seed:local": "pnpm --silent supabase db dump -f supabase/seed.sql --local --data-only --exclude public.user,auth.users,auth.identities,auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens && pnpm --silent fomat:lint",
+    "seed:remote": "pnpm --silent supabase db dump -f supabase/seed.sql --linked --data-only --exclude public.user,auth.users,auth.identities,auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens && pnpm --silent fomat:lint",
+    "zod": "pnpm --silent dlx supabase-to-zod --input src/schema/default.ts --output ../utils/src/dbValidators.ts && prettier ../utils/src/dbValidators.ts --write"
   },
   "dependencies": {
     "@embed-stuff/utils": "workspace:*",

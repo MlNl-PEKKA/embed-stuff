@@ -19,7 +19,12 @@
     "lint:ws": "pnpm dlx sherif@latest",
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
-    "ui-add": "turbo run ui-add"
+    "ui-add": "turbo run ui-add",
+    "types:local": "turbo run types:local",
+    "types:remote": "turbo run types:remote",
+    "seed:local": "turbo run seed:local",
+    "seed:remote": "turbo run seed:remote",
+    "zod": "turbo run zod"
   },
   "devDependencies": {
     "@embed-stuff/prettier-config": "workspace:*",
