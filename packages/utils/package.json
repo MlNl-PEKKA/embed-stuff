@@ -18,6 +18,9 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
+  "dependencies": {
+    "zod": "catalog:"
+  },
   "devDependencies": {
     "@embed-stuff/eslint-config": "workspace:*",
     "@embed-stuff/prettier-config": "workspace:*",

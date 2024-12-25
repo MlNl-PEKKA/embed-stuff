@@ -6,4 +6,10 @@ export default [
     ignores: ["dist/**"],
   },
   ...baseConfig,
+  {
+    ignores: ["src/dbValidators"],
+    rules: {
+      "@typescript-eslint/consistent-type-imports": "off",
+    },
+  },
 ];

@@ -1,8 +1,9 @@
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 
-import type { AppRouter } from "#root";
-import { appRouter } from "#root";
+import { app as appRouter } from "#routers/index";
 import { createCallerFactory, createTRPCContext } from "#trpc";
+
+type AppRouter = typeof appRouter;
 
 const createCaller = createCallerFactory(appRouter);
 

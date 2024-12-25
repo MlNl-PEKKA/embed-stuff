@@ -1,5 +1,13 @@
-import type { RequestCookies } from "next/dist/compiled/@edge-runtime/cookies";
 import type { cookies } from "next/headers";
+import type React from "react";
+
+import type { EMOTE_KIT_WIDGETS } from "./constants";
+
+type WidgetType = "feedback" | "reaction" | "banner";
+
+export type WidgetNames = {
+  [id in WidgetType]: `emote-kit-${id}`;
+};
 
 export type CustomizableTypes<T extends "Array" | "Object"> = T extends "Array"
   ? Record<string, unknown>[]
@@ -78,7 +86,30 @@ export type Prettify<T extends CustomizableTypes<"Object">> = {
   [id in keyof T]: T[id];
 } & {};
 
+export type EmoteKitWidgetProps = {
+  id: string;
+  theme?: "light" | "dark";
+};
+
+type EmoteKitWidgetWebComponentProps = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLElement>,
+  HTMLElement
+> &
+  EmoteKitWidgetProps;
+
+type Widgets = (typeof EMOTE_KIT_WIDGETS)[keyof typeof EMOTE_KIT_WIDGETS];
+
+type WidgetProps = Record<Widgets, EmoteKitWidgetWebComponentProps>;
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type, @typescript-eslint/consistent-type-definitions
+    interface IntrinsicElements extends WidgetProps {}
+  }
+}
+
 export type TRPCContext = {
   headers: Headers;
-  cookies: RequestCookies | Awaited<ReturnType<typeof cookies>>;
+  cookies: Awaited<ReturnType<typeof cookies>>;
 };

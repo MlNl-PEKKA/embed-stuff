@@ -1,6 +1,8 @@
 import type { NextRequest } from "next/server";
-import { appRouter, createTRPCContext } from "@embed-stuff/api";
+import { cookies } from "next/headers";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+
+import { appRouter, createTRPCContext } from "@embed-stuff/api";
 
 // import { auth } from "@embed-stuff/auth";
 
@@ -26,11 +28,16 @@ export const OPTIONS = () => {
 };
 
 const handler = async (req: NextRequest) => {
+  const cookieStore = await cookies();
   const response = await fetchRequestHandler({
     endpoint: "/api/trpc",
     router: appRouter,
     req,
-    createContext: () => createTRPCContext(req),
+    createContext: () =>
+      createTRPCContext({
+        headers: req.headers,
+        cookies: cookieStore,
+      }),
     onError({ error, path }) {
       console.error(`>>> tRPC Error on '${path}'`, error);
     },

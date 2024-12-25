@@ -11,10 +11,6 @@
     "./types": {
       "types": "./dist/types.d.ts",
       "default": "./src/types.ts"
-    },
-    "./zod": {
-      "types": "./dist/zod.d.ts",
-      "default": "./src/zod.ts"
     }
   },
   "license": "MIT",
@@ -28,11 +24,11 @@
     "with-env": "dotenv -e ../../.env --",
     "format:lint": "eslint src --fix && prettier src --write",
     "supabase": "pnpm with-env pnpm dlx supabase",
-    "types:local": "pnpm supabase gen types --lang=typescript --local --schema public> src/schema/default.ts && pnpm run zod",
-    "types:remote": "pnpm supabase gen types --lang=typescript --linked --schema public> src/schema/default.ts && pnpm run zod",
+    "types:local": "pnpm supabase gen types --lang=typescript --local --schema public> src/schema/default.ts && pnpm run zod && pnpm format:lint",
+    "types:remote": "pnpm supabase gen types --lang=typescript --linked --schema public> src/schema/default.ts && pnpm run zod && pnpm format:lint",
     "seed:local": "pnpm supabase db dump -f supabase/seed.sql --local --data-only --exclude public.user,auth.users,auth.identities,auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens && pnpm format:lint",
     "seed:remote": "pnpm supabase db dump -f supabase/seed.sql --linked --data-only --exclude public.user,auth.users,auth.identities,auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens && pnpm format:lint",
-    "zod": "pnpm dlx supabase-to-zod --input src/schema/default.ts --output src/zod.ts && pnpm format:lint"
+    "zod": "pnpm dlx supabase-to-zod --input src/schema/default.ts --output ../utils/src/dbValidators.ts && eslint ../utils/src/dbValidators.ts --fix && prettier ../utils/src/dbValidators.ts --write"
   },
   "dependencies": {
     "@embed-stuff/utils": "workspace:*",

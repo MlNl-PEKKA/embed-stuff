@@ -5,7 +5,6 @@
   "type": "module",
   "imports": {
     "#init": "./src/init.ts",
-    "#root": "./src/root.ts",
     "#trpc": "./src/trpc.ts",
     "#types": "./src/types.ts",
     "#middlewares/*": "./src/middlewares/*.ts",
