@@ -1,7 +1,7 @@
-import type { AppRouter } from "@acme/api";
+import type { AppRouter } from "@embed-stuff/api";
 import { cache } from "react";
 import { cookies, headers } from "next/headers";
-import { createCaller, createTRPCContext } from "@acme/api";
+import { createCaller, createTRPCContext } from "@embed-stuff/api";
 import { createHydrationHelpers } from "@trpc/react-query/rsc";
 
 import { createQueryClient } from "./query-client";

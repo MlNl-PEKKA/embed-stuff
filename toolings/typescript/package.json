@@ -1,5 +1,5 @@
 {
-  "name": "@acme/tsconfig",
+  "name": "@embed-stuff/tsconfig",
   "private": true,
   "version": "0.0.0",
   "files": [

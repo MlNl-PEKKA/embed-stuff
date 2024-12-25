@@ -1,8 +1,8 @@
 import type { NextRequest } from "next/server";
-import { appRouter, createTRPCContext } from "@acme/api";
+import { appRouter, createTRPCContext } from "@embed-stuff/api";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
-// import { auth } from "@acme/auth";
+// import { auth } from "@embed-stuff/auth";
 
 export const runtime = "edge";
 

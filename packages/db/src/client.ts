@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import type { TRPCContext } from "@acme/utils/types";
+import type { TRPCContext } from "@embed-stuff/utils/types";
 import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
 

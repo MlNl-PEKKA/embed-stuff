@@ -6,10 +6,10 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 import "~/app/globals.css";
 
-import { ThemeProvider } from "@acme/ui/components/theme-provider";
-import { ThemeToggle } from "@acme/ui/components/theme-toggle";
-import { cn } from "@acme/ui/lib/utils";
-import { Toaster } from "@acme/ui/ui/toaster";
+import { ThemeProvider } from "@embed-stuff/ui/components/theme-provider";
+import { ThemeToggle } from "@embed-stuff/ui/components/theme-toggle";
+import { cn } from "@embed-stuff/ui/lib/utils";
+import { Toaster } from "@embed-stuff/ui/ui/toaster";
 
 import { env } from "~/env";
 

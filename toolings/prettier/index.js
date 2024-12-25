@@ -21,7 +21,7 @@ const config = {
     "<THIRD_PARTY_MODULES>",
     "",
     "<TYPES>^@embed-stuff",
-    "^@acme/(.*)$",
+    "^@embed-stuff/(.*)$",
     "",
     "<TYPES>^[.|..|~|#]",
     "^~/",

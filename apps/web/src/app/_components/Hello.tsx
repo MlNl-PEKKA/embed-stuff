@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@acme/ui/ui/button";
+import { Button } from "@embed-stuff/ui/ui/button";
 
 import { api } from "~/trpc/react";
 

@@ -1,4 +1,4 @@
-import type { Custom, CustomizableTypes } from "@acme/utils/types";
+import type { Custom, CustomizableTypes } from "@embed-stuff/utils/types";
 
 import type { Database } from "../default";
 

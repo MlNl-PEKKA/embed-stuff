@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-// import { Button } from "@acme/ui/ui/button";
+// import { Button } from "@embed-stuff/ui/ui/button";
 
 import { api, HydrateClient } from "~/trpc/server";
 import { Hello } from "./_components/Hello";
