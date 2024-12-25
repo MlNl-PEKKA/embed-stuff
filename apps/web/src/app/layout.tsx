@@ -2,14 +2,14 @@ import type { Metadata, Viewport } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
+import { TRPCReactProvider } from "~/trpc/react";
+
+import "~/app/globals.css";
+
 import { ThemeProvider } from "@embed-stuff/ui/components/theme-provider";
 import { ThemeToggle } from "@embed-stuff/ui/components/theme-toggle";
 import { cn } from "@embed-stuff/ui/lib/utils";
 import { Toaster } from "@embed-stuff/ui/ui/toaster";
-
-import { TRPCReactProvider } from "~/trpc/react";
-
-import "~/app/globals.css";
 
 import { env } from "~/env";
 

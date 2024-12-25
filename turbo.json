@@ -45,7 +45,12 @@
       "interactive": true
     }
   },
-  "globalEnv": ["POSTGRES_URL", "PORT"],
+  "globalEnv": [
+    "SUPABASE_URL",
+    "SUPABASE_ANON_KEY",
+    "SUPABASE_SERVICE_KEY",
+    "PORT"
+  ],
   "globalPassThroughEnv": [
     "NODE_ENV",
     "CI",

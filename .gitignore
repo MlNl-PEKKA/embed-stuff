@@ -33,6 +33,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# supabase
+.branches
+.temp
+
 # typescript
 dist/
 .cache

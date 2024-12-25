@@ -4,9 +4,17 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./src/client.ts"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "default": "./src/types.ts"
+    },
+    "./zod": {
+      "types": "./dist/zod.d.ts",
+      "default": "./src/zod.ts"
     }
   },
   "license": "MIT",
@@ -17,7 +25,20 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "dotenv -e ../../.env --",
+    "format:lint": "eslint src --fix && prettier src --write",
+    "supabase": "pnpm with-env pnpm dlx supabase",
+    "types:local": "pnpm supabase gen types --lang=typescript --local --schema public> src/schema/default.ts && pnpm run zod",
+    "types:remote": "pnpm supabase gen types --lang=typescript --linked --schema public> src/schema/default.ts && pnpm run zod",
+    "seed:local": "pnpm supabase db dump -f supabase/seed.sql --local --data-only --exclude public.user,auth.users,auth.identities,auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens && pnpm format:lint",
+    "seed:remote": "pnpm supabase db dump -f supabase/seed.sql --linked --data-only --exclude public.user,auth.users,auth.identities,auth.audit_log_entries,auth.flow_state,auth.sessions,auth.mfa_amr_claims,auth.one_time_tokens,auth.refresh_tokens && pnpm format:lint",
+    "zod": "pnpm dlx supabase-to-zod --input src/schema/default.ts --output src/zod.ts && pnpm format:lint"
+  },
+  "dependencies": {
+    "@embed-stuff/utils": "workspace:*",
+    "@supabase/ssr": "catalog:supabase",
+    "@supabase/supabase-js": "catalog:supabase",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@embed-stuff/eslint-config": "workspace:*",
@@ -25,6 +46,8 @@
     "@embed-stuff/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
+    "supabase": "catalog:supabase",
+    "supabase-to-zod": "catalog:supabase",
     "typescript": "catalog:"
   },
   "prettier": "@embed-stuff/prettier-config"

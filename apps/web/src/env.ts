@@ -10,9 +10,10 @@ export const env = createEnv({
       .default("development"),
   },
   server: {
-    POSTGRES_URL: z.string().url(),
+    SUPABASE_URL: z.string().url(),
+    SUPABASE_ANON_KEY: z.string(),
+    SUPABASE_SERVICE_KEY: z.string(),
   },
-
   client: {},
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,

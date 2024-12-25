@@ -4,51 +4,27 @@
   "private": true,
   "type": "module",
   "imports": {
-    "#components/*": [
-      "./src/components/*.ts",
-      "./src/components/*.tsx"
-    ],
-    "#hooks/*": [
-      "./src/hooks/*.ts",
-      "./src/hooks/*.tsx"
-    ],
-    "#lib/*": [
-      "./src/lib/*.ts",
-      "./src/lib/*.tsx"
-    ],
-    "#ui/*": [
-      "./src/ui/*.ts",
-      "./src/ui/*.tsx"
-    ]
+    "#components/*": "./src/components/*.tsx",
+    "#hooks/*": "./src/hooks/*.ts",
+    "#lib/*": "./src/lib/*.ts",
+    "#ui/*": "./src/ui/*.tsx"
   },
   "exports": {
     "./components/*": {
       "types": "./dist/src/components/*.d.ts",
-      "default": [
-        "./src/components/*.ts",
-        "./src/components/*.tsx"
-      ]
+      "default": "./src/components/*.tsx"
     },
     "./hooks/*": {
       "types": "./dist/src/hooks/*.d.ts",
-      "default": [
-        "./src/hooks/*.ts",
-        "./src/hooks/*.tsx"
-      ]
+      "default": "./src/hooks/*.ts"
     },
     "./lib/*": {
       "types": "./dist/src/lib/*.d.ts",
-      "default": [
-        "./src/lib/*.ts",
-        "./src/lib/*.tsx"
-      ]
+      "default": "./src/lib/*.ts"
     },
     "./ui/*": {
       "types": "./dist/src/ui/*.d.ts",
-      "default": [
-        "./src/ui/*.ts",
-        "./src/ui/*.tsx"
-      ]
+      "default": "./src/ui/*.tsx"
     }
   },
   "license": "MIT",

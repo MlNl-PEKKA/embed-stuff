@@ -4,7 +4,13 @@
   "private": true,
   "type": "module",
   "imports": {
-    "#trpc": "./src/trpc.ts"
+    "#init": "./src/init.ts",
+    "#root": "./src/root.ts",
+    "#trpc": "./src/trpc.ts",
+    "#types": "./src/types.ts",
+    "#middlewares/*": "./src/middlewares/*.ts",
+    "#procedures/*": "./src/procedures/*.ts",
+    "#routers/*": "./src/routers/*.ts"
   },
   "exports": {
     ".": {
@@ -22,6 +28,8 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
+    "@embed-stuff/db": "workspace:*",
+    "@embed-stuff/utils": "workspace:*",
     "@trpc/server": "catalog:",
     "superjson": "catalog:",
     "zod": "catalog:"
@@ -30,7 +38,10 @@
     "@embed-stuff/eslint-config": "workspace:*",
     "@embed-stuff/prettier-config": "workspace:*",
     "@embed-stuff/tsconfig": "workspace:*",
+    "@supabase/supabase-js": "catalog:supabase",
+    "@trpc/react-query": "catalog:",
     "eslint": "catalog:",
+    "next": "catalog:next15/react18",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },

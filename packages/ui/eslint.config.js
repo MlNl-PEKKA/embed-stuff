@@ -8,4 +8,9 @@ export default [
   },
   ...baseConfig,
   ...reactConfig,
+  {
+    rules: {
+      "@typescript-eslint/no-unsafe-assignment": "off",
+    },
+  },
 ];

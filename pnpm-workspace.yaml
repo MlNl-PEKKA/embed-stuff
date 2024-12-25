@@ -17,20 +17,13 @@ catalog:
   zod: ^3.24.1
 
 catalogs:
-  react19:
-    react: 19.0.0
-    react-dom: 19.0.0
-    "@types/react": ^19.0.2
-    "@types/react-dom": ^19.0.2
-
-  react18:
-    react: 18.3.1
-    react-dom: 18.3.1
-    "@types/react": ^18.3.11
-    "@types/react-dom": ^18.3.1
+  "supabase":
+    "@supabase/ssr": "^0.5.2"
+    "@supabase/supabase-js": "^2.47.10"
+    "supabase": "^1.226.4"
+    "supabase-to-zod": "^1.0.7"
 
   "next15/react19":
-    next: 15.1.2
     react: 19.0.0
     react-dom: 19.0.0
     "@types/react": ^19.0.2

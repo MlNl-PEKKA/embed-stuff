@@ -1,5 +1,5 @@
-import { publicProcedure } from "#trpc";
+import { publicProcedure } from "#procedures/publicProcedure";
 
-export const helloRouter = publicProcedure.query(() => {
-  return "Hello, world!";
+export const helloRouter = publicProcedure.query(({ ctx }) => {
+  return `${ctx.hello}, world!`;
 });
