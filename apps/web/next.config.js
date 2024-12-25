@@ -9,11 +9,16 @@ const config = {
   reactStrictMode: true,
 
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: ["@embed-stuff/api", "@embed-stuff/db", "@embed-stuff/ui", "@embed-stuff/utils"],
+  transpilePackages: [
+    "@embed-stuff/api",
+    "@embed-stuff/db",
+    "@embed-stuff/ui",
+    "@embed-stuff/utils",
+  ],
 
   /** We already do linting and typechecking as separate tasks in CI */
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
+  // eslint: { ignoreDuringBuilds: true },
+  // typescript: { ignoreBuildErrors: true },
 };
 
 export default config;
