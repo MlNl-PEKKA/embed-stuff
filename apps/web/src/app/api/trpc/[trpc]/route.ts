@@ -1,50 +1,38 @@
 import type { NextRequest } from "next/server";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
 import { appRouter, createTRPCContext } from "@embed-stuff/api";
 
-// import { auth } from "@embed-stuff/auth";
-
-export const runtime = "edge";
+import { env } from "~/env";
 
 /**
- * Configure basic CORS headers
- * You should extend this to match your needs
+ * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
+ * handling a HTTP request (e.g. when you make requests from Client Components).
  */
-const setCorsHeaders = (res: Response) => {
-  res.headers.set("Access-Control-Allow-Origin", "*");
-  res.headers.set("Access-Control-Request-Method", "*");
-  res.headers.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
-  res.headers.set("Access-Control-Allow-Headers", "*");
-};
-
-export const OPTIONS = () => {
-  const response = new Response(null, {
-    status: 204,
-  });
-  setCorsHeaders(response);
-  return response;
-};
-
-const handler = async (req: NextRequest) => {
+const createContext = async () => {
+  const heads = await headers();
   const cookieStore = await cookies();
-  const response = await fetchRequestHandler({
-    endpoint: "/api/trpc",
-    router: appRouter,
-    req,
-    createContext: () =>
-      createTRPCContext({
-        headers: req.headers,
-        cookies: cookieStore,
-      }),
-    onError({ error, path }) {
-      console.error(`>>> tRPC Error on '${path}'`, error);
-    },
+  return createTRPCContext({
+    headers: heads,
+    cookies: cookieStore,
   });
-
-  setCorsHeaders(response);
-  return response;
 };
+
+const handler = (req: NextRequest) =>
+  fetchRequestHandler({
+    endpoint: "/api/trpc",
+    req,
+    router: appRouter,
+    createContext: () => createContext(),
+    onError:
+      env.NODE_ENV === "development"
+        ? ({ path, error }) => {
+            console.error(
+              `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`,
+            );
+          }
+        : undefined,
+  });
 
 export { handler as GET, handler as POST };
