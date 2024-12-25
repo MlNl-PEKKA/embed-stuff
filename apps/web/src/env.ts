@@ -8,6 +8,8 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),
+    NEXT_PUBLIC_WIDGET_URL: z.string().url(),
+    NEXT_PUBLIC_WEB_URL: z.string().url(),
   },
   server: {
     SUPABASE_URL: z.string().url(),
@@ -17,6 +19,8 @@ export const env = createEnv({
   client: {},
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_WEB_URL: process.env.NEXT_PUBLIC_WEB_URL,
+    NEXT_PUBLIC_WIDGET_URL: process.env.NEXT_PUBLIC_WIDGET_URL,
   },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",

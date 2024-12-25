@@ -49,6 +49,8 @@
     "SUPABASE_URL",
     "SUPABASE_ANON_KEY",
     "SUPABASE_SERVICE_KEY",
+    "NEXT_PUBLIC_WEB_URL",
+    "NEXT_PUBLIC_WIDGET_URL",
     "PORT"
   ],
   "globalPassThroughEnv": [
