@@ -17,7 +17,7 @@ export type NonVoid<T> = T extends void ? never : T;
 type WidgetType = "feedback" | "reaction" | "banner";
 
 export type WidgetNames = {
-  [id in WidgetType]: `emote-kit-${id}`;
+  [id in WidgetType]: `embed-stuff-${id}`;
 };
 
 export type CustomizableTypes<T extends "Array" | "Object"> = T extends "Array"

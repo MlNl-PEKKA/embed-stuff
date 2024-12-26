@@ -11,7 +11,7 @@ export const Preview = () => {
   return (
     <div className="dotted flex h-full w-full items-center justify-center">
       <Script src={getWidgetUrl()} />
-      <emote-kit-feedback id={feedback} theme="dark"></emote-kit-feedback>
+      <embed-stuff-feedback id={feedback} theme="dark"></embed-stuff-feedback>
     </div>
   );
 };

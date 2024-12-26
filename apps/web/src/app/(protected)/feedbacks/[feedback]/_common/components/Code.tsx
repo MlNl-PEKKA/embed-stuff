@@ -29,7 +29,7 @@ export const Code = () => {
         <span>
           &lt;
           <span className="text-[#267f99] dark:text-[#4ec9b0]">
-            emote-kit-feedback
+            embed-stuff-feedback
           </span>{" "}
           <span className="#f59f7d dark:text-[#9CDCFE]">id</span>=
           <span className="text-[#c7813a] dark:text-[#CE9178]">
@@ -41,7 +41,7 @@ export const Code = () => {
           </span>
           &gt;&lt;/
           <span className="text-[#267f99] dark:text-[#4ec9b0]">
-            emote-kit-feedback
+            embed-stuff-feedback
           </span>
           &gt;
         </span>
@@ -76,7 +76,7 @@ const Copy = () => {
   const { feedback } = useFeedback();
   const { toast } = useToast();
   const content = `<script src="${getWidgetUrl()}"></script>
-<emote-kit-feedback id="${feedback}" theme="dark"></emote-kit-feedback>`;
+<embed-stuff-feedback id="${feedback}" theme="dark"></embed-stuff-feedback>`;
   return (
     <Button
       variant="outline"

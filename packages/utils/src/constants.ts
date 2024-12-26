@@ -1,9 +1,9 @@
 import type { WidgetNames } from "./types";
 
-export const EMOTE_KIT = "emote-kit";
+export const EMBED_STUFF = "embed-stuff";
 
 export const EMOTE_KIT_WIDGETS = {
-  banner: "emote-kit-banner",
-  feedback: "emote-kit-feedback",
-  reaction: "emote-kit-reaction",
+  banner: "embed-stuff-banner",
+  feedback: "embed-stuff-feedback",
+  reaction: "embed-stuff-reaction",
 } satisfies WidgetNames;
