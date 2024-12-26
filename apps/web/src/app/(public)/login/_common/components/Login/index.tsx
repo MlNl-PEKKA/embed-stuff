@@ -1,3 +1,5 @@
+import { Github as GithubIcon, Mail } from "lucide-react";
+
 import { github, google } from "~/login/actions";
 import { Body } from "./Body";
 import { Provider } from "./Provider";
@@ -19,21 +21,15 @@ export const Login = (props: Props) => {
 
 const Google = () => {
   return (
-    <Provider
-      src={"google.svg"}
-      alt={"Google"}
-      title={"Log in with Google"}
-      formAction={google}
-    />
+    <Provider title="Login with Google" icon={<Mail />} formAction={google} />
   );
 };
 
 const Github = () => {
   return (
     <Provider
-      src={"github.svg"}
-      alt={"Github"}
-      title={"Log in with Github"}
+      title="Login with Github"
+      icon={<GithubIcon />}
       formAction={github}
     />
   );

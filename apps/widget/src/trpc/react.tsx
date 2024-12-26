@@ -36,7 +36,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
           url: `${getWebUrl()}/api/trpc`,
           headers: () => {
             const headers = new Headers();
-            headers.set("x-trpc-source", "nextjs-react");
+            headers.set("x-trpc-source", "vite-react");
             return headers;
           },
         }),
