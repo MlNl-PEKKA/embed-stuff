@@ -63,6 +63,8 @@
     "SUPABASE_SERVICE_KEY",
     "NEXT_PUBLIC_WEB_URL",
     "NEXT_PUBLIC_WIDGET_URL",
+    "VITE_WIDGET_URL",
+    "VITE_WEB_URL",
     "PORT"
   ],
   "globalPassThroughEnv": [
