@@ -3,6 +3,17 @@ import type React from "react";
 
 import type { EMOTE_KIT_WIDGETS } from "./constants";
 
+export type TRPCContext = {
+  headers: Headers;
+  cookies: Awaited<ReturnType<typeof cookies>>;
+};
+
+export type NonUndefined<T> = T extends undefined ? never : T;
+
+export type NonNullable<T> = T extends null ? never : T;
+
+export type NonVoid<T> = T extends void ? never : T;
+
 type WidgetType = "feedback" | "reaction" | "banner";
 
 export type WidgetNames = {
@@ -108,8 +119,3 @@ declare global {
     interface IntrinsicElements extends WidgetProps {}
   }
 }
-
-export type TRPCContext = {
-  headers: Headers;
-  cookies: Awaited<ReturnType<typeof cookies>>;
-};

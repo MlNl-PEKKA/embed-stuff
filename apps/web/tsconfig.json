@@ -5,7 +5,15 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/env": ["./src/env"],
+      "~/trpc/*": ["./src/trpc/*"],
+      "~/app/*": ["./src/app/_common/*"],
+      "~/public/*": ["./src/app/(public)/_common/*"],
+      "~/public/landing/*": ["./src/app/(public)/(landing)/_common/*"],
+      "~/login/*": ["./src/app/(public)/login/_common/*"],
+      "~/protected/*": ["./src/app/(protected)/_common/*"],
+      "~/feedbacks/*": ["./src/app/(protected)/feedbacks/_common/*"],
+      "~/feedback/*": ["./src/app/(protected)/feedbacks/[feedback]/_common/*"]
     },
     "plugins": [{ "name": "next" }],
     "module": "esnext"

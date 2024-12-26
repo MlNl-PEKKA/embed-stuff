@@ -4,6 +4,7 @@ import { z } from "zod";
 import { createAuthClient } from "@embed-stuff/db/client";
 
 import type { PublicProcedureEndpoint } from "#procedures/publicProcedure";
+import type { ProcedureDefinition } from "#types";
 import { publicProcedure } from "#procedures/publicProcedure";
 
 const schema = z.object({
@@ -31,3 +32,5 @@ const mutation = async ({
 };
 
 export const login = publicProcedure.input(schema).mutation(mutation);
+
+export type Login = ProcedureDefinition<typeof login>;

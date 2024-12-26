@@ -4,7 +4,7 @@ import { GeistSans } from "geist/font/sans";
 
 import { TRPCReactProvider } from "~/trpc/react";
 
-import "~/app/globals.css";
+import "./globals.css";
 
 import type { PropsWithChildren } from "react";
 
@@ -28,8 +28,12 @@ export const viewport: Viewport = {
 
 const Layout = (props: PropsWithChildren) => {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn(GeistSans.variable, GeistMono.variable)}>
+    <html
+      lang="en"
+      className={cn(GeistSans.variable, GeistMono.variable)}
+      suppressHydrationWarning
+    >
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

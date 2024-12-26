@@ -73,6 +73,8 @@ export default tseslint.config(
       "@typescript-eslint/no-non-null-assertion": "error",
       "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
       "@typescript-eslint/consistent-type-definitions": ["warn", "type"],
+      "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-unsafe-assignment": "off",
     },
   },
   {

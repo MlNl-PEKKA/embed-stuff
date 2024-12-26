@@ -4,6 +4,7 @@ import { z } from "zod";
 import { createAuthClient } from "@embed-stuff/db/client";
 
 import type { PublicProcedureEndpoint } from "#procedures/publicProcedure";
+import type { ProcedureDefinition } from "#types";
 import { publicProcedure } from "#procedures/publicProcedure";
 
 const schema = z.object({
@@ -36,3 +37,5 @@ const query = async ({
 };
 
 export const callback = publicProcedure.input(schema).query(query);
+
+export type Callback = ProcedureDefinition<typeof callback>;
