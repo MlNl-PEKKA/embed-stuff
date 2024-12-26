@@ -14,8 +14,6 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@embed-stuff/api": "workspace:*",
-    "@embed-stuff/db": "workspace:*",
     "@embed-stuff/ui": "workspace:*",
     "@embed-stuff/utils": "workspace:*",
     "@t3-oss/env-nextjs": "^0.11.1",
@@ -29,6 +27,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@embed-stuff/api": "workspace:*",
     "@embed-stuff/eslint-config": "workspace:*",
     "@embed-stuff/prettier-config": "workspace:*",
     "@embed-stuff/tailwind-config": "workspace:*",
