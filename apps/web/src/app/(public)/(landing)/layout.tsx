@@ -8,7 +8,7 @@ const Layout = async (props: LandingNextProps["layout"]) => {
   void api.session.prefetch();
   return (
     <HydrateClient>
-      <div className="flex min-h-full items-center justify-center">
+      <div className="h-screen w-full">
         {props.children}
         {props.login}
       </div>
