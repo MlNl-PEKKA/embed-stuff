@@ -2,8 +2,8 @@ import { TRPCError } from "@trpc/server";
 
 import { createSchema } from "@embed-stuff/utils/feedbackValidators";
 
-import type { AuthProcedureEndpoint } from "#procedures/protectedProcedure";
-import { authProcedure } from "#procedures/protectedProcedure";
+import type { AuthProcedureEndpoint } from "#procedures/authProcedure";
+import { authProcedure } from "#procedures/authProcedure";
 
 const mutation = async ({
   ctx,

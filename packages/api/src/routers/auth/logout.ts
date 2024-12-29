@@ -1,5 +1,5 @@
-import type { AuthProcedureEndpoint } from "#procedures/protectedProcedure";
-import { authProcedure } from "#procedures/protectedProcedure";
+import type { AuthProcedureEndpoint } from "#procedures/authProcedure";
+import { authProcedure } from "#procedures/authProcedure";
 
 const mutation = async ({ ctx }: AuthProcedureEndpoint) =>
   await ctx.db.auth.signOut({ scope: "local" });

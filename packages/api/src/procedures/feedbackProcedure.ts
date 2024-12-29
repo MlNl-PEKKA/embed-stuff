@@ -1,7 +1,7 @@
 import { feedbackProjectRowSchema } from "@embed-stuff/utils/dbValidators";
 
 import type { ProcedureEndpoint, ProcedureMiddleware } from "#types";
-import { authProcedure } from "./protectedProcedure";
+import { authProcedure } from "./authProcedure";
 
 const schema = feedbackProjectRowSchema.pick({ id: true });
 

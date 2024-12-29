@@ -52,11 +52,11 @@ export type Database = {
         };
         Insert: {
           created_at?: string;
-          feedback_project_id?: string;
+          feedback_project_id: string;
           id?: string;
           meta?: Json | null;
           order: number;
-          user_id?: string;
+          user_id: string;
         };
         Update: {
           created_at?: string;
@@ -133,14 +133,14 @@ export type Database = {
           created_at?: string;
           description?: string | null;
           feedback_page_id?: string | null;
-          feedback_project_id?: string;
+          feedback_project_id: string;
           id?: string;
           order?: number | null;
           required?: boolean;
           status?: Database["public"]["Enums"]["feedback_question_status"];
           title: string;
           type?: Database["public"]["Enums"]["feedback_question_type"];
-          user_id?: string;
+          user_id: string;
         };
         Update: {
           created_at?: string;
@@ -271,8 +271,12 @@ export type Database = {
         Relationships: [];
       };
     };
-    Views: Record<never, never>;
-    Functions: Record<never, never>;
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      [_ in never]: never;
+    };
     Enums: {
       feedback_question_status: "archived" | "active";
       feedback_question_type: "text" | "select" | "checkbox" | "level";
@@ -280,7 +284,9 @@ export type Database = {
       project_type: "feedback" | "banner" | "poll" | "reaction";
       user_membership: "free" | "pro";
     };
-    CompositeTypes: Record<never, never>;
+    CompositeTypes: {
+      [_ in never]: never;
+    };
   };
 };
 

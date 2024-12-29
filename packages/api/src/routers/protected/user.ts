@@ -1,5 +1,5 @@
-import type { AuthProcedureEndpoint } from "#procedures/protectedProcedure";
-import { authProcedure } from "#procedures/protectedProcedure";
+import type { AuthProcedureEndpoint } from "#procedures/authProcedure";
+import { authProcedure } from "#procedures/authProcedure";
 
 const query = ({ ctx }: AuthProcedureEndpoint) => ctx.user;
 
