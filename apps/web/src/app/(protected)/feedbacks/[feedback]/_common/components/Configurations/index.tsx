@@ -9,6 +9,7 @@ import {
 } from "@embed-stuff/ui/ui/tabs";
 
 import { Project } from "./Project";
+import { Questionnaire } from "./Questionnaire";
 import { Widget } from "./Widget";
 
 export const Configurations = ({
@@ -30,6 +31,9 @@ export const Configurations = ({
         </TabsTrigger>
         <TabsTrigger className="w-full" value="widget">
           Widget
+        </TabsTrigger>
+        <TabsTrigger className="w-full" value="questionnaire">
+          Questionnaire
         </TabsTrigger>
       </TabsList>
       <Content />
@@ -53,6 +57,9 @@ const Content = () => {
       </ContentWrapper>
       <ContentWrapper value="widget">
         <Widget />
+      </ContentWrapper>
+      <ContentWrapper value="questionnaire">
+        <Questionnaire />
       </ContentWrapper>
     </>
   );
