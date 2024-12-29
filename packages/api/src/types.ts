@@ -16,6 +16,8 @@ import type {
 } from "@trpc/server/unstable-core-do-not-import";
 import type { TypeOf, ZodSchema } from "zod";
 
+import type { Prettify } from "@embed-stuff/utils/types";
+
 type Definition = { _def: { $types: any } };
 
 export type ProcedureDefinition<T extends Definition> = Pick<
@@ -32,7 +34,7 @@ export type ProcedureMutation<T extends ProcedureDefinition<Definition>> =
 export type ProcedureEndpoint<T extends AnyProcedureBuilder, U = undefined> =
   inferProcedureBuilderResolverOptions<T> extends infer R
     ? U extends ZodSchema
-      ? R & { input: TypeOf<U> }
+      ? Prettify<R & { input: TypeOf<U> }>
       : R
     : never;
 

@@ -41,6 +41,48 @@ export type Database = {
           },
         ];
       };
+      feedback_page: {
+        Row: {
+          created_at: string;
+          feedback_project_id: string;
+          id: string;
+          meta: Json | null;
+          order: number;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          feedback_project_id?: string;
+          id?: string;
+          meta?: Json | null;
+          order: number;
+          user_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          feedback_project_id?: string;
+          id?: string;
+          meta?: Json | null;
+          order?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "feedback_page_feedback_project_id_fkey";
+            columns: ["feedback_project_id"];
+            isOneToOne: false;
+            referencedRelation: "feedback_project";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "feedback_page_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "user";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       feedback_project: {
         Row: {
           created_at: string;
@@ -66,6 +108,70 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "feedback_project_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "user";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      feedback_question: {
+        Row: {
+          created_at: string;
+          description: string | null;
+          feedback_page_id: string | null;
+          feedback_project_id: string;
+          id: string;
+          order: number | null;
+          required: boolean;
+          status: Database["public"]["Enums"]["feedback_question_status"];
+          title: string;
+          type: Database["public"]["Enums"]["feedback_question_type"];
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          description?: string | null;
+          feedback_page_id?: string | null;
+          feedback_project_id?: string;
+          id?: string;
+          order?: number | null;
+          required?: boolean;
+          status?: Database["public"]["Enums"]["feedback_question_status"];
+          title: string;
+          type?: Database["public"]["Enums"]["feedback_question_type"];
+          user_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          description?: string | null;
+          feedback_page_id?: string | null;
+          feedback_project_id?: string;
+          id?: string;
+          order?: number | null;
+          required?: boolean;
+          status?: Database["public"]["Enums"]["feedback_question_status"];
+          title?: string;
+          type?: Database["public"]["Enums"]["feedback_question_type"];
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "feedback_question_feedback_page_id_fkey";
+            columns: ["feedback_page_id"];
+            isOneToOne: false;
+            referencedRelation: "feedback_page";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "feedback_question_feedback_project_id_fkey";
+            columns: ["feedback_project_id"];
+            isOneToOne: false;
+            referencedRelation: "feedback_project";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "feedback_question_user_id_fkey";
             columns: ["user_id"];
             isOneToOne: false;
             referencedRelation: "user";
@@ -165,20 +271,16 @@ export type Database = {
         Relationships: [];
       };
     };
-    Views: {
-      [_ in never]: never;
-    };
-    Functions: {
-      [_ in never]: never;
-    };
+    Views: Record<never, never>;
+    Functions: Record<never, never>;
     Enums: {
+      feedback_question_status: "archived" | "active";
+      feedback_question_type: "text" | "select" | "checkbox" | "level";
       project_status: "active" | "inactive";
       project_type: "feedback" | "banner" | "poll" | "reaction";
       user_membership: "free" | "pro";
     };
-    CompositeTypes: {
-      [_ in never]: never;
-    };
+    CompositeTypes: Record<never, never>;
   };
 };
 

@@ -9,6 +9,7 @@ const query = async ({ ctx, input }: FeedbackProcedureEndpoint) => {
       .from("feedback_project")
       .select()
       .eq("id", input.id)
+      .eq("user_id", ctx.user.id)
       .single()
       .throwOnError()
   ).data;

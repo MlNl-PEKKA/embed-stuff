@@ -6,16 +6,17 @@ import { feedbackProcedure } from "#procedures/feedbackProcedure";
 const query = async ({ ctx, input }: FeedbackProcedureEndpoint) => {
   const data = (
     await ctx.db
-      .from("feedback_project")
+      .from("feedback_page")
       .select()
-      .eq("id", input.id)
-      .single()
+      .eq("feedback_project_id", input.id)
+      .eq("user_id", ctx.user.id)
+      .order("order", { nullsFirst: false, ascending: true })
       .throwOnError()
   ).data;
   if (!data)
     throw new TRPCError({
       code: "NOT_FOUND",
-      message: "Feedback project not found",
+      message: "Feedback pages not found",
     });
   return data;
 };
