@@ -78,9 +78,9 @@ export const useFeedbackPageCreate = () => {
   return { ...mutation, mutate };
 };
 
-export const useFeedbackPageRead = () => {
+export const useFeedbackPageNodes = () => {
   const { feedback } = useFeedback();
-  return api.protected.feedbacks.feedback.page.read.useSuspenseQuery({
+  return api.protected.feedbacks.feedback.page.nodes.useSuspenseQuery({
     feedback_project_id: feedback,
   })[0];
 };

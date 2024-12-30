@@ -11,22 +11,43 @@ import "@xyflow/react/dist/style.css";
 
 import { Card } from "@embed-stuff/ui/ui/card";
 
-import { PlaygroundStoreProvider, usePlaygroundStore } from "./store";
+import {
+  PlaygroundStoreProvider,
+  useEdges,
+  useNodes,
+  usePlaygroundStore,
+} from "./store";
 
 export const Playground = () => {
   return (
     <Card className="h-full w-full bg-background">
       <ReactFlowProvider>
-        <PlaygroundStoreProvider>
-          <Content />
-        </PlaygroundStoreProvider>
+        <Content />
       </ReactFlowProvider>
     </Card>
   );
 };
 
 const Content = () => {
-  const { onLayout: _, ...store } = usePlaygroundStore((store) => store);
+  const nodes = useNodes();
+  const edges = useEdges();
+  if (nodes.status !== "success" || edges.status !== "success")
+    return <Loading />;
+  return (
+    <PlaygroundStoreProvider nodes={nodes.data} edges={edges.data}>
+      <ReactFlowContent />
+    </PlaygroundStoreProvider>
+  );
+};
+
+const Loading = () => (
+  <ReactFlow className="text-background" fitView>
+    <Background variant={BackgroundVariant.Dots} />
+  </ReactFlow>
+);
+
+const ReactFlowContent = () => {
+  const store = usePlaygroundStore();
   return (
     <ReactFlow {...store} className="text-background" fitView>
       <Background variant={BackgroundVariant.Dots} />

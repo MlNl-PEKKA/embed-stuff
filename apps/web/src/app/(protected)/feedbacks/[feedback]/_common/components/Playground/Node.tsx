@@ -5,9 +5,9 @@ import { cn } from "@embed-stuff/ui/lib/utils";
 import { Badge } from "@embed-stuff/ui/ui/badge";
 import { Card, CardContent } from "@embed-stuff/ui/ui/card";
 
-import type { Data, Type } from "./store";
+import type { NodeData, Type } from "./store";
 
-type Props = NodeProps & { data: Data; type: Type };
+type Props = NodeProps & { data: NodeData; type: Type };
 
 export const Node = ({ data, isConnectable }: Props) => {
   return (

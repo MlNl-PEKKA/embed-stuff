@@ -5,9 +5,16 @@ import type { NextProps } from "~/app/types";
 
 export type FeedbackNextProps = NextProps<["feedback"]>;
 
-export type FeedbackPage = {
+export type FeedbackPageNodes = {
   input: NonVoid<
-    RouterInputs["protected"]["feedbacks"]["feedback"]["page"]["read"]
+    RouterInputs["protected"]["feedbacks"]["feedback"]["page"]["nodes"]
   >;
-  output: RouterOutputs["protected"]["feedbacks"]["feedback"]["page"]["read"];
+  output: RouterOutputs["protected"]["feedbacks"]["feedback"]["page"]["nodes"];
+};
+
+export type FeedbackPageEdges = {
+  input: NonVoid<
+    RouterInputs["protected"]["feedbacks"]["feedback"]["page"]["edges"]
+  >;
+  output: RouterOutputs["protected"]["feedbacks"]["feedback"]["page"]["edges"];
 };
