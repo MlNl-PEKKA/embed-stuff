@@ -100,3 +100,11 @@
       hsl(var(--muted));
   }
 }
+
+.react-flow__controls-button {
+  @apply border-none bg-card text-primary !important;
+}
+
+.react-flow__controls {
+  @apply overflow-hidden rounded-sm border border-muted;
+}

@@ -3,6 +3,7 @@
 import {
   Background,
   BackgroundVariant,
+  Controls,
   ReactFlow,
   ReactFlowProvider,
 } from "@xyflow/react";
@@ -51,6 +52,7 @@ const ReactFlowContent = () => {
   return (
     <ReactFlow {...store} className="text-background" fitView>
       <Background variant={BackgroundVariant.Dots} />
+      <Controls className="" />
     </ReactFlow>
   );
 };

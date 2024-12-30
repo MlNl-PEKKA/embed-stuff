@@ -178,50 +178,91 @@ export const useEdges = () => {
   return useQuery(edgeQuery);
 };
 
+const useNodesRemove = () => {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const nodesQuery = useNodeQueryOptions();
+  const mutationKey = getMutationKey(
+    api.protected.feedbacks.feedback.page.remove,
+  );
+  const mutation = useMutation({
+    mutationKey,
+    mutationFn: async ({ nodes }: { nodes: Nodes; prevNodes: Nodes }) => {
+      const ids = nodes.map((node) => node.id);
+      await apiClient.protected.feedbacks.feedback.page.remove.mutate({ ids });
+    },
+    onMutate: ({ nodes, prevNodes }) => {
+      const newNodes = prevNodes.filter(
+        (prevNode) => !nodes.some((node) => node.id === prevNode.id),
+      );
+      queryClient.setQueryData(nodesQuery.queryKey, newNodes);
+    },
+    onError: (error, { prevNodes }) => {
+      queryClient.setQueryData(nodesQuery.queryKey, prevNodes);
+      toast({
+        title: "Failed to remove page",
+        description: error.message,
+      });
+    },
+  });
+  return mutation;
+};
+
 const useOnNodeChanges = () => {
+  const { toast } = useToast();
   const queryClient = useQueryClient();
   const nodeQuery = useNodeQueryOptions();
+  const nodesRemove = useNodesRemove();
   return useCallback<NonUndefined<Store["onNodesChange"]>>(
     (changes) => {
-      queryClient.setQueryData(nodeQuery.queryKey, (queryCache) =>
-        applyNodeChanges(changes, queryCache!),
+      const prevNodes = queryClient.getQueryData(nodeQuery.queryKey)!;
+      const removeNodes = changes.filter((change) => change.type === "remove");
+      if (removeNodes.length) {
+        const nodes = prevNodes.filter(
+          (prevNode) =>
+            !prevNode.data.is_root &&
+            removeNodes.some((removeNode) => removeNode.id === prevNode.id),
+        );
+        if (nodes.length) nodesRemove.mutate({ nodes, prevNodes });
+        else toast({ title: "Root page cannot be removed" });
+        return;
+      }
+      queryClient.setQueryData(
+        nodeQuery.queryKey,
+        applyNodeChanges(changes, prevNodes),
       );
     },
-    [queryClient, nodeQuery.queryKey],
+    [queryClient, nodeQuery.queryKey, nodesRemove, toast],
   );
 };
 
-const useEdgesRemoveChange = () => {
-  const { feedback } = useFeedback();
+const useEdgesRemove = () => {
   const { toast } = useToast();
+  const { feedback } = useFeedback();
   const queryClient = useQueryClient();
-  const edgeQuery = useEdgeQueryOptions();
+  const edgesQuery = useEdgeQueryOptions();
   const mutationKey = getMutationKey(
     api.protected.feedbacks.feedback.page.disconnect,
   );
   const mutation = useMutation({
     mutationKey,
-    mutationFn: async (edges: Edges) => {
+    mutationFn: async ({ edges }: { edges: Edges; prevEdges: Edges }) => {
+      const ids = edges.map((edge) => edge.source);
       await apiClient.protected.feedbacks.feedback.page.disconnect.mutate({
+        ids,
         feedback_project_id: feedback,
-        ids: edges.map((edge) => edge.data!.id),
       });
     },
-    onMutate: (edges) => {
-      const prev = structuredClone(
-        queryClient.getQueryData(edgeQuery.queryKey)!,
+    onMutate: ({ edges, prevEdges }) => {
+      const newEdges = prevEdges.filter(
+        (prevEdge) => !edges.some((edge) => edge.source === prevEdge.source),
       );
-      queryClient.setQueryData(edgeQuery.queryKey, (queryCache) =>
-        (queryCache ?? []).filter(
-          (edge) => !edges.some((e) => e.id === edge.id),
-        ),
-      );
-      return { prev };
+      queryClient.setQueryData(edgesQuery.queryKey, newEdges);
     },
-    onError: (error, _, context) => {
-      queryClient.setQueryData(edgeQuery.queryKey, context!.prev);
+    onError: (error, { prevEdges }) => {
+      queryClient.setQueryData(edgesQuery.queryKey, prevEdges);
       toast({
-        title: "Failed to disconnect page",
+        title: "Failed to remove page",
         description: error.message,
       });
     },
@@ -232,25 +273,24 @@ const useEdgesRemoveChange = () => {
 const useOnEdgeChanges = () => {
   const queryClient = useQueryClient();
   const edgeQuery = useEdgeQueryOptions();
-  const { mutate: edgeRemoveMutate } = useEdgesRemoveChange();
+  const edgesRemove = useEdgesRemove();
   return useCallback<NonUndefined<Store["onEdgesChange"]>>(
     (changes) => {
-      const removeChanges = changes.filter(
-        (change) => change.type === "remove",
-      );
-      if (removeChanges.length) {
-        const edgesQueryCache = queryClient.getQueryData(edgeQuery.queryKey)!;
-        const removeEdges = edgesQueryCache.filter((edge) =>
-          removeChanges.some((change) => change.id === edge.id),
+      const prevEdges = queryClient.getQueryData(edgeQuery.queryKey)!;
+      const removeEdges = changes.filter((change) => change.type === "remove");
+      if (removeEdges.length) {
+        const edges = prevEdges.filter((prevEdge) =>
+          removeEdges.some((removeEdge) => removeEdge.id === prevEdge.id),
         );
-        edgeRemoveMutate(removeEdges);
-      } else {
-        queryClient.setQueryData(edgeQuery.queryKey, (queryCache) =>
-          applyEdgeChanges(changes, queryCache ?? []),
-        );
+        edgesRemove.mutate({ edges, prevEdges });
+        return;
       }
+      queryClient.setQueryData(
+        edgeQuery.queryKey,
+        applyEdgeChanges(changes, prevEdges),
+      );
     },
-    [queryClient, edgeQuery.queryKey, edgeRemoveMutate],
+    [queryClient, edgeQuery.queryKey, edgesRemove],
   );
 };
 
