@@ -1,5 +1,7 @@
 import { createTRPCRouter } from "#trpc";
+import { connect } from "./connect";
 import { create } from "./create";
+import { disconnect } from "./disconnect";
 import { edges } from "./edges";
 import { nodes } from "./nodes";
 import { remove } from "./remove";
@@ -11,4 +13,6 @@ export const page = createTRPCRouter({
   edges,
   remove,
   update,
+  connect,
+  disconnect,
 });

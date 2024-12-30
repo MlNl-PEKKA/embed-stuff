@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 "use client";
 
@@ -16,8 +15,13 @@ import {
   useMemo,
 } from "react";
 import Dagre from "@dagrejs/dagre";
-import { queryOptions, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getQueryKey } from "@trpc/react-query";
+import {
+  queryOptions,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { getMutationKey, getQueryKey } from "@trpc/react-query";
 import {
   addEdge,
   applyEdgeChanges,
@@ -26,6 +30,7 @@ import {
 } from "@xyflow/react";
 
 import type { NonUndefined } from "@embed-stuff/utils/types";
+import { useToast } from "@embed-stuff/ui/hooks/use-toast";
 
 import type { FeedbackPageEdges, FeedbackPageNodes } from "~/feedback/types";
 import { useFeedback } from "~/feedback/hooks";
@@ -85,7 +90,7 @@ const getNode = (page: NodeData): Nodes[number] => ({
 });
 
 const getEdge = (page: EdgeData): Edges[number] => ({
-  id: `xyEdge__${page.id}-${page.next_id}`,
+  id: `xy-edge__${page.id}-${page.next_id}`,
   data: page,
   source: page.id,
   target: page.next_id!,
@@ -106,7 +111,7 @@ const useNodeQueryOptions = () => {
   const queryCache = queryClient.getQueryData<Nodes>(queryKey) ?? [];
   return queryOptions({
     queryKey,
-    staleTime: 0,
+    staleTime: Infinity,
     queryFn: async (): Promise<Nodes> => {
       const data =
         await apiClient.protected.feedbacks.feedback.page.nodes.query({
@@ -142,7 +147,7 @@ const useEdgeQueryOptions = () => {
   const queryCache = queryClient.getQueryData<Edges>(queryKey) ?? [];
   return queryOptions({
     queryKey,
-    staleTime: 0,
+    staleTime: Infinity,
     queryFn: async (): Promise<Edges> => {
       const data =
         await apiClient.protected.feedbacks.feedback.page.edges.query({
@@ -179,37 +184,108 @@ const useOnNodeChanges = () => {
   return useCallback<NonUndefined<Store["onNodesChange"]>>(
     (changes) => {
       queryClient.setQueryData(nodeQuery.queryKey, (queryCache) =>
-        applyNodeChanges(changes, queryCache ?? []),
+        applyNodeChanges(changes, queryCache!),
       );
     },
     [queryClient, nodeQuery.queryKey],
   );
 };
 
+const useEdgesRemoveChange = () => {
+  const { feedback } = useFeedback();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const edgeQuery = useEdgeQueryOptions();
+  const mutationKey = getMutationKey(
+    api.protected.feedbacks.feedback.page.disconnect,
+  );
+  const mutation = useMutation({
+    mutationKey,
+    mutationFn: async (edges: Edges) => {
+      await apiClient.protected.feedbacks.feedback.page.disconnect.mutate({
+        feedback_project_id: feedback,
+        ids: edges.map((edge) => edge.data!.id),
+      });
+    },
+    onMutate: (edges) => {
+      const prev = structuredClone(
+        queryClient.getQueryData(edgeQuery.queryKey)!,
+      );
+      queryClient.setQueryData(edgeQuery.queryKey, (queryCache) =>
+        (queryCache ?? []).filter(
+          (edge) => !edges.some((e) => e.id === edge.id),
+        ),
+      );
+      return { prev };
+    },
+    onError: (error, _, context) => {
+      queryClient.setQueryData(edgeQuery.queryKey, context!.prev);
+      toast({
+        title: "Failed to disconnect page",
+        description: error.message,
+      });
+    },
+  });
+  return mutation;
+};
+
 const useOnEdgeChanges = () => {
   const queryClient = useQueryClient();
   const edgeQuery = useEdgeQueryOptions();
+  const { mutate: edgeRemoveMutate } = useEdgesRemoveChange();
   return useCallback<NonUndefined<Store["onEdgesChange"]>>(
     (changes) => {
-      queryClient.setQueryData(edgeQuery.queryKey, (queryCache) =>
-        applyEdgeChanges(changes, queryCache ?? []),
+      const removeChanges = changes.filter(
+        (change) => change.type === "remove",
       );
+      if (removeChanges.length) {
+        const edgesQueryCache = queryClient.getQueryData(edgeQuery.queryKey)!;
+        const removeEdges = edgesQueryCache.filter((edge) =>
+          removeChanges.some((change) => change.id === edge.id),
+        );
+        edgeRemoveMutate(removeEdges);
+      } else {
+        queryClient.setQueryData(edgeQuery.queryKey, (queryCache) =>
+          applyEdgeChanges(changes, queryCache ?? []),
+        );
+      }
     },
-    [queryClient, edgeQuery.queryKey],
+    [queryClient, edgeQuery.queryKey, edgeRemoveMutate],
   );
 };
 
 const useOnConnect = () => {
+  const { toast } = useToast();
   const queryClient = useQueryClient();
   const edgeQuery = useEdgeQueryOptions();
-  return useCallback<NonUndefined<Store["onConnect"]>>(
-    (connection) => {
+  const mutationKey = getMutationKey(
+    api.protected.feedbacks.feedback.page.connect,
+  );
+  const mutation = useMutation({
+    mutationKey,
+    mutationFn: (async (connection) =>
+      await apiClient.protected.feedbacks.feedback.page.connect.mutate({
+        id: connection.source,
+        next_id: connection.target,
+      })) satisfies NonUndefined<Store["onConnect"]>,
+    onMutate: (connection) => {
+      const prev = structuredClone(
+        queryClient.getQueryData(edgeQuery.queryKey)!,
+      );
       queryClient.setQueryData(edgeQuery.queryKey, (queryCache) =>
         addEdge(connection, queryCache ?? []),
       );
+      return { prev };
     },
-    [queryClient, edgeQuery.queryKey],
-  );
+    onError: (error, _, context) => {
+      queryClient.setQueryData(edgeQuery.queryKey, context?.prev);
+      toast({
+        title: "Failed to connect page",
+        description: error.message,
+      });
+    },
+  });
+  return mutation;
 };
 
 const useOnLayout = () => {
@@ -236,19 +312,30 @@ const useStoreDefaults = (props: Props) => {
   const onNodesChange = useOnNodeChanges();
   const onEdgesChange = useOnEdgeChanges();
   const onConnect = useOnConnect();
-  const store = useMemo(
+  const store: Store = useMemo(
     () => ({
       nodes: props.nodes,
       edges: props.edges,
       nodeTypes,
+      isValidConnection: (connection) => {
+        if (
+          props.edges.some(
+            (edge) =>
+              edge.source === connection.source ||
+              edge.target === connection.target,
+          )
+        )
+          return false;
+        return true;
+      },
       onNodesChange,
       onEdgesChange,
-      onConnect,
+      onConnect: onConnect.mutate,
     }),
-    [props.nodes, props.edges, onNodesChange, onEdgesChange, onConnect],
+    [props.nodes, props.edges, onNodesChange, onEdgesChange, onConnect.mutate],
   );
   const onLayout = useOnLayout();
-  useEffect(() => onLayout("LR"), []);
+  useEffect(() => onLayout("LR"), [onLayout]);
   return store;
 };
 
