@@ -50,8 +50,9 @@ export const feedbackPageRowSchema = z.object({
   created_at: z.string(),
   feedback_project_id: z.string(),
   id: z.string(),
+  is_root: z.boolean(),
   meta: jsonSchema.nullable(),
-  order: z.number(),
+  next_id: z.string().nullable(),
   user_id: z.string(),
 });
 
@@ -59,8 +60,9 @@ export const feedbackPageInsertSchema = z.object({
   created_at: z.string().optional(),
   feedback_project_id: z.string(),
   id: z.string().optional(),
+  is_root: z.boolean().optional(),
   meta: jsonSchema.optional().nullable(),
-  order: z.number(),
+  next_id: z.string().optional().nullable(),
   user_id: z.string(),
 });
 
@@ -68,8 +70,9 @@ export const feedbackPageUpdateSchema = z.object({
   created_at: z.string().optional(),
   feedback_project_id: z.string().optional(),
   id: z.string().optional(),
+  is_root: z.boolean().optional(),
   meta: jsonSchema.optional().nullable(),
-  order: z.number().optional(),
+  next_id: z.string().optional().nullable(),
   user_id: z.string().optional(),
 });
 
@@ -79,6 +82,13 @@ export const feedbackPageRelationshipsSchema = z.tuple([
     columns: z.tuple([z.literal("feedback_project_id")]),
     isOneToOne: z.literal(false),
     referencedRelation: z.literal("feedback_project"),
+    referencedColumns: z.tuple([z.literal("id")]),
+  }),
+  z.object({
+    foreignKeyName: z.literal("feedback_page_next_id_fkey"),
+    columns: z.tuple([z.literal("next_id")]),
+    isOneToOne: z.literal(false),
+    referencedRelation: z.literal("feedback_page"),
     referencedColumns: z.tuple([z.literal("id")]),
   }),
   z.object({

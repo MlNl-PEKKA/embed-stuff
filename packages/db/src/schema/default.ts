@@ -46,24 +46,27 @@ export type Database = {
           created_at: string;
           feedback_project_id: string;
           id: string;
+          is_root: boolean;
           meta: Json | null;
-          order: number;
+          next_id: string | null;
           user_id: string;
         };
         Insert: {
           created_at?: string;
           feedback_project_id: string;
           id?: string;
+          is_root?: boolean;
           meta?: Json | null;
-          order: number;
+          next_id?: string | null;
           user_id: string;
         };
         Update: {
           created_at?: string;
           feedback_project_id?: string;
           id?: string;
+          is_root?: boolean;
           meta?: Json | null;
-          order?: number;
+          next_id?: string | null;
           user_id?: string;
         };
         Relationships: [
@@ -72,6 +75,13 @@ export type Database = {
             columns: ["feedback_project_id"];
             isOneToOne: false;
             referencedRelation: "feedback_project";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "feedback_page_next_id_fkey";
+            columns: ["next_id"];
+            isOneToOne: false;
+            referencedRelation: "feedback_page";
             referencedColumns: ["id"];
           },
           {

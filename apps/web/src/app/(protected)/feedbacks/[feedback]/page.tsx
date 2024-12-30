@@ -7,7 +7,7 @@ import {
 
 import { Code } from "~/feedback/components/Code";
 import { Configurations } from "~/feedback/components/Configurations";
-import { Preview } from "~/feedback/components/Preview";
+import { Playground } from "~/feedback/components/Playground";
 
 const Page = () => {
   return (
@@ -15,14 +15,14 @@ const Page = () => {
       direction="horizontal"
       className="h-full w-full text-card-foreground"
     >
-      <Card className="border-none" defaultSize={60}>
-        <Configurations />
+      <Card className="border-none" defaultSize={75}>
+        <Playground />
       </Card>
       <Handle />
-      <Card className="border-none" defaultSize={40}>
+      <Card className="border-none" defaultSize={25}>
         <ResizablePanelGroup direction="vertical">
           <Card defaultSize={67.7}>
-            <Preview />
+            <Configurations />
           </Card>
           <Handle />
           <Card defaultSize={32.3}>

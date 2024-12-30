@@ -14,7 +14,6 @@ const query = async ({ ctx, input }: AuthProcedureEndpoint<typeof schema>) => {
       .select()
       .eq("feedback_project_id", input.feedback_project_id)
       .eq("user_id", ctx.user.id)
-      .order("order", { nullsFirst: false, ascending: true })
       .throwOnError()
   ).data;
   if (!data)
