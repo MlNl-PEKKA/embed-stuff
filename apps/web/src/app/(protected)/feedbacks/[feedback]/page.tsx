@@ -15,17 +15,17 @@ const Page = () => {
       direction="horizontal"
       className="h-full w-full text-card-foreground"
     >
-      <Card className="border-none" defaultSize={75}>
+      <Card className="border-none" defaultSize={60}>
         <Playground />
       </Card>
       <Handle />
-      <Card className="border-none" defaultSize={25}>
+      <Card className="border-none" defaultSize={40}>
         <ResizablePanelGroup direction="vertical">
-          <Card defaultSize={67.7}>
+          <Card defaultSize={75}>
             <Configurations />
           </Card>
           <Handle />
-          <Card defaultSize={32.3}>
+          <Card defaultSize={25}>
             <Code />
           </Card>
         </ResizablePanelGroup>

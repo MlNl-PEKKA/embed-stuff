@@ -1,9 +1,11 @@
 import { useParams, useRouter } from "next/navigation";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { useToast } from "@embed-stuff/ui/hooks/use-toast";
 
 import type { FeedbackNextProps } from "~/feedback/types";
 import { api } from "~/trpc/react";
+import { useEdgeQueryOptions, useNodeQueryOptions } from "./store";
 
 export const useFeedback = () => useParams<FeedbackNextProps["params"]>();
 
@@ -53,4 +55,14 @@ export const useFeedbackDelete = () => {
   });
   const mutate = () => mutation.mutate({ id: feedback });
   return { ...mutation, mutate };
+};
+
+export const useNodes = () => {
+  const nodeQuery = useNodeQueryOptions();
+  return useSuspenseQuery(nodeQuery);
+};
+
+export const useEdges = () => {
+  const edgeQuery = useEdgeQueryOptions();
+  return useSuspenseQuery(edgeQuery);
 };

@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "@embed-stuff/ui/ui/card";
 
-import type { NodeData, Type } from "./store";
+import type { NodeData, Type } from "~/feedback/store";
 
 type Props = NodeProps & { data: NodeData; type: Type };
 
@@ -78,22 +78,24 @@ const Content = ({ data: { feedback_question } }: Props) => {
   );
 };
 
-const Question = ({}: Props["data"]["feedback_question"][number]) => {
+const Question = (_props: Props["data"]["feedback_question"][number]) => {
   return <div>Question</div>;
 };
 
-const TextQuestion = ({}: Props["data"]["feedback_question"][number]) => {
-  return <div>Text</div>;
-};
+// const TextQuestion = (_props: Props["data"]["feedback_question"][number]) => {
+//   return <div>Text</div>;
+// };
 
-const SelectQuestion = ({}: Props["data"]["feedback_question"][number]) => {
-  return <div>Select</div>;
-};
+// const SelectQuestion = (_props: Props["data"]["feedback_question"][number]) => {
+//   return <div>Select</div>;
+// };
 
-const CheckboxQuestion = ({}: Props["data"]["feedback_question"][number]) => {
-  return <div>Checkbox</div>;
-};
+// const CheckboxQuestion = (
+//   _props: Props["data"]["feedback_question"][number],
+// ) => {
+//   return <div>Checkbox</div>;
+// };
 
-const LevelQustion = ({}: Props["data"]["feedback_question"][number]) => {
-  return <div> Level</div>;
-};
+// const LevelQustion = (_props: Props["data"]["feedback_question"][number]) => {
+//   return <div> Level</div>;
+// };

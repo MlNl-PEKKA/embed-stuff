@@ -8,9 +8,8 @@ import {
   TabsTrigger,
 } from "@embed-stuff/ui/ui/tabs";
 
-import { Project } from "./Project";
+import { Pages } from "./Pages";
 import { Questionnaire } from "./Questionnaire";
-import { Widget } from "./Widget";
 
 export const Configurations = ({
   className,
@@ -22,15 +21,12 @@ export const Configurations = ({
         "flex h-full w-full flex-col items-center gap-2",
         className,
       )}
-      defaultValue="project"
+      defaultValue="pages"
       {...props}
     >
       <TabsList className="flex w-full flex-row justify-evenly">
-        <TabsTrigger className="w-full" value="project">
-          Project
-        </TabsTrigger>
-        <TabsTrigger className="w-full" value="widget">
-          Widget
+        <TabsTrigger className="w-full" value="pages">
+          Pages
         </TabsTrigger>
         <TabsTrigger className="w-full" value="questionnaire">
           Questionnaire
@@ -52,11 +48,8 @@ const ContentWrapper = (props: PropsWithChildren<{ value: string }>) => {
 const Content = () => {
   return (
     <>
-      <ContentWrapper value="project">
-        <Project />
-      </ContentWrapper>
-      <ContentWrapper value="widget">
-        <Widget />
+      <ContentWrapper value="pages">
+        <Pages />
       </ContentWrapper>
       <ContentWrapper value="questionnaire">
         <Questionnaire />

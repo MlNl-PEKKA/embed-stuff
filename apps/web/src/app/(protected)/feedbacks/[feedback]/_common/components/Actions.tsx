@@ -21,6 +21,9 @@ export const Actions = async (
         <TabsTrigger asChild value={`${link}/stats`} className="gap-2">
           <Link href={`${link}/stats`}>Stats</Link>
         </TabsTrigger>
+        <TabsTrigger asChild value={`${link}/settings`} className="gap-2">
+          <Link href={`${link}/settings`}>Settings</Link>
+        </TabsTrigger>
       </TabsList>
     </Tabs>
   );

@@ -18,7 +18,6 @@ import Dagre from "@dagrejs/dagre";
 import {
   queryOptions,
   useMutation,
-  useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 import { getMutationKey, getQueryKey } from "@trpc/react-query";
@@ -33,10 +32,10 @@ import type { NonUndefined } from "@embed-stuff/utils/types";
 import { useToast } from "@embed-stuff/ui/hooks/use-toast";
 
 import type { FeedbackPageEdges, FeedbackPageNodes } from "~/feedback/types";
+import { Node } from "~/feedback/components/Playground/Node";
 import { useFeedback } from "~/feedback/hooks";
 import { api as apiClient } from "~/trpc/client";
 import { api } from "~/trpc/react";
-import { Node } from "./Node";
 
 export type Type = "node";
 
@@ -96,7 +95,7 @@ const getEdge = (page: EdgeData): Edges[number] => ({
   target: page.next_id!,
 });
 
-const useNodeQueryOptions = () => {
+export const useNodeQueryOptions = () => {
   const { feedback } = useFeedback();
   const queryKey = useMemo(
     () =>
@@ -111,7 +110,7 @@ const useNodeQueryOptions = () => {
   const queryCache = queryClient.getQueryData<Nodes>(queryKey) ?? [];
   return queryOptions({
     queryKey,
-    staleTime: 0,
+    staleTime: 30_000,
     queryFn: async (): Promise<Nodes> => {
       const data =
         await apiClient.protected.feedbacks.feedback.page.nodes.query({
@@ -132,7 +131,7 @@ const useNodeQueryOptions = () => {
   });
 };
 
-const useEdgeQueryOptions = () => {
+export const useEdgeQueryOptions = () => {
   const { feedback } = useFeedback();
   const queryKey = useMemo(
     () =>
@@ -147,7 +146,7 @@ const useEdgeQueryOptions = () => {
   const queryCache = queryClient.getQueryData<Edges>(queryKey) ?? [];
   return queryOptions({
     queryKey,
-    staleTime: 0,
+    staleTime: 30_000,
     queryFn: async (): Promise<Edges> => {
       const data =
         await apiClient.protected.feedbacks.feedback.page.edges.query({
@@ -166,16 +165,6 @@ const useEdgeQueryOptions = () => {
       }, [] as Edges);
     },
   });
-};
-
-export const useNodes = () => {
-  const nodeQuery = useNodeQueryOptions();
-  return useQuery(nodeQuery);
-};
-
-export const useEdges = () => {
-  const edgeQuery = useEdgeQueryOptions();
-  return useQuery(edgeQuery);
 };
 
 const useNodesRemove = () => {

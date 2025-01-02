@@ -1,4 +1,5 @@
 import type { FeedbackNextProps } from "~/feedback/types";
+import { PlaygroundProvider } from "~/feedback/providers";
 import { api, HydrateClient } from "~/trpc/server";
 
 const Layout = async (props: FeedbackNextProps["layout"]) => {
@@ -10,7 +11,11 @@ const Layout = async (props: FeedbackNextProps["layout"]) => {
   // void api.protected.feedbacks.feedback.page.edges.prefetch({
   //   feedback_project_id: feedback,
   // });
-  return <HydrateClient>{props.children}</HydrateClient>;
+  return (
+    <HydrateClient>
+      <PlaygroundProvider>{props.children}</PlaygroundProvider>
+    </HydrateClient>
+  );
 };
 
 export default Layout;
