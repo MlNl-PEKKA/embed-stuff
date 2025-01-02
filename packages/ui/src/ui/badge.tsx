@@ -16,11 +16,18 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
         outline: "text-foreground",
+        special: "special text-foreground shadow",
       },
     },
     defaultVariants: {
       variant: "default",
     },
+    compoundVariants: [
+      {
+        variant: "special",
+        className: "p-[1px]",
+      },
+    ],
   },
 );
 
@@ -28,9 +35,19 @@ export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({ className, variant, children, ...props }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div className={cn(badgeVariants({ variant }), className)} {...props}>
+      {variant === "special" ? (
+        <div
+          className={cn("h-full w-full rounded-md bg-background px-2.5 py-0.5")}
+        >
+          {children}
+        </div>
+      ) : (
+        children
+      )}
+    </div>
   );
 }
 

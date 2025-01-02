@@ -132,6 +132,7 @@ export type Database = {
           feedback_page_id: string | null;
           feedback_project_id: string;
           id: string;
+          meta: Json | null;
           order: number | null;
           required: boolean;
           status: Database["public"]["Enums"]["feedback_question_status"];
@@ -145,6 +146,7 @@ export type Database = {
           feedback_page_id?: string | null;
           feedback_project_id: string;
           id?: string;
+          meta?: Json | null;
           order?: number | null;
           required?: boolean;
           status?: Database["public"]["Enums"]["feedback_question_status"];
@@ -158,6 +160,7 @@ export type Database = {
           feedback_page_id?: string | null;
           feedback_project_id?: string;
           id?: string;
+          meta?: Json | null;
           order?: number | null;
           required?: boolean;
           status?: Database["public"]["Enums"]["feedback_question_status"];

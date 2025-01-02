@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --gradient-angle: 360deg;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -107,4 +108,42 @@
 
 .react-flow__controls {
   @apply overflow-hidden rounded-sm border border-muted;
+}
+
+@keyframes gradient-rotate {
+  0% {
+    --gradient-angle: 360deg;
+  }
+
+  100% {
+    --gradient-angle: 0deg;
+  }
+}
+
+@property --gradient-angle {
+  syntax: "<angle>"; /* <- defined as type angle for the transition to work */
+  initial-value: 360deg;
+  inherits: false;
+}
+
+.special {
+  background: linear-gradient(
+    var(--gradient-angle),
+    hsla(211, 60%, 48%, 0.7),
+    hsla(211, 60%, 48%, 0.3),
+    #3178c6,
+    hsla(211, 60%, 48%, 0.5)
+  );
+  animation: gradient-rotate 5s linear infinite reverse;
+}
+
+.dark .special {
+  background: linear-gradient(
+    var(--gradient-angle),
+    hsla(0, 0%, 100%, 0.5),
+    hsla(0, 0%, 100%, 0.1),
+    #fff,
+    hsla(0, 0%, 100%, 0.3)
+  ) !important;
+  animation: gradient-rotate 5s linear infinite reverse;
 }

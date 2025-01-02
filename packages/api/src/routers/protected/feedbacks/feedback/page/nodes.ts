@@ -14,7 +14,9 @@ const query = async ({ ctx, input }: AuthProcedureEndpoint<typeof schema>) => {
   const data = (
     await ctx.db
       .from("feedback_page")
-      .select("id, created_at, feedback_project_id, meta, is_root, next_id")
+      .select(
+        "id, created_at, feedback_project_id, meta, is_root, next_id, feedback_question(id, title, description, required, type, status)",
+      )
       .eq("feedback_project_id", input.feedback_project_id)
       .eq("user_id", ctx.user.id)
       .throwOnError()

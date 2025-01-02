@@ -59,7 +59,7 @@ const getLayoutedElements = (
   edges: Edges,
   options: { direction: Direction },
 ) => {
-  const width = 410;
+  const width = 480;
   const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
   g.setGraph({ rankdir: options.direction });
   edges.forEach((edge) => g.setEdge(edge.source, edge.target));
@@ -111,7 +111,7 @@ const useNodeQueryOptions = () => {
   const queryCache = queryClient.getQueryData<Nodes>(queryKey) ?? [];
   return queryOptions({
     queryKey,
-    staleTime: Infinity,
+    staleTime: 0,
     queryFn: async (): Promise<Nodes> => {
       const data =
         await apiClient.protected.feedbacks.feedback.page.nodes.query({
@@ -147,7 +147,7 @@ const useEdgeQueryOptions = () => {
   const queryCache = queryClient.getQueryData<Edges>(queryKey) ?? [];
   return queryOptions({
     queryKey,
-    staleTime: Infinity,
+    staleTime: 0,
     queryFn: async (): Promise<Edges> => {
       const data =
         await apiClient.protected.feedbacks.feedback.page.edges.query({

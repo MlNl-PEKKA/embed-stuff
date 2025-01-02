@@ -14,25 +14,27 @@ import {
 
 import type { NodeData, Type } from "./store";
 
-export const Node = ({
-  data,
-  isConnectable,
-}: NodeProps & { data: NodeData; type: Type }) => {
+type Props = NodeProps & { data: NodeData; type: Type };
+
+export const Node = (props: Props) => {
   return (
-    <Page {...data}>
+    <Page {...props}>
       <Handle
-        className={cn(data.is_root && "hidden")}
+        className={cn(props.data.is_root && "hidden")}
         type="target"
         position={Position.Left}
-        isConnectable={isConnectable}
+        isConnectable={props.isConnectable}
       />
       <Handle
         type="source"
         position={Position.Right}
-        isConnectable={isConnectable}
+        isConnectable={props.isConnectable}
       />
       <Badge
-        className={cn("absolute right-0 top-0 m-2", !data.is_root && "hidden")}
+        className={cn(
+          "absolute right-0 top-0 m-2",
+          !props.data.is_root && "hidden",
+        )}
       >
         Start
       </Badge>
@@ -40,24 +42,58 @@ export const Node = ({
   );
 };
 
-type Props = PropsWithChildren<NodeData>;
-
-const Page = (props: Props) => {
+const Page = (props: PropsWithChildren<Props>) => {
   return (
-    <Card>
-      <Header {...props} />
+    <Card
+      variant={props.selected ? "special" : "default"}
+      className={cn(
+        "min-w-[480px]",
+        props.selected ? "" : "hover:bg-[#101010]",
+      )}
+    >
       {props.children}
-      <CardContent>{props.id}</CardContent>
+      <Header {...props} />
+      <Content {...props} />
     </Card>
   );
 };
 
-const Header = ({ meta }: Props) => {
+const Header = ({ data: { meta } }: Props) => {
   if (!meta) return null;
   return (
-    <CardHeader className="border-b">
-      <CardTitle className="text-2xl">{meta.title}</CardTitle>
-      <CardDescription className="text-xl">{meta.description}</CardDescription>
+    <CardHeader className="flex flex-col items-center">
+      <CardTitle className="text-4xl">{meta.title}</CardTitle>
+      <CardDescription className="text-2xl">{meta.description}</CardDescription>
     </CardHeader>
   );
+};
+
+const Content = ({ data: { feedback_question } }: Props) => {
+  return (
+    <CardContent>
+      {feedback_question.map((question) => (
+        <Question key={question.id} {...question} />
+      ))}
+    </CardContent>
+  );
+};
+
+const Question = ({}: Props["data"]["feedback_question"][number]) => {
+  return <div>Question</div>;
+};
+
+const TextQuestion = ({}: Props["data"]["feedback_question"][number]) => {
+  return <div>Text</div>;
+};
+
+const SelectQuestion = ({}: Props["data"]["feedback_question"][number]) => {
+  return <div>Select</div>;
+};
+
+const CheckboxQuestion = ({}: Props["data"]["feedback_question"][number]) => {
+  return <div>Checkbox</div>;
+};
+
+const LevelQustion = ({}: Props["data"]["feedback_question"][number]) => {
+  return <div> Level</div>;
 };
