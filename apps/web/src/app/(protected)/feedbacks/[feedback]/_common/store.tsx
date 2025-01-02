@@ -28,11 +28,11 @@ import {
   useReactFlow,
 } from "@xyflow/react";
 
-import type { NonUndefined } from "@embed-stuff/utils/types";
+import type { NonUndefined, Require } from "@embed-stuff/utils/types";
 import { useToast } from "@embed-stuff/ui/hooks/use-toast";
 
 import type { FeedbackPageEdges, FeedbackPageNodes } from "~/feedback/types";
-import { Node } from "~/feedback/components/Playground/Node";
+import { Node as NodeComponent } from "~/feedback/components/Playground/Node";
 import { useFeedback } from "~/feedback/hooks";
 import { api as apiClient } from "~/trpc/client";
 import { api } from "~/trpc/react";
@@ -41,17 +41,24 @@ export type Type = "node";
 
 export type NodeData = FeedbackPageNodes["output"][number];
 
-type EdgeData = FeedbackPageEdges["output"][number];
+export type EdgeData = FeedbackPageEdges["output"][number];
 
-type Nodes = NodeType<NodeData, Type>[];
+export type Node = NodeType<NodeData, Type>;
 
-type Edges = EdgeType<EdgeData>[];
+export type Edge = EdgeType<EdgeData>;
+
+type Nodes = Node[];
+
+type Edges = Edge[];
 
 type Direction = "TB" | "LR";
 
-type Store = ReactFlowProps<Nodes[number], Edges[number]>;
+type Store = Require<
+  ReactFlowProps<Nodes[number], Edges[number]>,
+  "nodes" | "edges"
+>;
 
-const nodeTypes = { node: Node };
+const nodeTypes = { node: NodeComponent };
 
 const getLayoutedElements = (
   nodes: Nodes,

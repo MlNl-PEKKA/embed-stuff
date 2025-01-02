@@ -47,8 +47,8 @@ const Page = (props: PropsWithChildren<Props>) => {
     <Card
       variant={props.selected ? "special" : "default"}
       className={cn(
-        "min-w-[480px]",
-        props.selected ? "" : "hover:bg-[#101010]",
+        "min-w-[480px] bg-[#000]",
+        props.selected ? "translate-y-[-1px]" : "hover:bg-[#060606]",
       )}
     >
       {props.children}

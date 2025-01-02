@@ -8,7 +8,7 @@ const cardVariants = cva("rounded-xl text-card-foreground shadow", {
   variants: {
     variant: {
       default: "border bg-card",
-      special: "special border-none p-[1px]",
+      special: "special border-none p-[2px]",
     },
   },
   defaultVariants: {
@@ -28,7 +28,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       {...props}
     >
       {variant === "special" ? (
-        <div className={cn("h-full w-full rounded-xl bg-[#101010]")}>
+        <div className={cn("h-full w-full rounded-xl bg-[#060606]")}>
           {children}
         </div>
       ) : (

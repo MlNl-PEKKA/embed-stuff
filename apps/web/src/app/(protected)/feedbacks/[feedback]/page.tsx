@@ -21,7 +21,7 @@ const Page = () => {
       <Handle />
       <Card className="border-none" defaultSize={40}>
         <ResizablePanelGroup direction="vertical">
-          <Card defaultSize={75}>
+          <Card defaultSize={75} className="border-none">
             <Configurations />
           </Card>
           <Handle />

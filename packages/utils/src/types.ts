@@ -119,3 +119,8 @@ declare global {
     interface IntrinsicElements extends WidgetProps {}
   }
 }
+
+export type Require<T extends object, U extends keyof T> = Prettify<
+  Omit<T, U> &
+    (Pick<T, U> extends infer R ? { [key in keyof R]-?: R[key] } : never)
+>;

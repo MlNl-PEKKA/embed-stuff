@@ -40,7 +40,9 @@ function Badge({ className, variant, children, ...props }: BadgeProps) {
     <div className={cn(badgeVariants({ variant }), className)} {...props}>
       {variant === "special" ? (
         <div
-          className={cn("h-full w-full rounded-md bg-background px-2.5 py-0.5")}
+          className={cn(
+            "flex h-full w-full items-center justify-center rounded-md bg-background px-2.5 py-0.5",
+          )}
         >
           {children}
         </div>
