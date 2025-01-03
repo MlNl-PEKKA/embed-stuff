@@ -2,6 +2,7 @@ import type { cookies } from "next/headers";
 import type React from "react";
 
 import type { EMOTE_KIT_WIDGETS } from "./constants";
+import { Json } from "../../db/src/schema/default";
 
 export type TRPCContext = {
   headers: Headers;
@@ -82,7 +83,7 @@ type Nullable<T extends CustomizableTypes<"Object">, U extends Options<T>> =
     : never;
 
 type NullableOnly<T extends CustomizableTypes<"Object">> = {
-  [id in keyof T]: null extends T[id] ? id : never;
+  [id in keyof T]: Json extends T[id] ? never : null extends T[id] ? id : never;
 }[keyof T];
 
 type Nullify<T extends CustomizableTypes<"Object">> = {

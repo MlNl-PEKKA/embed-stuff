@@ -6,7 +6,8 @@ import type {
   Node as NodeType,
   ReactFlowProps,
 } from "@xyflow/react";
-import type { PropsWithChildren } from "react";
+import type { Component, PropsWithChildren } from "react";
+import type { HtmlPortalNode } from "react-reverse-portal";
 import {
   createContext,
   useCallback,
@@ -27,12 +28,13 @@ import {
   applyNodeChanges,
   useReactFlow,
 } from "@xyflow/react";
+import { createHtmlPortalNode } from "react-reverse-portal";
 
 import type { NonUndefined, Require } from "@embed-stuff/utils/types";
 import { useToast } from "@embed-stuff/ui/hooks/use-toast";
 
 import type { FeedbackPageEdges, FeedbackPageNodes } from "~/feedback/types";
-import { Node as NodeComponent } from "~/feedback/components/Playground/Node";
+import { NodeOutPortal } from "~/feedback/components/Node";
 import { useFeedback } from "~/feedback/hooks";
 import { api as apiClient } from "~/trpc/client";
 import { api } from "~/trpc/react";
@@ -56,9 +58,9 @@ type Direction = "TB" | "LR";
 type Store = Require<
   ReactFlowProps<Nodes[number], Edges[number]>,
   "nodes" | "edges"
->;
+> & { portalNodes: Map<string, HtmlPortalNode<Component<unknown>>> };
 
-const nodeTypes = { node: NodeComponent };
+const nodeTypes = { node: NodeOutPortal };
 
 const getLayoutedElements = (
   nodes: Nodes,
@@ -234,7 +236,6 @@ const useOnNodeChanges = () => {
 
 const useEdgesRemove = () => {
   const { toast } = useToast();
-  const { feedback } = useFeedback();
   const queryClient = useQueryClient();
   const edgesQuery = useEdgeQueryOptions();
   const mutationKey = getMutationKey(
@@ -246,7 +247,6 @@ const useEdgesRemove = () => {
       const ids = edges.map((edge) => edge.source);
       await apiClient.protected.feedbacks.feedback.page.disconnect.mutate({
         ids,
-        feedback_project_id: feedback,
       });
     },
     onMutate: ({ edges, prevEdges }) => {
@@ -367,6 +367,9 @@ const useStoreDefaults = (props: Props) => {
       onNodesChange,
       onEdgesChange,
       onConnect: onConnect.mutate,
+      portalNodes: new Map(
+        props.nodes.map(({ id }) => [id, createHtmlPortalNode()]),
+      ),
     }),
     [props.nodes, props.edges, onNodesChange, onEdgesChange, onConnect.mutate],
   );

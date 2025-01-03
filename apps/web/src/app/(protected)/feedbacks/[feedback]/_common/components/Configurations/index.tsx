@@ -9,7 +9,7 @@ import {
 } from "@embed-stuff/ui/ui/tabs";
 
 import { Pages } from "./Pages";
-import { Questionnaire } from "./Questionnaire";
+import { Theme } from "./Theme";
 
 export const Configurations = ({
   className,
@@ -29,7 +29,7 @@ export const Configurations = ({
           Pages
         </TabsTrigger>
         <TabsTrigger className="w-full" value="questionnaire">
-          Questionnaire
+          Theme
         </TabsTrigger>
       </TabsList>
       <Content />
@@ -52,7 +52,7 @@ const Content = () => {
         <Pages />
       </ContentWrapper>
       <ContentWrapper value="questionnaire">
-        <Questionnaire />
+        <Theme />
       </ContentWrapper>
     </>
   );

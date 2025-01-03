@@ -14,7 +14,7 @@ import { Card } from "@embed-stuff/ui/ui/card";
 import { usePlaygroundStore } from "~/feedback/store";
 
 export const Playground = () => {
-  const store = usePlaygroundStore();
+  const { portalNodes: _, ...store } = usePlaygroundStore();
   return (
     <Card className="h-full w-full bg-background">
       <ReactFlow {...store} className="text-background" fitView>

@@ -47,7 +47,7 @@ export type Database = {
           feedback_project_id: string;
           id: string;
           is_root: boolean;
-          meta: Json | null;
+          meta: Json;
           next_id: string | null;
           user_id: string;
         };
@@ -56,7 +56,7 @@ export type Database = {
           feedback_project_id: string;
           id?: string;
           is_root?: boolean;
-          meta?: Json | null;
+          meta: Json;
           next_id?: string | null;
           user_id: string;
         };
@@ -65,7 +65,7 @@ export type Database = {
           feedback_project_id?: string;
           id?: string;
           is_root?: boolean;
-          meta?: Json | null;
+          meta?: Json;
           next_id?: string | null;
           user_id?: string;
         };
@@ -118,73 +118,6 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "feedback_project_user_id_fkey";
-            columns: ["user_id"];
-            isOneToOne: false;
-            referencedRelation: "user";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      feedback_question: {
-        Row: {
-          created_at: string;
-          description: string | null;
-          feedback_page_id: string | null;
-          feedback_project_id: string;
-          id: string;
-          meta: Json | null;
-          order: number | null;
-          required: boolean;
-          status: Database["public"]["Enums"]["feedback_question_status"];
-          title: string;
-          type: Database["public"]["Enums"]["feedback_question_type"];
-          user_id: string;
-        };
-        Insert: {
-          created_at?: string;
-          description?: string | null;
-          feedback_page_id?: string | null;
-          feedback_project_id: string;
-          id?: string;
-          meta?: Json | null;
-          order?: number | null;
-          required?: boolean;
-          status?: Database["public"]["Enums"]["feedback_question_status"];
-          title: string;
-          type?: Database["public"]["Enums"]["feedback_question_type"];
-          user_id: string;
-        };
-        Update: {
-          created_at?: string;
-          description?: string | null;
-          feedback_page_id?: string | null;
-          feedback_project_id?: string;
-          id?: string;
-          meta?: Json | null;
-          order?: number | null;
-          required?: boolean;
-          status?: Database["public"]["Enums"]["feedback_question_status"];
-          title?: string;
-          type?: Database["public"]["Enums"]["feedback_question_type"];
-          user_id?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "feedback_question_feedback_page_id_fkey";
-            columns: ["feedback_page_id"];
-            isOneToOne: false;
-            referencedRelation: "feedback_page";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "feedback_question_feedback_project_id_fkey";
-            columns: ["feedback_project_id"];
-            isOneToOne: false;
-            referencedRelation: "feedback_project";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "feedback_question_user_id_fkey";
             columns: ["user_id"];
             isOneToOne: false;
             referencedRelation: "user";
@@ -291,8 +224,7 @@ export type Database = {
       [_ in never]: never;
     };
     Enums: {
-      feedback_question_status: "archived" | "active";
-      feedback_question_type: "text" | "select" | "checkbox" | "level";
+      feedback_page_type: "blank" | "text" | "select" | "checkbox" | "level";
       project_status: "active" | "inactive";
       project_type: "feedback" | "banner" | "poll" | "reaction";
       user_membership: "free" | "pro";
